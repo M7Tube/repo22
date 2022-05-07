@@ -55,7 +55,7 @@ Route::get('Download/Test', function () {
     $headers = array(
         'Content-Type: application/pdf',
     );
-
+    //ssa
     return response()->download($file, 'filename.pdf', $headers);
 });
 
