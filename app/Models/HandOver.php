@@ -16,6 +16,7 @@ class HandOver extends Model
         'signture1',
         'signture1Name',
         'signture2',
-        'signture2Name'
+        'signture2Name',
+        'Doc_No',
     ];
 }

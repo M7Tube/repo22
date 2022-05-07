@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\HandOver;
 use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Template;
@@ -89,6 +90,15 @@ class DatabaseSeeder extends Seeder
             'desc' => 'hwwwwwwwwww',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
             'user_id' => '1',
+        ]);
+        HandOver::Create([
+            'note' => 'test1',
+            'name' => 'tesstts',
+            'signture1' => 'https://c-rpt.com/storage/app/public/images/cars.jpg',
+            'signture1Name' => 'mahmoud',
+            'signture2' => 'https://c-rpt.com/storage/app/public/images/cars.jpg',
+            'signture2Name' => 'Obada',
+            'Doc_No' => '1',
         ]);
     }
 }

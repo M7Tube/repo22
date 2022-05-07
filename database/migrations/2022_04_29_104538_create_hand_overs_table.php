@@ -21,6 +21,7 @@ class CreateHandOversTable extends Migration
             $table->string('signture1Name');
             $table->string('signture2');
             $table->string('signture2Name');
+            $table->integer('Doc_No');
             $table->timestamps();
         });
     }

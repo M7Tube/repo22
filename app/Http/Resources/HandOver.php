@@ -21,6 +21,8 @@ class HandOver extends JsonResource
             'signture1Name' => $this->signture1Name,
             'signture2' => 'https://c-rpt.com/storage/app/public/images/' . $this->signture2,
             'signture2Name' => $this->signture2Name,
+            'created_at' => $this->created_at,
+            'Doc_No' => $this->Doc_No,
         ];
         // return parent::toArray($request);
     }
