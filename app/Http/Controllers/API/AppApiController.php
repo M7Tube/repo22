@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CreateInspectionResource;
 use App\Http\Resources\HandOver as ResourcesHandOver;
 use App\Http\Resources\OneHandOver;
 use App\Models\Attrubite;
@@ -219,7 +220,7 @@ class AppApiController extends Controller
                 'message' => 'Wrong Data',
             ], 200);
         }
-        $data = ReportCategory::where('template_id', $id)->with('att', 'selector', 'textbox')->get();
+        $data = ReportCategory::where('template_id', $id)->with(['att', 'selector', 'textbox'])->get();
         if ($data) {
             $docNo = Document::all()->last();
             if ($docNo) {
@@ -232,7 +233,7 @@ class AppApiController extends Controller
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
-                    'Category' => $data,
+                    'Category' => CreateInspectionResource::collection($data),
                     'Doc_No' => $docNo,
                 ],
             ], 200);
