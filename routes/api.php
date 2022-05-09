@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AppApiController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CONTROL\CategoryController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,10 @@ Route::group(['as' => 'noAuth.'], function () {
 //     return 'sss';
 // });
 
-
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 Route::get('Test', function () {
 
     return 'true';
