@@ -46,7 +46,7 @@ Route::group(['as' => 'noAuth.'], function () {
 // });
 
 Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
+    Artisan::call('migrate');
     return "Cache is cleared";
 });
 Route::get('Test', function () {
