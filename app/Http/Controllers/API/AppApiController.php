@@ -9,6 +9,7 @@ use App\Http\Resources\OneHandOver;
 use App\Models\Attrubite;
 use App\Models\Document;
 use App\Models\HandOver;
+use App\Models\InProgressInspection;
 use App\Models\ReportCategory;
 use App\Models\Template;
 use Illuminate\Http\Request;
@@ -16,7 +17,37 @@ use Illuminate\Support\Facades\Validator;
 
 class AppApiController extends Controller
 {
-
+    public function inspection_inprogress(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:96'],
+            'desc' => ['string', 'max:192'],
+            'date' => ['required', 'date'],
+            'location' => ['required', 'string'],
+        ]);
+        $data = InProgressInspection::Create([
+            'name' => $request->name,
+            'desc' => $request->desc,
+            'date' => $request->date,
+            'location' => $request->location,
+        ]);
+        if ($data) {
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Successfull Request',
+                'data' => [
+                    'InProgress' => $data
+                ],
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'Something went wrong',
+            ], 200);
+        }
+    }
     public function getOnehandover($id)
     {
         $handover = HandOver::find($id);

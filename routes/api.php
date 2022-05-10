@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         Route::post('create/handover', [AppApiController::class, 'handover'])->name('handover');
         Route::get('create/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
+        //create api link for creating new inProgress Inspections
+        Route::post('create/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
         Route::post('create/template', [AppApiController::class, 'template'])->name('template');
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
@@ -45,7 +47,7 @@ Route::group(['as' => 'noAuth.'], function () {
 //     return 'sss';
 // });
 
-Route::get('/migrate', function() {
+Route::get('/migrate', function () {
     Artisan::call('migrate:refresh');
     Artisan::call('db:seed');
     //
