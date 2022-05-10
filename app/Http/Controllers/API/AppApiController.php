@@ -69,7 +69,6 @@ class AppApiController extends Controller
             'signture1Name' => ['required', 'string', 'max:72'],
             'signture2' => ['required', 'mimes:png,jpg,jpeg'],
             'signture2Name' => ['required', 'string', 'max:72'],
-            'Doc_No' => ['required', 'integer'],
         ]);
         $lastDocNo = HandOver::all()->last()['Doc_No'];
         if ($lastDocNo) {
