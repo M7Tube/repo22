@@ -100,5 +100,6 @@ class DatabaseSeeder extends Seeder
             'signture2Name' => 'Obada',
             'Doc_No' => '1',
         ]);
+        //;'
     }
 }
