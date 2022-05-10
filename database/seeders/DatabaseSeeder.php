@@ -94,9 +94,9 @@ class DatabaseSeeder extends Seeder
         HandOver::Create([
             'note' => 'test1',
             'name' => 'tesstts',
-            'signture1' => 'https://c-rpt.com/storage/app/public/images/cars.jpg',
+            'signture1' => 'cars.jpg',
             'signture1Name' => 'mahmoud',
-            'signture2' => 'https://c-rpt.com/storage/app/public/images/cars.jpg',
+            'signture2' => 'cars.jpg',
             'signture2Name' => 'Obada',
             'Doc_No' => '1',
         ]);
