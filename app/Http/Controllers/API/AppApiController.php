@@ -69,7 +69,14 @@ class AppApiController extends Controller
             'signture1Name' => ['required', 'string', 'max:72'],
             'signture2' => ['required', 'mimes:png,jpg,jpeg'],
             'signture2Name' => ['required', 'string', 'max:72'],
+            'Doc_No' => ['required', 'integer'],
         ]);
+        $lastDocNo = HandOver::all()->last()['Doc_No'];
+        if ($lastDocNo) {
+            $lastDocNo = $lastDocNo + 1;
+        } else {
+            $lastDocNo = 1;
+        }
         $handOver = HandOver::Create([
             'note' => $request->note,
             'name' => $request->name,
@@ -77,6 +84,7 @@ class AppApiController extends Controller
             'signture1Name' => $request->signture1Name,
             'signture2' => $request->signture2->getClientOriginalName(),
             'signture2Name' => $request->signture2Name,
+            'Doc_No' => $lastDocNo,
         ]);
         if (!$request->hasFile('signture1')) {
             return response()->json([
