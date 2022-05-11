@@ -11,7 +11,9 @@ use App\Models\Document;
 use App\Models\HandOver;
 use App\Models\InProgressInspection;
 use App\Models\ReportCategory;
+use App\Models\Selector;
 use App\Models\Template;
+use App\Models\TextBox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -234,6 +236,7 @@ class AppApiController extends Controller
             'template_desc' => ['required', 'string', 'max:144'],
             'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],
+            'template_category' => ['json'],
         ]);
         $newTemplate = Template::Create([
             'name' => $request->template_name,
@@ -270,14 +273,6 @@ class AppApiController extends Controller
                     ], 200);
                 }
             }
-            return response()->json([
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'Successfull Request',
-                'data' => [
-                    'created_Template' => $newTemplate
-                ],
-            ], 200);
         } else {
             return response()->json([
                 'status' => 'fails',
@@ -285,7 +280,53 @@ class AppApiController extends Controller
                 'message' => 'There Is Somthing Wrong',
             ], 200);
         }
-        //complate the link
+        //first i need to make loop for creating the category
+        if (!is_null($request->template_category)) {
+            foreach ($request->template_category as $key => $data) {
+                $category = ReportCategory::Create([
+                    'name' => $data->name,
+                    'template_id' => $newTemplate->template_id,
+                ]);
+                if (!is_null($data->att)) {
+                    foreach ($data->att as $key2 => $data2) {
+                        $attrubite = Attrubite::Create([
+                            'name' => $data2->name,
+                            'template_id' => $newTemplate->template_id,
+                            'status' => $data2->status,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if (!is_null($data->textbox)) {
+                    foreach ($data->textbox as $key3 => $data3) {
+                        $textbox = TextBox::Create([
+                            'name' => $data3->name,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if (!is_null($data->selector)) {
+                    foreach ($data->selector as $key4 => $data4) {
+                        $selector = Selector::Create([
+                            'name' => $data4->name,
+                            'values' => $data4->values,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+            }
+        } else {
+        }
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'Successfull Request',
+        ], 200);
     }
 
     public function inspection($id)
