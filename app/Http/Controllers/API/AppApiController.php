@@ -236,7 +236,7 @@ class AppApiController extends Controller
             'template_desc' => ['required', 'string', 'max:144'],
             'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],
-            'template_category' => ['json'],
+            // 'template_category' => ['json'],
         ]);
         $newTemplate = Template::Create([
             'name' => $request->template_name,
