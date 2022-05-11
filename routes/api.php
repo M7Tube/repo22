@@ -28,11 +28,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('inProgressInspection/history', [AppApiController::class, 'InProgressHistory'])->name('InProgressHistory');
         Route::get('ComplateInspection/history', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');
         // Route::get('handover/id/{id}', [AppApiController::class, 'getOnehandover'])->name('getOnehandover');
+        Route::group(['prefix' => '/create'], function () {
+            Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
+            Route::get('/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
+            Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
+            Route::post('/template', [AppApiController::class, 'template'])->name('template');
+        });
+
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
-        Route::post('create/handover', [AppApiController::class, 'handover'])->name('handover');
-        Route::get('create/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
-        Route::post('create/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
-        Route::post('create/template', [AppApiController::class, 'template'])->name('template');
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
     // //
