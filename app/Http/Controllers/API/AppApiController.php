@@ -18,7 +18,28 @@ use Illuminate\Support\Facades\Validator;
 class AppApiController extends Controller
 {
 
-    public function history()
+    public function ComplateHistory()
+    {
+        $Complate = Document::paginate(25);
+        if ($Complate) {
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Successfull Request',
+                'data' => [
+                    'Complate' => $Complate
+                ],
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'Something went wrong',
+            ], 200);
+        }
+    }
+
+    public function InProgressHistory()
     {
         $inProgress = InProgressInspection::paginate(25);
         if ($inProgress) {
