@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['as' => 'Auth.'], function () {
         Route::get('handover/perpage/{perpage}', [AppApiController::class, 'gethandover'])->name('gethandover');
+        Route::get('inProgressInspection/history', [AppApiController::class, 'history'])->name('history');
         // Route::get('handover/id/{id}', [AppApiController::class, 'getOnehandover'])->name('getOnehandover');
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         Route::post('create/handover', [AppApiController::class, 'handover'])->name('handover');

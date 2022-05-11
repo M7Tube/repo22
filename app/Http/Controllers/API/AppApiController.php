@@ -17,6 +17,28 @@ use Illuminate\Support\Facades\Validator;
 
 class AppApiController extends Controller
 {
+
+    public function history()
+    {
+        $inProgress = InProgressInspection::paginate(25);
+        if ($inProgress) {
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Successfull Request',
+                'data' => [
+                    'InProgress' => $inProgress
+                ],
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'Something went wrong',
+            ], 200);
+        }
+    }
+
     public function inspection_inprogress(Request $request)
     {
         $request->validate([
