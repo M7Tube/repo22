@@ -235,47 +235,47 @@ class AppApiController extends Controller
             'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],
         ]);
-        if (!$request->hasFile('template_pic')) {
-            return response()->json([
-                'status' => 'fails',
-                'code' => 200,
-                'message' => 'upload file not found',
-            ], 200);
-        } else {
-            $allowedExtension = ['jpg', 'jpeg', 'png'];
-            $file = $request->file('template_pic');
-            // $erros = [];
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedExtension);
-            if ($check) {
-                $name = $file->getClientOriginalName();
-                $path = $file->store('public/images');
-                response()->json([
-                    'status' => 'success',
-                    'code' => 200,
-                    'message' => 'images saved',
-                ], 200);
-            } else {
+        $newTemplate = Template::Create([
+            'name' => $request->template_name,
+            'desc' => $request->template_desc,
+            'pic' => $request->file('template_pic')->getClientOriginalName(),
+            'user_id' => $request->template_user_id,
+        ]);
+        if ($newTemplate) {
+            if (!$request->hasFile('template_pic')) {
                 return response()->json([
                     'status' => 'fails',
                     'code' => 200,
-                    'message' => 'Invalid File Format',
+                    'message' => 'upload file not found',
                 ], 200);
+            } else {
+                $allowedExtension = ['jpg', 'jpeg', 'png'];
+                $file = $request->file('template_pic');
+                // $erros = [];
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedExtension);
+                if ($check) {
+                    $name = $file->getClientOriginalName();
+                    $path = $file->storeAs('public/images', $name);
+                    response()->json([
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'images saved',
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => 'fails',
+                        'code' => 200,
+                        'message' => 'Invalid File Format',
+                    ], 200);
+                }
             }
-        }
-
-        $template = Template::Create([
-            'name' => $request->name,
-            'pic' => $name,
-            'user_id' => $request->user_id,
-        ]);
-        if ($template) {
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
-                    'created_Template' => $template
+                    'created_Template' => $newTemplate
                 ],
             ], 200);
         } else {
@@ -285,6 +285,7 @@ class AppApiController extends Controller
                 'message' => 'There Is Somthing Wrong',
             ], 200);
         }
+        //complate the link
     }
 
     public function inspection($id)
