@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('inProgressInspection/history', [AppApiController::class, 'InProgressHistory'])->name('InProgressHistory');
         Route::get('ComplateInspection/history', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
-        // Create Route
+        //Create Route
         Route::group(['prefix' => '/create'], function () {
             Route::get('/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
