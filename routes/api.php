@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AppApiController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CONTROL\CategoryController;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('/template', [AppApiController::class, 'template'])->name('template');
 
 
 //Protected Route
@@ -36,7 +38,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
-            Route::post('/template', [AppApiController::class, 'template'])->name('template');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -56,9 +57,8 @@ Route::get('/migrate', function () {
     //
     return "Cache is cleared";
 });
-Route::get('Test', function () {
-
-    return 'true';
+Route::get('test', function () {
+    // return InProgress;
 });
 Route::get('Download/Test', function () {
     $file = public_path() . "/upload/Doc.53.pdf";

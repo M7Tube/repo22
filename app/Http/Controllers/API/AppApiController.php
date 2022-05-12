@@ -231,6 +231,7 @@ class AppApiController extends Controller
     //
     public function template(Request $request)
     {
+        // return $request->template_category;
         $request->validate([
             'template_name' => ['required', 'string', 'max:72'],
             'template_desc' => ['required', 'string', 'max:144'],
@@ -288,7 +289,7 @@ class AppApiController extends Controller
                     'template_id' => $newTemplate->template_id,
                 ]);
                 if (!is_null($data->att)) {
-                    foreach ([$data->att] as $key2 => $data2) {
+                    foreach ($data->att as $key2 => $data2) {
                         $attrubite = Attrubite::Create([
                             'name' => $data2->name,
                             'template_id' => $newTemplate->template_id,
@@ -299,7 +300,7 @@ class AppApiController extends Controller
                 } else {
                 }
                 if (!is_null($data->textbox)) {
-                    foreach ([$data->textbox] as $key3 => $data3) {
+                    foreach ($data->textbox as $key3 => $data3) {
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
                             'template_id' => $newTemplate->template_id,
@@ -309,7 +310,7 @@ class AppApiController extends Controller
                 } else {
                 }
                 if (!is_null($data->selector)) {
-                    foreach ([$data->selector] as $key4 => $data4) {
+                    foreach ($data->selector as $key4 => $data4) {
                         $selector = Selector::Create([
                             'name' => $data4->name,
                             'values' => $data4->values,
