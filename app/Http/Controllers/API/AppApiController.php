@@ -26,7 +26,7 @@ class AppApiController extends Controller
             'IPI_id' => ['required', 'integer', 'exists:in_progress_inspections,IPI_id'],
             'value' => ['required'],
         ]);
-        $insp = InProgressInspection::find('IPI_id', $request->IPI_id)->first();
+        $insp = InProgressInspection::find($request->IPI_id);
         if ($insp) {
             $insp->value = $request->value;
             $insp->save();
