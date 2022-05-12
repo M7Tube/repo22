@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/template', [AppApiController::class, 'template'])->name('template');
 
 
 //Protected Route
@@ -36,8 +35,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         //Create Route
         Route::group(['prefix' => '/create'], function () {
             Route::get('/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
-            Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
+            Route::post('/inspection/saveValue', [AppApiController::class, 'saveValue'])->name('saveValue');
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
+            Route::post('/template', [AppApiController::class, 'template'])->name('template');
+            Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');

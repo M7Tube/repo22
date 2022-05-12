@@ -20,6 +20,30 @@ use Illuminate\Support\Facades\Validator;
 class AppApiController extends Controller
 {
 
+    public function saveValue(Request $request)
+    {
+        $request->validate([
+            'IPI_id' => ['required', 'integer', 'exists:in_progress_inspections,IPI_id'],
+            'value' => ['required', 'json'],
+        ]);
+        $insp = InProgressInspection::where('IPI_id', $request->IPI_id)->first();
+        if ($insp) {
+            $insp->value = $request->value;
+            $insp->save();
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Successfull Request',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'Something went wrong',
+            ], 200);
+        }
+    }
+
     public function ComplateHistory()
     {
         $Complate = Document::paginate(25);
