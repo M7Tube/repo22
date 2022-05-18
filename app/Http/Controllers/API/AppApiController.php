@@ -51,7 +51,7 @@ class AppApiController extends Controller
                         $path = $mediaFile->storeAs('public/images/', $name);
                         //ad_picture
                     }
-                    return response()->json([
+                    response()->json([
                         'message' => 'images saved'
                     ], 200);
                 } else {
@@ -405,13 +405,13 @@ class AppApiController extends Controller
         //ss
         //first i need to make loop for creating the category
         if (!is_null($request->template_category)) {
-            foreach ($request->template_category as $key => $data) {
+            foreach (json_decode($request->template_category) as $key => $data) {
                 $category = ReportCategory::Create([
                     'name' => $data->name,
                     'template_id' => $newTemplate->template_id,
                 ]);
-                if (!is_null($data->att)) {
-                    foreach ($data->att as $key2 => $data2) {
+                if (!is_null($data->api->att)) {
+                    foreach ($data->api->att as $key2 => $data2) {
                         $attrubite = Attrubite::Create([
                             'name' => $data2->name,
                             'template_id' => $newTemplate->template_id,
@@ -421,8 +421,8 @@ class AppApiController extends Controller
                     }
                 } else {
                 }
-                if (!is_null($data->textbox)) {
-                    foreach ($data->textbox as $key3 => $data3) {
+                if (!is_null($data->api->textbox)) {
+                    foreach ($data->api->textbox as $key3 => $data3) {
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
                             'template_id' => $newTemplate->template_id,
@@ -431,8 +431,8 @@ class AppApiController extends Controller
                     }
                 } else {
                 }
-                if (!is_null($data->selector)) {
-                    foreach ($data->selector as $key4 => $data4) {
+                if (!is_null($data->api->selector)) {
+                    foreach ($data->api->selector as $key4 => $data4) {
                         $selector = Selector::Create([
                             'name' => $data4->name,
                             'values' => $data4->values,

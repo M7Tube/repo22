@@ -3,6 +3,8 @@
 use App\Http\Controllers\API\AppApiController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CONTROL\CategoryController;
+use App\Models\Attrubite;
+use App\Models\ReportCategory;
 use App\Models\Template;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,14 +40,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('/inspection/{id}', [AppApiController::class, 'inspection'])->name('inspection');
             Route::post('/inspection/saveValue', [AppApiController::class, 'saveValue'])->name('saveValue');
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
-            Route::post('/template', [AppApiController::class, 'template'])->name('template');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
+            Route::post('/form', [AppApiController::class, 'form'])->name('form');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
-Route::post('/form', [AppApiController::class, 'form'])->name('form');
+Route::post('/template', [AppApiController::class, 'template'])->name('template');
 
 //Un Protected Route
 Route::group(['as' => 'noAuth.'], function () {
@@ -60,9 +62,6 @@ Route::get('/migrate', function () {
     //
     return "Cache is cleared";
 });
-Route::get('test', function () {
-    return Carbon::now();
-});
 Route::get('Download/Test', function () {
     $file = public_path() . "/upload/Doc.53.pdf";
 
@@ -71,4 +70,46 @@ Route::get('Download/Test', function () {
     );
     //ssa
     return response()->download($file, 'filename.pdf', $headers);
+});
+Route::get('test', function () {
+    $template_category = ['name' => 'FirstQuestion', 'template_id' => 1];
+    foreach ([$template_category] as $data) {
+        $category = ReportCategory::Create([
+            'name' => $data['name'],
+            'template_id' => $data['template_id'],
+        ]);
+        // if (!is_null($data->att)) {
+        //     foreach ($data->att as $key2 => $data2) {
+        //         $attrubite = Attrubite::Create([
+        //             'name' => $data2->name,
+        //             'template_id' => $newTemplate->template_id,
+        //             'status' => $data2->status,
+        //             'category_id' => $category->category_id,
+        //         ]);
+        //     }
+        // } else {
+        // }
+        // if (!is_null($data->textbox)) {
+        //     foreach ($data->textbox as $key3 => $data3) {
+        //         $textbox = TextBox::Create([
+        //             'name' => $data3->name,
+        //             'template_id' => $newTemplate->template_id,
+        //             'category_id' => $category->category_id,
+        //         ]);
+        //     }
+        // } else {
+        // }
+        // if (!is_null($data->selector)) {
+        //     foreach ($data->selector as $key4 => $data4) {
+        //         $selector = Selector::Create([
+        //             'name' => $data4->name,
+        //             'values' => $data4->values,
+        //             'template_id' => $newTemplate->template_id,
+        //             'category_id' => $category->category_id,
+        //         ]);
+        //     }
+        // } else {
+        // }
+    }
+    return 'true';
 });
