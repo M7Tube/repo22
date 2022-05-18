@@ -156,7 +156,7 @@ class AppApiController extends Controller
             ],
             'InProgress'
         );
-        $Complate = Document::where('value', null)->paginate(
+        $Complate = InProgressInspection::where('value', null)->paginate(
             25,
             [
                 'name', 'desc', 'location', 'date', 'created_at'
