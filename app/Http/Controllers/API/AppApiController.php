@@ -149,7 +149,7 @@ class AppApiController extends Controller
 
     public function History()
     {
-        $inProgress = InProgressInspection::paginate(
+        $inProgress = InProgressInspection::where('value', '!=', null)->paginate(
             25,
             [
                 'name', 'desc', 'location', 'date', 'value', 'created_at'
