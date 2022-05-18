@@ -38,6 +38,7 @@ class AppApiController extends Controller
                 'upload file not found' => 'not found'
             ], 400);
         } else {
+            //
             $allowedExtension = ['jpg', 'jpeg', 'png'];
             $files = $request->file('images');
             $erros = [];
