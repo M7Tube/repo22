@@ -14,12 +14,112 @@ use App\Models\ReportCategory;
 use App\Models\Selector;
 use App\Models\Template;
 use App\Models\TextBox;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class AppApiController extends Controller
 {
-
+    public function form(Request $request)
+    {
+        //see the field form XD and validate it
+        $request->validate([
+            // 'note' => ['required', 'string', 'max:288'],
+            // 'images' => ['required'],
+            // 'pictureFromSite.*' => ['mimes:png,jpg,jpeg'],
+            // 'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+            // 'signture1Name' => ['required', 'string', 'max:72'],
+            // 'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+            // 'signture2Name' => ['required', 'string', 'max:72'],
+        ]);
+        //store the  images from site
+        if (!$request->hasFile('images')) {
+            return response()->json([
+                'upload file not found' => 'not found'
+            ], 400);
+        } else {
+            $allowedExtension = ['jpg', 'jpeg', 'png'];
+            $files = $request->file('images');
+            $erros = [];
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedExtension);
+                if ($check) {
+                    foreach ($files as $mediaFile) {
+                        $name = $mediaFile->getClientOriginalName() . Carbon::now();
+                        $path = $mediaFile->storeAs('public/images/', $name);
+                        //ad_picture
+                    }
+                    return response()->json([
+                        'message' => 'images saved'
+                    ], 200);
+                } else {
+                    return response()->json(['invalid_file_format'], 422);
+                }
+            }
+        }
+        return 'true';
+        //store the signtures
+        // if (!$request->hasFile('signture1')) {
+        //     return response()->json([
+        //         'status' => 'fails',
+        //         'code' => 200,
+        //         'message' => 'upload file not found',
+        //     ], 200);
+        // } else {
+        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
+        //     $file = $request->file('signture1');
+        //     // $erros = [];
+        //     $extension = $file->getClientOriginalExtension();
+        //     $check = in_array($extension, $allowedExtension);
+        //     if ($check) {
+        //         $name = $file->getClientOriginalName();
+        //         $path = $file->storeAs('public/images', $name);
+        //         response()->json([
+        //             'status' => 'success',
+        //             'code' => 200,
+        //             'message' => 'images saved',
+        //         ], 200);
+        //     } else {
+        //         return response()->json([
+        //             'status' => 'fails',
+        //             'code' => 200,
+        //             'message' => 'Invalid File Format',
+        //         ], 200);
+        //     }
+        // }
+        // if (!$request->hasFile('signture2')) {
+        //     return response()->json([
+        //         'status' => 'fails',
+        //         'code' => 200,
+        //         'message' => 'upload file not found',
+        //     ], 200);
+        // } else {
+        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
+        //     $file = $request->file('signture2');
+        //     // $erros = [];
+        //     $extension = $file->getClientOriginalExtension();
+        //     $check = in_array($extension, $allowedExtension);
+        //     if ($check) {
+        //         $name = $file->getClientOriginalName();
+        //         $path = $file->storeAs('public/images', $name);
+        //         response()->json([
+        //             'status' => 'success',
+        //             'code' => 200,
+        //             'message' => 'images saved',
+        //         ], 200);
+        //     } else {
+        //         return response()->json([
+        //             'status' => 'fails',
+        //             'code' => 200,
+        //             'message' => 'Invalid File Format',
+        //         ], 200);
+        //     }
+        // }
+        //create the pdf
+        //store the pdf
+        //return the pdf
+    }
     public function saveValue(Request $request)
     {
         $request->validate([
@@ -47,37 +147,30 @@ class AppApiController extends Controller
         }
     }
 
-    public function ComplateHistory()
+    public function History()
     {
-        $Complate = Document::paginate(25);
-        if ($Complate) {
+        $inProgress = InProgressInspection::paginate(
+            25,
+            [
+                'name', 'desc', 'location', 'date', 'value', 'created_at'
+            ],
+            'InProgress'
+        );
+        $Complate = Document::where('value', null)->paginate(
+            25,
+            [
+                'name', 'desc', 'location', 'date', 'created_at'
+            ],
+            'Complate'
+        );
+        if ($inProgress && $Complate) {
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
+                    'InProgress' => $inProgress,
                     'Complate' => $Complate
-                ],
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'fails',
-                'code' => 200,
-                'message' => 'Something went wrong',
-            ], 200);
-        }
-    }
-
-    public function InProgressHistory()
-    {
-        $inProgress = InProgressInspection::paginate(25);
-        if ($inProgress) {
-            return response()->json([
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'Successfull Request',
-                'data' => [
-                    'InProgress' => $inProgress
                 ],
             ], 200);
         } else {

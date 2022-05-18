@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AppApiController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CONTROL\CategoryController;
 use App\Models\Template;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +30,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['as' => 'Auth.'], function () {
         //get route
         Route::get('handover/perpage/{perpage}', [AppApiController::class, 'gethandover'])->name('gethandover');
-        Route::get('inProgressInspection/history', [AppApiController::class, 'InProgressHistory'])->name('InProgressHistory');
-        Route::get('ComplateInspection/history', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');
+        Route::get('Inspection/history', [AppApiController::class, 'History'])->name('History');
+        // Route::get('ComplateInspection/history', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         //Create Route
         Route::group(['prefix' => '/create'], function () {
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
+Route::post('/form', [AppApiController::class, 'form'])->name('form');
 
 //Un Protected Route
 Route::group(['as' => 'noAuth.'], function () {
@@ -59,7 +61,7 @@ Route::get('/migrate', function () {
     return "Cache is cleared";
 });
 Route::get('test', function () {
-    // return InProgress;
+    return Carbon::now();
 });
 Route::get('Download/Test', function () {
     $file = public_path() . "/upload/Doc.53.pdf";
