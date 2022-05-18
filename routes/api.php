@@ -42,12 +42,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
             Route::post('/form', [AppApiController::class, 'form'])->name('form');
+            Route::post('/template', [AppApiController::class, 'template'])->name('template');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
-Route::post('/template', [AppApiController::class, 'template'])->name('template');
 
 //Un Protected Route
 Route::group(['as' => 'noAuth.'], function () {
