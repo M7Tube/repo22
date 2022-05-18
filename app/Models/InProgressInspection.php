@@ -12,6 +12,8 @@ class InProgressInspection extends Model
     use HasFactory;
     use Filterable;
     use InspectionFilter;
+    private static $whiteListFilter = ['*'];
+
     protected $table = 'in_progress_inspections';
     protected $primaryKey = 'IPI_id';
     protected $fillable = [
