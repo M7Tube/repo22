@@ -33,31 +33,37 @@ class AppApiController extends Controller
             // 'signture2Name' => ['required', 'string', 'max:72'],
         ]);
         //store the  images from site
-        if (!$request->hasFile('images')) {
-            return response()->json([
-                'upload file not found' => 'not found'
-            ], 400);
-        } else {
-            //
-            $allowedExtension = ['jpg', 'jpeg', 'png'];
-            $files = $request->file('images');
-            $erros = [];
-            foreach ($files as $file) {
-                $extension = $file->getClientOriginalExtension();
-                $check = in_array($extension, $allowedExtension);
-                if ($check) {
-                    foreach ($files as $mediaFile) {
-                        $name = $mediaFile->getClientOriginalName() . Carbon::now();
-                        $path = $mediaFile->storeAs('public/images/', $name);
-                        //ad_picture
-                    }
-                    response()->json([
-                        'message' => 'images saved'
-                    ], 200);
-                } else {
-                    return response()->json(['invalid_file_format'], 422);
+        if (!$request->hasFile('fileName')) {
+            return response()->json(['upload_file_not_found'], 400);
+        }
+
+        $allowedfileExtension = ['pdf', 'jpg', 'png'];
+        $files = $request->file('fileName');
+        $errors = [];
+
+        foreach ($files as $file) {
+
+            $extension = $file->getClientOriginalExtension();
+
+            $check = in_array($extension, $allowedfileExtension);
+
+            if ($check) {
+                foreach ($request->fileName as $mediaFiles) {
+
+                    $path = $mediaFiles->store('public/images');
+                    $name = $mediaFiles->getClientOriginalName();
+
+                    // //store image file into directory and db
+                    // $save = new Image();
+                    // $save->title = $name;
+                    // $save->path = $path;
+                    // $save->save();
                 }
+            } else {
+                return response()->json(['invalid_file_format'], 422);
             }
+
+            return response()->json(['file_uploaded'], 200);
         }
         return 'true';
         //store the signtures
@@ -150,17 +156,17 @@ class AppApiController extends Controller
 
     public function History()
     {
-        $inProgress = InProgressInspection::where('value', '!=', null)->filter()->paginate(
+        $inProgress = InProgressInspection::where('is_complated', 0)->filter()->paginate(
             25,
             [
-                'name', 'desc', 'location', 'date', 'value', 'created_at'
+                'IPI_id', 'name', 'desc', 'location', 'date', 'value', 'is_complated', 'created_at'
             ],
             'InProgress'
         );
-        $Complate = InProgressInspection::where('value', null)->filter()->paginate(
+        $Complate = InProgressInspection::where('is_complated', 1)->filter()->paginate(
             25,
             [
-                'name', 'desc', 'location', 'date', 'created_at'
+                'IPI_id', 'name', 'desc', 'location', 'date', 'is_complated', 'created_at'
             ],
             'Complate'
         );
@@ -190,12 +196,17 @@ class AppApiController extends Controller
             'desc' => ['string', 'max:192'],
             'date' => ['required', 'date'],
             'location' => ['required', 'string'],
+            'template_id' => ['required', 'integer', 'exists:templates,template_id'],
         ]);
+        $questions = ReportCategory::where('template_id', $request->template_id)->with(['att', 'selector', 'textbox'])->get();
+
         $data = InProgressInspection::Create([
             'name' => $request->name,
             'desc' => $request->desc,
             'date' => $request->date,
             'location' => $request->location,
+            'value' => CreateInspectionResource::collection($questions),
+            'is_complated' => 0,
         ]);
         if ($data) {
             return response()->json([

@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         //get route
         Route::get('handover/perpage/{perpage}', [AppApiController::class, 'gethandover'])->name('gethandover');
         Route::get('Inspection/history', [AppApiController::class, 'History'])->name('History');
-        // Route::get('ComplateInspection/history', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         //Create Route
         Route::group(['prefix' => '/create'], function () {
@@ -41,13 +40,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::post('/inspection/saveValue', [AppApiController::class, 'saveValue'])->name('saveValue');
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
-            Route::post('/form', [AppApiController::class, 'form'])->name('form');
             Route::post('/template', [AppApiController::class, 'template'])->name('template');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
+Route::post('/form', [AppApiController::class, 'form'])->name('form');
 
 //Un Protected Route
 Route::group(['as' => 'noAuth.'], function () {

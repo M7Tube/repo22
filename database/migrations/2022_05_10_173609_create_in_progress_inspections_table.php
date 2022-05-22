@@ -20,6 +20,7 @@ class CreateInProgressInspectionsTable extends Migration
             $table->string('location');
             $table->date('date');
             $table->json('value')->nullable();
+            $table->boolean('is_complated');
             $table->timestamps();
         });
     }
