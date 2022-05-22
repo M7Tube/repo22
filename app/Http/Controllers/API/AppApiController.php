@@ -205,7 +205,7 @@ class AppApiController extends Controller
             'desc' => $request->desc,
             'date' => $request->date,
             'location' => $request->location,
-            'value' => CreateInspectionResource::collection($questions),
+            'value' => $questions,
             'is_complated' => 0,
         ]);
         if ($data) {
