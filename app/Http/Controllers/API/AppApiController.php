@@ -24,13 +24,13 @@ class AppApiController extends Controller
     {
         //see the field form XD and validate it
         $request->validate([
-            // 'note' => ['required', 'string', 'max:288'],
-            // 'images' => ['required'],
-            // 'pictureFromSite.*' => ['mimes:png,jpg,jpeg'],
-            // 'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-            // 'signture1Name' => ['required', 'string', 'max:72'],
-            // 'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-            // 'signture2Name' => ['required', 'string', 'max:72'],
+            'note' => ['required', 'string', 'max:288'],
+            'images' => ['required'],
+            'images.*' => ['mimes:png,jpg,jpeg'],
+            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture1Name' => ['required', 'string', 'max:72'],
+            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture2Name' => ['required', 'string', 'max:72'],
         ]);
         //store the  images from site
         if (!$request->hasFile('fileName')) {
@@ -154,29 +154,49 @@ class AppApiController extends Controller
         }
     }
 
-    public function History($inProgressPerPage, $ComplatePerPage)
+
+    public function inProgressHistory($perpage)
     {
-        $inProgress = InProgressInspection::where('is_complated', 0)->ignoreRequest(['InProgress', 'Complate'])->filter()->paginate(
-            $inProgressPerPage,
+        $inProgress = InProgressInspection::where('is_complated', 0)->ignoreRequest('InProgress')->filter()->paginate(
+            $perpage,
             [
                 'IPI_id', 'name', 'desc', 'location', 'date', 'value', 'is_complated', 'created_at'
             ],
             'InProgress'
         );
-        $Complate = InProgressInspection::where('is_complated', 1)->ignoreRequest(['Complate', 'InProgress'])->filter()->paginate(
-            $ComplatePerPage,
-            [
-                'IPI_id', 'name', 'desc', 'location', 'date', 'is_complated', 'created_at'
-            ],
-            'Complate'
-        );
-        if ($inProgress && $Complate) {
+        if ($inProgress) {
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
-                    'InProgress' => $inProgress,
+                    'inProgress' => $inProgress
+                ],
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'Something went wrong',
+            ], 200);
+        }
+    }
+
+    public function ComplateHistory($perpage)
+    {
+        $Complate = InProgressInspection::where('is_complated', 1)->ignoreRequest('Complate')->filter()->paginate(
+            $perpage,
+            [
+                'IPI_id', 'name', 'desc', 'location', 'date', 'is_complated', 'created_at'
+            ],
+            'Complate'
+        );
+        if ($Complate) {
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Successfull Request',
+                'data' => [
                     'Complate' => $Complate
                 ],
             ], 200);
