@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['as' => 'Auth.'], function () {
         //get route
         Route::get('handover/perpage/{perpage}', [AppApiController::class, 'gethandover'])->name('gethandover');
-        Route::get('Inspection/history', [AppApiController::class, 'History'])->name('History');
+        Route::get('Inspection/history/InProgressPerPage/{inProgressPerPage}/ComplatePerPage/{ComplatePerPage}', [AppApiController::class, 'History'])->name('History');
         Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         //Create Route
         Route::group(['prefix' => '/create'], function () {

@@ -154,17 +154,17 @@ class AppApiController extends Controller
         }
     }
 
-    public function History()
+    public function History($inProgressPerPage, $ComplatePerPage)
     {
         $inProgress = InProgressInspection::where('is_complated', 0)->ignoreRequest(['InProgress', 'Complate'])->filter()->paginate(
-            25,
+            $inProgressPerPage,
             [
                 'IPI_id', 'name', 'desc', 'location', 'date', 'value', 'is_complated', 'created_at'
             ],
             'InProgress'
         );
         $Complate = InProgressInspection::where('is_complated', 1)->ignoreRequest(['Complate', 'InProgress'])->filter()->paginate(
-            25,
+            $ComplatePerPage,
             [
                 'IPI_id', 'name', 'desc', 'location', 'date', 'is_complated', 'created_at'
             ],
