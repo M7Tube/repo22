@@ -24,35 +24,29 @@ class AppApiController extends Controller
     {
         //see the field form XD and validate it
         $request->validate([
-            'note' => ['required', 'string', 'max:288'],
+            // 'note' => ['required', 'string', 'max:288'],
             'images' => ['required'],
             'images.*' => ['mimes:png,jpg,jpeg'],
-            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture1Name' => ['required', 'string', 'max:72'],
-            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture2Name' => ['required', 'string', 'max:72'],
+            // 'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+            // 'signture1Name' => ['required', 'string', 'max:72'],
+            // 'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+            // 'signture2Name' => ['required', 'string', 'max:72'],
         ]);
         //store the  images from site
-        if (!$request->hasFile('fileName')) {
+        if (!$request->hasFile('images')) {
             return response()->json(['upload_file_not_found'], 400);
         }
 
         $allowedfileExtension = ['pdf', 'jpg', 'png'];
-        $files = $request->file('fileName');
+        $files = $request->file('images');
         $errors = [];
-
-        foreach ($files as $file) {
-
+        foreach ([$files] as $file) {
             $extension = $file->getClientOriginalExtension();
-
             $check = in_array($extension, $allowedfileExtension);
-
             if ($check) {
-                foreach ($request->fileName as $mediaFiles) {
-
-                    $path = $mediaFiles->store('public/images');
+                foreach ($file as $mediaFiles) {
                     $name = $mediaFiles->getClientOriginalName();
-
+                    $path = $mediaFiles->storeAs('public/images', $name);
                     // //store image file into directory and db
                     // $save = new Image();
                     // $save->title = $name;
@@ -62,7 +56,6 @@ class AppApiController extends Controller
             } else {
                 return response()->json(['invalid_file_format'], 422);
             }
-
             return response()->json(['file_uploaded'], 200);
         }
         return 'true';
