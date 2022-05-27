@@ -40,24 +40,22 @@ class AppApiController extends Controller
         $allowedfileExtension = ['pdf', 'jpg', 'png'];
         $files = $request->file('images');
         $errors = [];
-        foreach ([$files] as $file) {
+        foreach (array($request->file('images')) as $file) {
+            array_push($errors, $file);
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedfileExtension);
             if ($check) {
-                foreach ($file as $mediaFiles) {
+                foreach (array($request->file('images')) as $mediaFiles) {
                     $name = $mediaFiles->getClientOriginalName();
                     $path = $mediaFiles->storeAs('public/images', $name);
-                    // //store image file into directory and db
-                    // $save = new Image();
-                    // $save->title = $name;
-                    // $save->path = $path;
-                    // $save->save();
+                    // continue;
                 }
             } else {
                 return response()->json(['invalid_file_format'], 422);
             }
-            return response()->json(['file_uploaded'], 200);
+            response()->json(['file_uploaded'], 200);
         }
+        return $errors;
         return 'true';
         //store the signtures
         // if (!$request->hasFile('signture1')) {
@@ -440,6 +438,7 @@ class AppApiController extends Controller
                             'name' => $data2->name,
                             'template_id' => $newTemplate->template_id,
                             'status' => $data2->status,
+                            'is_required' => $data2->is_required,
                             'category_id' => $category->category_id,
                         ]);
                     }
@@ -449,6 +448,7 @@ class AppApiController extends Controller
                     foreach ($data->api->textbox as $key3 => $data3) {
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
+                            'is_required' => $data2->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
@@ -460,6 +460,7 @@ class AppApiController extends Controller
                         $selector = Selector::Create([
                             'name' => $data4->name,
                             'values' => $data4->values,
+                            'is_required' => $data2->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);

@@ -11,7 +11,7 @@ class Selector extends Model
     protected $table = 'selectors';
     protected $primaryKey = 'selector_id';
     protected $fillable = [
-        'name', 'values', 'template_id', 'category_id'
+        'name', 'values', 'is_required', 'template_id', 'category_id'
     ];
 
     // protected $casts = [

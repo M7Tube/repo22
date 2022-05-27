@@ -11,7 +11,7 @@ class TextBox extends Model
     protected $table = 'text_boxes';
     protected $primaryKey = 'box_id';
     protected $fillable = [
-        'name', 'template_id', 'category_id'
+        'name', 'is_required', 'template_id', 'category_id'
     ];
 
     // protected $casts = [

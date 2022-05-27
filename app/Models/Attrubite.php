@@ -11,7 +11,7 @@ class Attrubite extends Model
     protected $table = 'attrubites';
     protected $primaryKey = 'attrubite_id';
     protected $fillable = [
-        'name', 'template_id', 'status', 'category_id'
+        'name', 'template_id', 'status', 'is_required', 'category_id'
     ];
 
     protected $casts = [

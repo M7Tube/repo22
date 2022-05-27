@@ -37,7 +37,6 @@ class AttrubireController extends Controller
      */
     public function store(AttrubiteRequest $request)
     {
-        // TODO valdiation
         Attrubite::Create($request->all());
         return back()->with('success', 'Question Created Successfully');
     }
