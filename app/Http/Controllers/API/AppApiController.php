@@ -385,7 +385,7 @@ class AppApiController extends Controller
         $newTemplate = Template::Create([
             'name' => $request->template_name,
             'desc' => $request->template_desc,
-            'pic' => 'https://c-rpt.com/storage/app/images/' . $request->file('template_pic')->getClientOriginalName(),
+            'pic' => 'https://c-rpt.com/storage/app/public/images/' . $request->file('template_pic')->getClientOriginalName(),
             'user_id' => $request->template_user_id,
         ]);
         if ($newTemplate) {
@@ -426,50 +426,50 @@ class AppApiController extends Controller
         }
         //ss
         //first i need to make loop for creating the category
-        // if (!is_null($request->template_category)) {
-        //     foreach (json_decode($request->template_category) as $key => $data) {
-        //         $category = ReportCategory::Create([
-        //             'name' => $data->name,
-        //             'template_id' => $newTemplate->template_id,
-        //         ]);
-        //         if (!is_null($data->api->att)) {
-        //             foreach ($data->api->att as $key2 => $data2) {
-        //                 $attrubite = Attrubite::Create([
-        //                     'name' => $data2->name,
-        //                     'template_id' => $newTemplate->template_id,
-        //                     'status' => $data2->status,
-        //                     'is_required' => $data2->is_required,
-        //                     'category_id' => $category->category_id,
-        //                 ]);
-        //             }
-        //         } else {
-        //         }
-        //         if (!is_null($data->api->textbox)) {
-        //             foreach ($data->api->textbox as $key3 => $data3) {
-        //                 $textbox = TextBox::Create([
-        //                     'name' => $data3->name,
-        //                     'is_required' => $data2->is_required,
-        //                     'template_id' => $newTemplate->template_id,
-        //                     'category_id' => $category->category_id,
-        //                 ]);
-        //             }
-        //         } else {
-        //         }
-        //         if (!is_null($data->api->selector)) {
-        //             foreach ($data->api->selector as $key4 => $data4) {
-        //                 $selector = Selector::Create([
-        //                     'name' => $data4->name,
-        //                     'values' => $data4->values,
-        //                     'is_required' => $data2->is_required,
-        //                     'template_id' => $newTemplate->template_id,
-        //                     'category_id' => $category->category_id,
-        //                 ]);
-        //             }
-        //         } else {
-        //         }
-        //     }
-        // } else {
-        // }
+        if (!is_null($request->template_category)) {
+            foreach (json_decode($request->template_category) as $key => $data) {
+                $category = ReportCategory::Create([
+                    'name' => $data->name,
+                    'template_id' => $newTemplate->template_id,
+                ]);
+                if (!is_null($data->api->att)) {
+                    foreach ($data->api->att as $key2 => $data2) {
+                        $attrubite = Attrubite::Create([
+                            'name' => $data2->name,
+                            'template_id' => $newTemplate->template_id,
+                            'status' => $data2->status,
+                            'is_required' => $data2->is_required,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if (!is_null($data->api->textbox)) {
+                    foreach ($data->api->textbox as $key3 => $data3) {
+                        $textbox = TextBox::Create([
+                            'name' => $data3->name,
+                            'is_required' => $data2->is_required,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if (!is_null($data->api->selector)) {
+                    foreach ($data->api->selector as $key4 => $data4) {
+                        $selector = Selector::Create([
+                            'name' => $data4->name,
+                            'values' => $data4->values,
+                            'is_required' => $data2->is_required,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+            }
+        } else {
+        }
         return response()->json([
             'status' => 'success',
             'code' => 200,
