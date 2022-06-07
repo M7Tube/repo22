@@ -385,7 +385,7 @@ class AppApiController extends Controller
         $newTemplate = Template::Create([
             'name' => $request->template_name,
             'desc' => $request->template_desc,
-            'pic' => $request->file('template_pic')->getClientOriginalName(),
+            'pic' => 'https://c-rpt.com/storage/app/images/' . $request->file('template_pic')->getClientOriginalName(),
             'user_id' => $request->template_user_id,
         ]);
         if ($newTemplate) {
