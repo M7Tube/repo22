@@ -32,20 +32,22 @@ class AppApiController extends Controller
             // 'signture2' => ['required', 'mimes:png,jpg,jpeg'],
             // 'signture2Name' => ['required', 'string', 'max:72'],
         ]);
+
         //store the  images from site
         if (!$request->hasFile('images')) {
             return response()->json(['upload_file_not_found'], 400);
         }
 
         $allowedfileExtension = ['pdf', 'jpg', 'png'];
+
         $files = $request->file('images');
         $errors = [];
-        foreach (array($request->file('images')) as $file) {
-            array_push($errors, $file);
+        foreach ($files as $file) {
+            // return 'a';
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedfileExtension);
             if ($check) {
-                foreach (array($request->file('images')) as $mediaFiles) {
+                foreach ($request->file('images') as $mediaFiles) {
                     $name = $mediaFiles->getClientOriginalName();
                     $path = $mediaFiles->storeAs('public/images', $name);
                     // continue;
@@ -55,7 +57,7 @@ class AppApiController extends Controller
             }
             response()->json(['file_uploaded'], 200);
         }
-        return $errors;
+        // return $errors;
         return 'true';
         //store the signtures
         // if (!$request->hasFile('signture1')) {
@@ -118,6 +120,7 @@ class AppApiController extends Controller
         //store the pdf
         //return the pdf
     }
+
     public function saveValue(Request $request)
     {
         $request->validate([
