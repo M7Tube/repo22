@@ -47,7 +47,7 @@ class AppApiController extends Controller
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedfileExtension);
             if ($check) {
-                foreach ($request->file('images') as $mediaFiles) {
+                foreach ($files as $mediaFiles) {
                     $name = $mediaFiles->getClientOriginalName();
                     $path = $mediaFiles->storeAs('public/images', $name);
                     // continue;
