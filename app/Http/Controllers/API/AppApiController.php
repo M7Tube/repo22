@@ -24,24 +24,26 @@ class AppApiController extends Controller
     {
         //see the field form XD and validate it
         $request->validate([
-            // 'note' => ['required', 'string', 'max:288'],
+            'note' => ['required', 'string', 'max:1044'],
             'images' => ['required'],
             'images.*' => ['mimes:png,jpg,jpeg'],
-            // 'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-            // 'signture1Name' => ['required', 'string', 'max:72'],
-            // 'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-            // 'signture2Name' => ['required', 'string', 'max:72'],
+            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture1Name' => ['required', 'string', 'max:72'],
+            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture2Name' => ['required', 'string', 'max:72'],
         ]);
 
         //store the  images from site
         if (!$request->hasFile('images')) {
-            return response()->json(['upload_file_not_found'], 400);
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'upload file not found',
+            ], 200);
         }
-
         $allowedfileExtension = ['pdf', 'jpg', 'png'];
-
         $files = $request->file('images');
-        $errors = [];
+        $uploadedimages = [];
         foreach ($files as $file) {
             // return 'a';
             $extension = $file->getClientOriginalExtension();
@@ -50,72 +52,91 @@ class AppApiController extends Controller
                 foreach ($files as $mediaFiles) {
                     $name = $mediaFiles->getClientOriginalName();
                     $path = $mediaFiles->storeAs('public/images', $name);
-                    // continue;
+                    response()->json([
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'images saved',
+                    ], 200);
                 }
             } else {
-                return response()->json(['invalid_file_format'], 422);
+                return response()->json([
+                    'status' => 'fails',
+                    'code' => 200,
+                    'message' => 'Invalid File Format',
+                ], 200);
             }
-            response()->json(['file_uploaded'], 200);
+            array_push($uploadedimages, $file->getClientOriginalName());
+            response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'images saved',
+            ], 200);
         }
-        // return $errors;
-        return 'true';
         //store the signtures
-        // if (!$request->hasFile('signture1')) {
-        //     return response()->json([
-        //         'status' => 'fails',
-        //         'code' => 200,
-        //         'message' => 'upload file not found',
-        //     ], 200);
-        // } else {
-        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
-        //     $file = $request->file('signture1');
-        //     // $erros = [];
-        //     $extension = $file->getClientOriginalExtension();
-        //     $check = in_array($extension, $allowedExtension);
-        //     if ($check) {
-        //         $name = $file->getClientOriginalName();
-        //         $path = $file->storeAs('public/images', $name);
-        //         response()->json([
-        //             'status' => 'success',
-        //             'code' => 200,
-        //             'message' => 'images saved',
-        //         ], 200);
-        //     } else {
-        //         return response()->json([
-        //             'status' => 'fails',
-        //             'code' => 200,
-        //             'message' => 'Invalid File Format',
-        //         ], 200);
-        //     }
-        // }
-        // if (!$request->hasFile('signture2')) {
-        //     return response()->json([
-        //         'status' => 'fails',
-        //         'code' => 200,
-        //         'message' => 'upload file not found',
-        //     ], 200);
-        // } else {
-        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
-        //     $file = $request->file('signture2');
-        //     // $erros = [];
-        //     $extension = $file->getClientOriginalExtension();
-        //     $check = in_array($extension, $allowedExtension);
-        //     if ($check) {
-        //         $name = $file->getClientOriginalName();
-        //         $path = $file->storeAs('public/images', $name);
-        //         response()->json([
-        //             'status' => 'success',
-        //             'code' => 200,
-        //             'message' => 'images saved',
-        //         ], 200);
-        //     } else {
-        //         return response()->json([
-        //             'status' => 'fails',
-        //             'code' => 200,
-        //             'message' => 'Invalid File Format',
-        //         ], 200);
-        //     }
-        // }
+        $uploadedsignture=[];
+        if (!$request->hasFile('signture1')) {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'upload file not found',
+            ], 200);
+        } else {
+            $allowedExtension = ['jpg', 'jpeg', 'png'];
+            $file = $request->file('signture1');
+            // $erros = [];
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowedExtension);
+            if ($check) {
+                $name = $file->getClientOriginalName();
+                $path = $file->storeAs('public/images/signture', $name);
+                response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'images saved',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'fails',
+                    'code' => 200,
+                    'message' => 'Invalid File Format',
+                ], 200);
+            }
+            array_push($uploadedsignture, $file->getClientOriginalName());
+        }
+        if (!$request->hasFile('signture2')) {
+            return response()->json([
+                'status' => 'fails',
+                'code' => 200,
+                'message' => 'upload file not found',
+            ], 200);
+        } else {
+            $allowedExtension = ['jpg', 'jpeg', 'png'];
+            $file = $request->file('signture2');
+            // $erros = [];
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowedExtension);
+            if ($check) {
+                $name = $file->getClientOriginalName();
+                $path = $file->storeAs('public/images/signture', $name);
+                response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'images saved',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'fails',
+                    'code' => 200,
+                    'message' => 'Invalid File Format',
+                ], 200);
+            }
+            array_push($uploadedsignture, $file->getClientOriginalName());
+        }
+        return $data=[
+            'note'=>$request->note,
+            'pictures'=>$uploadedimages,
+            'signture'=>$uploadedsignture,
+        ];
         //create the pdf
         //store the pdf
         //return the pdf
