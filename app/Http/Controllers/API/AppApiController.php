@@ -501,7 +501,7 @@ class AppApiController extends Controller
         ], 200);
         //done !
     }
-
+    //dsfa
     public function inspection($id)
     {
         $request = [
