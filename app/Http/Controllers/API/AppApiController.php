@@ -73,7 +73,7 @@ class AppApiController extends Controller
             ], 200);
         }
         //store the signtures
-        $uploadedsignture=[];
+        $uploadedsignture = [];
         if (!$request->hasFile('signture1')) {
             return response()->json([
                 'status' => 'fails',
@@ -132,10 +132,10 @@ class AppApiController extends Controller
             }
             array_push($uploadedsignture, $file->getClientOriginalName());
         }
-        return $data=[
-            'note'=>$request->note,
-            'pictures'=>$uploadedimages,
-            'signture'=>$uploadedsignture,
+        return $data = [
+            'note' => $request->note,
+            'pictures' => $uploadedimages,
+            'signture' => $uploadedsignture,
         ];
         //create the pdf
         //store the pdf
@@ -450,13 +450,13 @@ class AppApiController extends Controller
         }
         //ss
         //first i need to make loop for creating the category
-        if (!is_null($request->template_category)) {
+        if ($request->template_category) {
             foreach (json_decode($request->template_category) as $key => $data) {
                 $category = ReportCategory::Create([
                     'name' => $data->name,
                     'template_id' => $newTemplate->template_id,
                 ]);
-                if (!is_null($data->api->att)) {
+                if ($data->api->att) {
                     foreach ($data->api->att as $key2 => $data2) {
                         $attrubite = Attrubite::Create([
                             'name' => $data2->name,
@@ -468,7 +468,7 @@ class AppApiController extends Controller
                     }
                 } else {
                 }
-                if (!is_null($data->api->textbox)) {
+                if ($data->api->textbox) {
                     foreach ($data->api->textbox as $key3 => $data3) {
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
@@ -479,7 +479,7 @@ class AppApiController extends Controller
                     }
                 } else {
                 }
-                if (!is_null($data->api->selector)) {
+                if ($data->api->selector) {
                     foreach ($data->api->selector as $key4 => $data4) {
                         $selector = Selector::Create([
                             'name' => $data4->name,
