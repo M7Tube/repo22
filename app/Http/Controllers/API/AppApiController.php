@@ -472,7 +472,7 @@ class AppApiController extends Controller
                     foreach ($data->api->textbox as $key3 => $data3) {
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
-                            'is_required' => $data2->is_required,
+                            'is_required' => $data3->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
@@ -484,7 +484,7 @@ class AppApiController extends Controller
                         $selector = Selector::Create([
                             'name' => $data4->name,
                             'values' => $data4->values,
-                            'is_required' => $data2->is_required,
+                            'is_required' => $data3->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
