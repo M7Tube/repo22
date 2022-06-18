@@ -15,7 +15,8 @@ class Attrubite extends Model
     ];
 
     protected $casts = [
-        'status' => 'array'
+        'status' => 'array',
+        'is_required' => 'integer'
     ];
 
     public function template()

@@ -484,7 +484,7 @@ class AppApiController extends Controller
                         $selector = Selector::Create([
                             'name' => $data4->name,
                             'values' => $data4->values,
-                            'is_required' => $data3->is_required,
+                            'is_required' => $data4->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);

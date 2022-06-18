@@ -14,9 +14,9 @@ class TextBox extends Model
         'name', 'is_required', 'template_id', 'category_id'
     ];
 
-    // protected $casts = [
-    //     'values' => 'array'
-    // ];
+    protected $casts = [
+        'is_required' => 'integer'
+    ];
 
     public function template()
     {
