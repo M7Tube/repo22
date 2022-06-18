@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 
 
 
-//Protected Route
+//Protected Routeee
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['as' => 'Auth.'], function () {
         //get route
