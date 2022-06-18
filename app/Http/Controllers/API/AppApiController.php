@@ -10,6 +10,7 @@ use App\Models\Attrubite;
 use App\Models\Document;
 use App\Models\HandOver;
 use App\Models\InProgressInspection;
+use PDF2;
 use App\Models\ReportCategory;
 use App\Models\Selector;
 use App\Models\Template;
@@ -132,12 +133,50 @@ class AppApiController extends Controller
             }
             array_push($uploadedsignture, $file->getClientOriginalName());
         }
-        return $data = [
+        $data = [
             'note' => $request->note,
             'pictures' => $uploadedimages,
             'signture' => $uploadedsignture,
         ];
         //create the pdf
+        // $info = session()->get('Quinfo' . session()->get('LoggedAccount')['email'], []);
+        // $files = session()->get('files' . session()->get('LoggedAccount')['email'], []);
+        // $request = session()->get('request' . session()->get('LoggedAccount')['email'], []);
+        // $data = session()->get('data' . session()->get('LoggedAccount')['email'], []);
+        // if (isset($data['data' . session()->get('LoggedAccount')['email']])) {
+        //     session()->forget('data' . session()->get('LoggedAccount')['email']);
+        //     $data['data' . session()->get('LoggedAccount')['email']] = [
+        //         'info' => $info,
+        //         'files' => $files,
+        //         0 => $request
+        //     ];
+        // } else {
+        //     $data['data' . session()->get('LoggedAccount')['email']] = [
+        //         'info' => $info,
+        //         'files' => $files,
+        //         0 => $request
+        //     ];
+        // }
+        // session()->put('data' . session()->get('LoggedAccount')['email'], $data);
+        // return redirect()->route('Exportform');
+        /////////////////////////////////////////
+        ini_set('max_execution_time', '300');
+        ini_set("pcre.backtrack_limit", "50000000");
+        view()->share('data', $data);
+        $pdf = PDF2::chunkLoadView('<html-separator/>', 'apiPDF', $data);
+        // $pdf = PDF2::loadView('pdf', $data);
+        $output = $pdf->output();
+        // $name = 'upload/Doc.' . session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'] . '.pdf';
+        // file_put_contents($name, $output);
+        // $document = Document::Create([
+            // 'docNo' => session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'],
+            // 'doc' => $name
+        // ]);
+        //TODO un comment the 3 line under this
+        // session()->forget('Quinfo');
+        // session()->forget('files');
+        // download PDF file with download method
+        return $pdf->download('Report.pdf');
         //store the pdf
         //return the pdf
     }
