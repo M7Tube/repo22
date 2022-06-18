@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AppApiController extends Controller
 {
-    //c
+    //
     public function form(Request $request)
     {
         //see the field form XD and validate it
