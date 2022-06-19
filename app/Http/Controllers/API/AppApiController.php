@@ -28,7 +28,7 @@ class AppApiController extends Controller
         $request->validate([
             'note' => ['required', 'string', 'max:1044'],
             'images' => ['required'],
-            'images.*' => ['mimes:png,jpg,jpeg'],
+            // 'images.*' => ['mimes:png,jpg,jpeg'],
             'signture1' => ['required', 'mimes:png,jpg,jpeg'],
             'signture1Name' => ['required', 'string', 'max:72'],
             'signture2' => ['required', 'mimes:png,jpg,jpeg'],
