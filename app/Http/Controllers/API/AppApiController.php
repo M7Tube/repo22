@@ -167,17 +167,24 @@ class AppApiController extends Controller
         $pdf = PDF2::chunkLoadView('<html-separator/>', 'apiPDF', $data);
         // $pdf = PDF2::loadView('pdf', $data);
         $output = $pdf->output();
-        // $name = 'upload/Doc.' . session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'] . '.pdf';
-        // file_put_contents($name, $output);
+        $name = 'upload/pdf/Doc.' . $request->note . $request->signture1Name . $request->signture2Name . '.pdf';
+        file_put_contents($name, $output);
         // $document = Document::Create([
-            // 'docNo' => session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'],
-            // 'doc' => $name
+        // 'docNo' => session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'],
+        // 'doc' => $name
         // ]);
         //TODO un comment the 3 line under this
         // session()->forget('Quinfo');
         // session()->forget('files');
         // download PDF file with download method
-        return $pdf->download('Report.pdf');
+        return $file = public_path() . '/'.$name;
+
+        // $headers = array(
+        //     'Content-Type: application/pdf',
+        // );
+        // //ssa
+        // return response()->download($file, 'filename.pdf', $headers);
+        // return $pdf->download('Report.pdf');
         //store the pdf
         //return the pdf
     }
