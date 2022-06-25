@@ -195,7 +195,7 @@ class AppApiController extends Controller
     {
         $request->validate([
             'IPI_id' => ['required', 'integer', 'exists:in_progress_inspections,IPI_id'],
-            'doc_no' => ['required','integer'],
+            'doc_no' => ['required', 'integer'],
             'value' => ['required'],
         ]);
         $insp = InProgressInspection::find($request->IPI_id);
@@ -225,7 +225,7 @@ class AppApiController extends Controller
         $inProgress = InProgressInspection::where('is_complated', 0)->ignoreRequest(['InProgress'])->filter()->paginate(
             $perpage,
             [
-                'IPI_id', 'name', 'desc', 'location', 'date', 'value', 'is_complated', 'created_at'
+                'IPI_id', 'name', 'desc', 'location', 'date', 'doc_no', 'value', 'is_complated', 'created_at'
             ],
             'InProgress'
         );
