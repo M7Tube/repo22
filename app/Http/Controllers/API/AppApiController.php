@@ -26,17 +26,17 @@ class AppApiController extends Controller
     {
         // dsf
         //see the field form XD and validate it
-        $request->validate(
-            ['data' => [
-                'note' => ['required', 'string', 'max:1044'],
-                'images' => ['required'],
-                // 'images.*' => ['mimes:png,jpg,jpeg'],
-                'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-                'signture1Name' => ['required', 'string', 'max:72'],
-                'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-                'signture2Name' => ['required', 'string', 'max:72'],
-            ]]
-        );
+        // $request->validate(
+        //     ['data' => [
+        //         'note' => ['required', 'string', 'max:1044'],
+        //         'images' => ['required'],
+        //         // 'images.*' => ['mimes:png,jpg,jpeg'],
+        //         'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+        //         'signture1Name' => ['required', 'string', 'max:72'],
+        //         'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+        //         'signture2Name' => ['required', 'string', 'max:72'],
+        //     ]]
+        // );
         return $request->all();
         //store the  images from site
         if (!$request->hasFile('images')) {
