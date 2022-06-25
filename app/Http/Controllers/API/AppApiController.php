@@ -24,7 +24,6 @@ class AppApiController extends Controller
     //
     public function form(Request $request)
     {
-        // dsf
         //see the field form XD and validate it
         $request->validate([
             'note' => ['required', 'string', 'max:1044'],
