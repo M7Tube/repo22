@@ -195,12 +195,10 @@ class AppApiController extends Controller
     {
         $request->validate([
             'IPI_id' => ['required', 'integer', 'exists:in_progress_inspections,IPI_id'],
-            'doc_no' => ['required', 'integer'],
             'value' => ['required'],
         ]);
         $insp = InProgressInspection::find($request->IPI_id);
         if ($insp) {
-            $insp->doc_no = $request->doc_no;
             $insp->value = $request->value;
             $insp->save();
             return response()->json([
@@ -282,6 +280,7 @@ class AppApiController extends Controller
             'name' => ['required', 'string', 'max:96'],
             'desc' => ['string', 'max:192'],
             'date' => ['required', 'date'],
+            'doc_no' => ['required', 'integer'],
             'location' => ['required', 'string'],
             'template_id' => ['required', 'integer', 'exists:templates,template_id'],
         ]);
@@ -291,6 +290,7 @@ class AppApiController extends Controller
             'name' => $request->name,
             'desc' => $request->desc,
             'date' => $request->date,
+            'doc_no' => $request->doc_no,
             'location' => $request->location,
             'value' => $questions,
             'is_complated' => 0,
