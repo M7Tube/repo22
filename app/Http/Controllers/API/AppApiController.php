@@ -200,6 +200,7 @@ class AppApiController extends Controller
         ]);
         $insp = InProgressInspection::find($request->IPI_id);
         if ($insp) {
+            $insp->doc_no = $request->doc_no;
             $insp->value = $request->value;
             $insp->save();
             return response()->json([
