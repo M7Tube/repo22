@@ -222,6 +222,7 @@ class AppApiController extends Controller
 
     public function inProgressHistory($perpage)
     {
+        // s
         $inProgress = InProgressInspection::where('is_complated', 0)->ignoreRequest(['InProgress'])->filter()->paginate(
             $perpage,
             [
