@@ -39,6 +39,7 @@ class FormController extends Controller
             ];
         }
         session()->put('data' . session()->get('LoggedAccount')['email'], $data);
+        // return $data;
         // return redirect()->route('Exportform');
         /////////////////////////////////////////
         ini_set('max_execution_time', '300');

@@ -34,7 +34,7 @@ class AppApiController extends Controller
             'signture2' => ['required', 'mimes:png,jpg,jpeg'],
             'signture2Name' => ['required', 'string', 'max:72'],
         ]);
-
+        return $request->all();
         //store the  images from site
         if (!$request->hasFile('images')) {
             return response()->json([
