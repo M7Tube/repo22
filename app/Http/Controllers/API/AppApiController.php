@@ -195,6 +195,7 @@ class AppApiController extends Controller
     {
         $request->validate([
             'IPI_id' => ['required', 'integer', 'exists:in_progress_inspections,IPI_id'],
+            'doc_no' => ['required','integer'],
             'value' => ['required'],
         ]);
         $insp = InProgressInspection::find($request->IPI_id);

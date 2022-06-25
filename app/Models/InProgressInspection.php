@@ -18,6 +18,6 @@ class InProgressInspection extends Model
     protected $table = 'in_progress_inspections';
     protected $primaryKey = 'IPI_id';
     protected $fillable = [
-        'name', 'desc', 'location', 'date', 'value','is_complated'
+        'name', 'desc', 'location', 'date','doc_no', 'value','is_complated'
     ];
 }

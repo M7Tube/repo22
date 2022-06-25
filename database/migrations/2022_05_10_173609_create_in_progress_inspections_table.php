@@ -19,6 +19,7 @@ class CreateInProgressInspectionsTable extends Migration
             $table->string('desc')->nullable();
             $table->string('location');
             $table->date('date');
+            $table->integer('doc_no');
             $table->json('value')->nullable();
             $table->boolean('is_complated');
             $table->timestamps();
