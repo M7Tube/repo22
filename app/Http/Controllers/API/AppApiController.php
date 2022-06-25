@@ -26,18 +26,16 @@ class AppApiController extends Controller
     {
         // dsf
         //see the field form XD and validate it
-        // $request->validate(
-        //     ['data' => [
-        //         'note' => ['required', 'string', 'max:1044'],
-        //         'images' => ['required'],
-        //         // 'images.*' => ['mimes:png,jpg,jpeg'],
-        //         'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-        //         'signture1Name' => ['required', 'string', 'max:72'],
-        //         'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-        //         'signture2Name' => ['required', 'string', 'max:72'],
-        //     ]]
-        // );
-        return $request->data[0]['name'];
+        $request->validate([
+            'note' => ['required', 'string', 'max:1044'],
+            'images' => ['required'],
+            // 'images.*' => ['mimes:png,jpg,jpeg'],
+            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture1Name' => ['required', 'string', 'max:72'],
+            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+            'signture2Name' => ['required', 'string', 'max:72'],
+        ]);
+        return $request->obada['name'];
         //store the  images from site
         if (!$request->hasFile('images')) {
             return response()->json([
@@ -137,10 +135,11 @@ class AppApiController extends Controller
             }
             array_push($uploadedsignture, $file->getClientOriginalName());
         }
-        $data = [
-            'note' => $request->note,
+        return $data = [
+            'info' => $request->data['info'],
             'pictures' => $uploadedimages,
-            'signture' => $uploadedsignture,
+            'signutares' => $uploadedsignture,
+            0 => $request->data[0],
         ];
         //create the pdf
         // $info = session()->get('Quinfo' . session()->get('LoggedAccount')['email'], []);
