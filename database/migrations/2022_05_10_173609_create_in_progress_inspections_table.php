@@ -24,6 +24,7 @@ class CreateInProgressInspectionsTable extends Migration
             $table->boolean('is_complated');
             $table->timestamps();
         });
+        // s
     }
 
     /**
