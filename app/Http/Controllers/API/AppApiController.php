@@ -37,7 +37,7 @@ class AppApiController extends Controller
         //         'signture2Name' => ['required', 'string', 'max:72'],
         //     ]]
         // );
-        return $request->data()[0]['name'];
+        return $request->data[0]['name'];
         //store the  images from site
         if (!$request->hasFile('images')) {
             return response()->json([
