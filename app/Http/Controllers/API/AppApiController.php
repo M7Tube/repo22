@@ -25,15 +25,17 @@ class AppApiController extends Controller
     public function form(Request $request)
     {
         //see the field form XD and validate it
-        $request->validate([
-            'note' => ['required', 'string', 'max:1044'],
-            'images' => ['required'],
-            // 'images.*' => ['mimes:png,jpg,jpeg'],
-            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture1Name' => ['required', 'string', 'max:72'],
-            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture2Name' => ['required', 'string', 'max:72'],
-        ]);
+        $request->validate(
+            ['data' => [
+                'note' => ['required', 'string', 'max:1044'],
+                'images' => ['required'],
+                // 'images.*' => ['mimes:png,jpg,jpeg'],
+                'signture1' => ['required', 'mimes:png,jpg,jpeg'],
+                'signture1Name' => ['required', 'string', 'max:72'],
+                'signture2' => ['required', 'mimes:png,jpg,jpeg'],
+                'signture2Name' => ['required', 'string', 'max:72'],
+            ]]
+        );
         return $request->all();
         //store the  images from site
         if (!$request->hasFile('images')) {
@@ -178,7 +180,7 @@ class AppApiController extends Controller
         // session()->forget('files');
         // download PDF file with download method
         // /upload/pdf/Doc.dsfaadfsaffadsewr.pdf
-        return $file = 'https://www.c-rpt.com/public' . '/'.$name;
+        return $file = 'https://www.c-rpt.com/public' . '/' . $name;
 
         // $headers = array(
         //     'Content-Type: application/pdf',
