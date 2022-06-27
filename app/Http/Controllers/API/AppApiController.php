@@ -7,6 +7,7 @@ use App\Http\Resources\CreateInspectionResource;
 use App\Http\Resources\HandOver as ResourcesHandOver;
 use App\Http\Resources\OneHandOver;
 use App\Models\Attrubite;
+use App\Models\DateAndTime;
 use App\Models\Document;
 use App\Models\HandOver;
 use App\Models\InProgressInspection;
@@ -539,6 +540,18 @@ class AppApiController extends Controller
                             'name' => $data4->name,
                             'values' => $data4->values,
                             'is_required' => $data4->is_required,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if ($data->api->dateAndTime) {
+                    foreach ($data->api->dateAndTime as $key5 => $data5) {
+                        $dateAndTime = DateAndTime::Create([
+                            'title' => $data5->title,
+                            'date' => $data5->date,
+                            'is_required' => $data5->is_required,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
