@@ -79,18 +79,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test',
             'desc' => 'hahahahah',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
+            'instructions' => 'Test From Mahmoud',
             'user_id' => '1',
         ]);
         Template::Create([
             'name' => 'hwhwhwh',
             'desc' => 'hahahahah',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
+            'instructions' => 'Test From Mahmoud',
             'user_id' => '1',
         ]);
         Template::Create([
             'name' => 'heeeeeeeee',
             'desc' => 'hwwwwwwwwww',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
+            'instructions' => 'Test From Mahmoud',
             'user_id' => '1',
         ]);
         HandOver::Create([

@@ -19,6 +19,7 @@ class Template extends Model
         'name',
         'desc',
         'pic',
+        'instructions',
         'user_id'
     ];
 

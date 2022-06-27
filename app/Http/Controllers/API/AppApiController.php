@@ -455,6 +455,7 @@ class AppApiController extends Controller
             'template_name' => ['required', 'string', 'max:72'],
             'template_desc' => ['required', 'string', 'max:144'],
             'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
+            'template_instructions' => ['required', 'string', 'max:1440'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],
             // 'template_category' => ['json'],
         ]);
@@ -462,6 +463,7 @@ class AppApiController extends Controller
             'name' => $request->template_name,
             'desc' => $request->template_desc,
             'pic' => 'https://c-rpt.com/storage/app/public/images/' . $request->file('template_pic')->getClientOriginalName(),
+            'instructions' =>  $request->template_instructions,
             'user_id' => $request->template_user_id,
         ]);
         if ($newTemplate) {

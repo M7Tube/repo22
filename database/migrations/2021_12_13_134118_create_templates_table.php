@@ -18,6 +18,7 @@ class CreateTemplatesTable extends Migration
             $table->string('name');
             $table->string('desc')->nullable();
             $table->string('pic')->nullable();
+            $table->string('instructions')->nullable();
             $table->bigInteger('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade')->index()->unsigned();
             $table->timestamps();
         });
