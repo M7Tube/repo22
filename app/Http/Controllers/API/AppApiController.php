@@ -620,7 +620,7 @@ class AppApiController extends Controller
             ], 200);
         }
     }
-
+    // sfd
     public function homepage($perpage)
     {
         $template = Template::filter()->paginate($perpage);
