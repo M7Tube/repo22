@@ -25,7 +25,7 @@ class Template extends Model
     ];
 
     protected $casts = [
-        'signatures' => 'array'
+        'signatures' => 'json'
     ];
 
     public  static function searchaa($search)
