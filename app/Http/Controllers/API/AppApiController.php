@@ -600,7 +600,7 @@ class AppApiController extends Controller
             ], 200);
         }
         $data = ReportCategory::where('template_id', $id)->with(['att', 'selector', 'textbox'])->get();
-        $template = Template::find($id);
+        $template = Template::where('template_id',$id)->first();
         if ($data && $template) {
             $docNo = Document::all()->last();
             if ($docNo) {
