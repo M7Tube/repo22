@@ -540,6 +540,7 @@ class AppApiController extends Controller
                             'name' => $data4->name,
                             'values' => $data4->values,
                             'is_required' => $data4->is_required,
+                            'is_multi' => 0,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
@@ -552,6 +553,19 @@ class AppApiController extends Controller
                             'title' => $data5->title,
                             'date' => $data5->date,
                             'is_required' => $data5->is_required,
+                            'template_id' => $newTemplate->template_id,
+                            'category_id' => $category->category_id,
+                        ]);
+                    }
+                } else {
+                }
+                if ($data->api->multiselector) {
+                    foreach ($data->api->multiselector as $key6 => $data6) {
+                        $selector = Selector::Create([
+                            'name' => $data6->name,
+                            'values' => $data6->values,
+                            'is_required' => $data6->is_required,
+                            'is_multi' => 1,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);
