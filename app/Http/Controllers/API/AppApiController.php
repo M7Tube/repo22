@@ -461,11 +461,12 @@ class AppApiController extends Controller
             // 'template_category' => ['json'],
         ]);
         $newTemplate = Template::Create([
-            'name' => $request->template_name,
-            'desc' => $request->template_desc,
-            'pic' => 'https://c-rpt.com/storage/app/public/images/' . $request->file('template_pic')->getClientOriginalName(),
-            'instructions' =>  $request->template_instructions,
-            'user_id' => $request->template_user_id,
+            'name' => $request->template_name ?? '',
+            'desc' => $request->template_desc ?? '',
+            'pic' => 'https://c-rpt.com/storage/app/public/images/' . $request->file('template_pic')->getClientOriginalName() ?? '',
+            'instructions' =>  $request->template_instructions ?? '',
+            'signatures' =>  $request->signatures ?? '',
+            'user_id' => $request->template_user_id ?? '',
         ]);
         if ($newTemplate) {
             if (!$request->hasFile('template_pic')) {

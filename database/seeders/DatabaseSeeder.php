@@ -80,6 +80,7 @@ class DatabaseSeeder extends Seeder
             'desc' => 'hahahahah',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
             'instructions' => 'Test From Mahmoud',
+            'signatures' => '[{"title":"hehe"},{"title":"hwhw"}]',
             'user_id' => '1',
         ]);
         Template::Create([
@@ -87,6 +88,7 @@ class DatabaseSeeder extends Seeder
             'desc' => 'hahahahah',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
             'instructions' => 'Test From Mahmoud',
+            'signatures' => '[{"title":"hehe"},{"title":"hwhw"}]',
             'user_id' => '1',
         ]);
         Template::Create([
@@ -94,6 +96,7 @@ class DatabaseSeeder extends Seeder
             'desc' => 'hwwwwwwwwww',
             'pic' => 'https://c-rpt.com/storage/app/images/logo.png',
             'instructions' => 'Test From Mahmoud',
+            'signatures' => '[{"title":"hehe"},{"title":"hwhw"}]',
             'user_id' => '1',
         ]);
         HandOver::Create([

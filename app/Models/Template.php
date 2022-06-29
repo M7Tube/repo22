@@ -20,8 +20,13 @@ class Template extends Model
         'desc',
         'pic',
         'instructions',
+        'signatures',
         'user_id'
     ];
+
+    // protected $casts = [
+    //     'signatures' => 'array'
+    // ];
 
     public  static function searchaa($search)
     {
