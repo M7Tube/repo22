@@ -24,9 +24,9 @@ class Template extends Model
         'user_id'
     ];
 
-    // protected $casts = [
-    //     'signatures' => 'array'
-    // ];
+    protected $casts = [
+        'signatures' => 'array'
+    ];
 
     public  static function searchaa($search)
     {
