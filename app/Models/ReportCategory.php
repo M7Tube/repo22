@@ -36,4 +36,8 @@ class ReportCategory extends Model
     {
         return $this->hasMany(TextBox::class, 'category_id', 'category_id');
     }
+    // public function textbox()
+    // {
+    //     return $this->hasMany(TextBox::class, 'category_id', 'category_id');
+    // }
 }

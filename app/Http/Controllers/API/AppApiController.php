@@ -600,7 +600,8 @@ class AppApiController extends Controller
             ], 200);
         }
         $data = ReportCategory::where('template_id', $id)->with(['att', 'selector', 'textbox'])->get();
-        if ($data) {
+        $template = Template::find($id);
+        if ($data && $template) {
             $docNo = Document::all()->last();
             if ($docNo) {
                 $docNo = $docNo->docNo + 1;
@@ -612,6 +613,7 @@ class AppApiController extends Controller
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
+                    'Template' => $template,
                     'Category' => CreateInspectionResource::collection($data),
                     'Doc_No' => $docNo,
                 ],
