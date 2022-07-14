@@ -54,17 +54,19 @@ class Index extends Component
             'name' => ['string', 'max:48'],
             // 'email'=>[email','unique:users,email'],
             'password' => ['min:8', 'max:72'],
-            'pic' => ['mimes:png,jpg,jpeg'],
+            'pic' => ['nullable', 'mimes:png,jpg,jpeg'],
             'department_id' => ['exists:departments,department_id']
         ]);
-        $editedPhoto =$this->pic->store('upload','public');
+        if ($this->pic) {
+            $editedPhoto = $this->pic->storeAs('upload', $this->pic->getClientOriginalName());
+        }
         $user = User::find($this->user_id);
         if ($user) {
             $user->update([
                 'name' => $this->name,
                 // 'email' => $this->email,
                 'password' => $this->password,
-                'pic' => $editedPhoto,
+                'pic' => $editedPhoto ?? $user->pic,
                 'department_id' => $this->department_id,
             ]);
             session()->flash('message', 'User Updated Successfully');
