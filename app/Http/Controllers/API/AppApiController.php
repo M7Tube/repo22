@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\TemplateResource;
 use App\Http\Resources\CreateInspectionResource;
 use App\Http\Resources\HandOver as ResourcesHandOver;
 use App\Http\Resources\OneHandOver;
@@ -463,7 +464,7 @@ class AppApiController extends Controller
         $newTemplate = Template::Create([
             'name' => $request->template_name ?? '',
             'desc' => $request->template_desc ?? '',
-            'pic' => 'https://c-rpt.com/storage/app/public/images/' . $request->file('template_pic')->getClientOriginalName() ?? '',
+            'pic' => $request->file('template_pic')->getClientOriginalName() ?? '', //'https://c-rpt.com/storage/app/public/images/' .
             'instructions' =>  $request->template_instructions ?? '',
             'signatures' =>  $request->signatures ?? '',
             'user_id' => $request->template_user_id ?? '',
@@ -600,7 +601,7 @@ class AppApiController extends Controller
             ], 200);
         }
         $data = ReportCategory::where('template_id', $id)->with(['att', 'selector', 'textbox'])->get();
-        $template = Template::where('template_id',$id)->first();
+        $template = Template::where('template_id', $id)->first();
         if ($data && $template) {
             $docNo = Document::all()->last();
             if ($docNo) {
@@ -630,7 +631,7 @@ class AppApiController extends Controller
                 'code' => 200,
                 'message' => 'Successfull Request',
                 'data' => [
-                    'template' => $template,
+                    'template' => TemplateResource::collection($template)->response()->getData(),
                 ],
             ], 200);
         } else {

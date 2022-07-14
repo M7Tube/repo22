@@ -27,7 +27,6 @@ class Index extends Component
         if ($template) {
             $this->template_id = $template->template_id;
             $this->name = $template->name;
-            $this->pic = $template->pic;
         } else {
             return session()->flash('WrongTemplate', 'You Can Not Edit This Template');
         }
@@ -43,14 +42,16 @@ class Index extends Component
     {
         $this->validate([
             'name' => ['string', 'max:48'],
-            'pic' => ['mimes:png,jpg,jpeg'],
+            'pic' => ['nullable', 'mimes:png,jpg,jpeg'],
         ]);
-        $editedPhoto =$this->pic->store('upload','public');
+        if ($this->pic) {
+            $editedPhoto = $this->pic->storeAs('upload', $this->pic->getClientOriginalName());
+        }
         $template = Template::find($this->template_id);
         if ($template) {
             $template->update([
                 'name' => $this->name,
-                'pic' => $editedPhoto,
+                'pic' => ('https://c-rpt.com/storage/app/upload/' . $editedPhoto) ?? $template->pic,
                 // 'email' => $this->email,
             ]);
             session()->flash('message', 'Template Updated Successfully');

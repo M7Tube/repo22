@@ -43,7 +43,8 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-primary" href="{{ route('control') }}">
+
+                    <a class="nav-link text-white {{ Request::url()==route('control') ? 'active bg-gradient-primary' : '' }}" href="{{ route('control') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -51,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('controleUser') }}">
+                    <a class="nav-link text-white {{ Request::url()==route('controleUser') ? 'active bg-gradient-primary' : '' }}" href="{{ route('controleUser') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -59,11 +60,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/billing.html">
+                    <a class="nav-link text-white {{ Request::url()==route('template.index') ? 'active bg-gradient-primary' : '' }}" href="{{ route('template.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="material-icons opacity-10">table_view</i>
                         </div>
-                        <span class="nav-link-text ms-1">Billing</span>
+                        <span class="nav-link-text ms-1">Template</span>
                     </a>
                 </li>
                 <li class="nav-item">
