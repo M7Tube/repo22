@@ -20,4 +20,10 @@ class InProgressInspection extends Model
     protected $fillable = [
         'name', 'desc', 'location', 'date', 'doc_no', 'value', 'is_complated'
     ];
+
+    public  static function search($search)
+    {
+        return empty($search) ? static::query()
+            : static::query()->where('name', 'like', '%' . $search . '%');
+    }
 }

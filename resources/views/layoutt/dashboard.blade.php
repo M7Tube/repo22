@@ -66,6 +66,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::url() == route('inporgressInspections') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('inporgressInspections') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">In Progress Inspection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white {{ Request::url() == route('template.index') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('template.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -99,6 +108,15 @@
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
                         <span class="nav-link-text ms-1">TextBox</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::url() == route('selector.index') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('selector.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Selector</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item mt-3">
@@ -168,6 +186,15 @@
                         @if (Request::url() == route('textbox.index'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">TextBox</li>
                         @endif
+                        @if (Request::url() == route('selector.index'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Selector</li>
+                        @endif
+                        @if (Request::url() == route('inporgressInspections'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">In Progress Inspection</li>
+                        @endif
+                        {{-- @if (Request::url() == route('handover.index'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Hand Over</li>
+                        @endif --}}
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Dashboard</h6>
                 </nav>

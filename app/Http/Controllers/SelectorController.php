@@ -14,7 +14,7 @@ class SelectorController extends Controller
      */
     public function index()
     {
-        // return Selector::all();
+        return view('selector.index');
     }
 
     /**

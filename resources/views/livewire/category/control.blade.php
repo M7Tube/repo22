@@ -28,7 +28,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            {{ $category->template->name }}
+                                            {{ $category->template->name ?? __('Empty')}}
                                         </div>
                                     </td>
                                     <td class="align-middle">

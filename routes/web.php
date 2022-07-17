@@ -7,6 +7,7 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HandOverController;
 use App\Http\Controllers\SelectorController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\StatusController;
@@ -51,6 +52,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () { 
         Route::resource('attrubite', AttrubireController::class);
         Route::resource('selector', SelectorController::class);
         Route::resource('textbox', TextBoxController::class);
+        Route::resource('handover', HandOverController::class);
+        Route::view('inporgressInspections', 'inporgressInspections.index')->name('inporgressInspections');
         Route::view('category', 'Category.create')->name('category.create');
         Route::view('category/control', 'Category.control')->name('category.control');
         Route::view('signatures', 'signatures.index')->name('signatures.index');
