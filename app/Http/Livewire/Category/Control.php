@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Category;
 
 use App\Models\Attrubite;
 use App\Models\ReportCategory;
+use App\Models\Template;
 use Livewire\WithPagination as LivewireWithPagination;
 
 use Livewire\Component;
@@ -16,9 +17,16 @@ class Control extends Component
     public $name;
     public $template_id;
 
+    public $templates;
+
     public $orderBy = 'name';
     public $orderAsc = true;
     public $search = '';
+
+    public function mount()
+    {
+        $this->templates = Template::all(['template_id', 'name']);
+    }
 
     public function edit($id)
     {
@@ -46,6 +54,7 @@ class Control extends Component
         if ($category) {
             $category->update([
                 'name' => $this->name,
+                'template_id' => $this->template_id,
             ]);
             session()->flash('message', 'Category Updated Successfully');
         } else {

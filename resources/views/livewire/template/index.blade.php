@@ -37,7 +37,7 @@
                                     @else
                                         <td class="text-sm">
                                             <span class=""><img width="75px"
-                                                    src="{{ $template->pic }}"
+                                                src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/' . $template->pic)) !!}"
                                                     alt="Picture"></span>
                                         </td>
                                     @endif

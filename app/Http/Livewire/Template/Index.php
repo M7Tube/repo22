@@ -45,13 +45,14 @@ class Index extends Component
             'pic' => ['nullable', 'mimes:png,jpg,jpeg'],
         ]);
         if ($this->pic) {
-            $editedPhoto = $this->pic->storeAs('upload', $this->pic->getClientOriginalName());
+            $name = $this->pic->getClientOriginalName();
+            $editedPhoto = $this->pic->storeAs('public/images', $name);
         }
         $template = Template::find($this->template_id);
         if ($template) {
             $template->update([
                 'name' => $this->name,
-                'pic' => ('https://c-rpt.com/storage/app/upload/' . $editedPhoto) ?? $template->pic,
+                'pic' => $name ?? $template->pic,
                 // 'email' => $this->email,
             ]);
             session()->flash('message', 'Template Updated Successfully');

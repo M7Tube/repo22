@@ -30,7 +30,7 @@
     <aside
         class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
         id="sidenav-main">
-        <div class="sidenav-header">
+        {{-- <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
@@ -38,21 +38,27 @@
                 <img src="{{ asset('images/logo.png') }}" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold text-white">{{ __('Reporty') }}</span>
             </a>
-        </div>
+        </div> --}}
         <hr class="horizontal light mt-0 mb-2">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
 
-                    <a class="nav-link text-white {{ Request::url()==route('control') ? 'active bg-gradient-primary' : '' }}" href="{{ route('control') }}">
+                    <a class="nav-link text-white {{ Request::url() == route('control') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('control') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Control pages
+                    </h6>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Request::url()==route('controleUser') ? 'active bg-gradient-primary' : '' }}" href="{{ route('controleUser') }}">
+                    <a class="nav-link text-white {{ Request::url() == route('controleUser') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('controleUser') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -60,7 +66,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Request::url()==route('template.index') ? 'active bg-gradient-primary' : '' }}" href="{{ route('template.index') }}">
+                    <a class="nav-link text-white {{ Request::url() == route('template.index') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('template.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -68,30 +75,33 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/virtual-reality.html">
+                    <a class="nav-link text-white {{ Request::url() == route('category.control') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('category.control') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
+                            <i class="material-icons opacity-10">table_view</i>
                         </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
+                        <span class="nav-link-text ms-1">Category</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/rtl.html">
+                    <a class="nav-link text-white {{ Request::url() == route('attrubite.index') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('attrubite.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                            <i class="material-icons opacity-10">table_view</i>
                         </div>
-                        <span class="nav-link-text ms-1">RTL</span>
+                        <span class="nav-link-text ms-1">Questions</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="./pages/notifications.html">
+                    <a class="nav-link text-white {{ Request::url() == route('textbox.index') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('textbox.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">notifications</i>
+                            <i class="material-icons opacity-10">table_view</i>
                         </div>
-                        <span class="nav-link-text ms-1">Notifications</span>
+                        <span class="nav-link-text ms-1">TextBox</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
+                {{-- <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages
                     </h6>
                 </li>
@@ -118,16 +128,18 @@
                         </div>
                         <span class="nav-link-text ms-1">Sign Up</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
-        {{-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-            <div class="mx-3">
-                <a class="btn bg-gradient-primary mt-4 w-100"
-                    href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
-                    type="button">Upgrade to pro</a>
-            </div>
-        </div> --}}
+        <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+                target="_blank">
+                <img src="{{ asset('images/logo.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold text-white">{{ __('Reporty') }}</span>
+            </a>
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
@@ -136,9 +148,26 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                                href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        </li>
+                        @if (Request::url() == route('control'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                        @endif
+                        @if (Request::url() == route('controleUser'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Users</li>
+                        @endif
+                        @if (Request::url() == route('template.index'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Templates</li>
+                        @endif
+                        @if (Request::url() == route('category.control'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Categorys</li>
+                        @endif
+                        @if (Request::url() == route('attrubite.index'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Questions</li>
+                        @endif
+                        @if (Request::url() == route('textbox.index'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">TextBox</li>
+                        @endif
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Dashboard</h6>
                 </nav>
@@ -151,9 +180,9 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">Sign In</span>
+                                <span class="d-sm-inline d-none">Log Out</span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

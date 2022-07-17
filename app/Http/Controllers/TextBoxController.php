@@ -14,7 +14,7 @@ class TextBoxController extends Controller
      */
     public function index()
     {
-        //
+        return view('textbox.index');
     }
 
     /**

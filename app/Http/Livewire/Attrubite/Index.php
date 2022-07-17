@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Attrubite;
 
 use App\Models\Attrubite;
+use App\Models\Template;
 use Livewire\WithPagination as LivewireWithPagination;
 
 use Livewire\Component;
@@ -14,12 +15,22 @@ class Index extends Component
     public $attrubite_id;
     public $name;
     public $template_id;
+    public $is_required;
+    // public $oldStatus;
     public $status;
+
+
+    public $templates;
+
 
     public $orderBy = 'name';
     public $orderAsc = true;
     public $search = '';
 
+    public function mount()
+    {
+        $this->templates = Template::all(['template_id', 'name']);
+    }
     public function edit($id)
     {
         $attrubite = Attrubite::where('attrubite_id', $id)->first();
@@ -27,6 +38,8 @@ class Index extends Component
             $this->attrubite_id = $attrubite->attrubite_id;
             $this->name = $attrubite->name;
             $this->template_id = $attrubite->template_id;
+            $this->is_required = $attrubite->is_required;
+            // $this->oldStatus = $attrubite->status;
             $this->status = $attrubite->status;
         } else {
             return session()->flash('WrongStatus', 'You Can Not Edit This Quastion');
@@ -37,17 +50,20 @@ class Index extends Component
         $this->attrubite_id = null;
         $this->name = null;
         $this->template_id = null;
+        $this->is_required = null;
         $this->status = null;
     }
     public function update()
     {
         $this->validate([
-            'name' => ['required', 'string', 'max:48'],
+            'name' => ['string', 'max:144'],
         ]);
         $attrubite = Attrubite::find($this->attrubite_id);
         if ($attrubite) {
             $attrubite->update([
                 'name' => $this->name,
+                'template_id' => $this->template_id,
+                'is_required' => $this->is_required,
             ]);
             session()->flash('message', 'Quastion Updated Successfully');
         } else {
