@@ -75,6 +75,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::url() == route('document') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('document') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white {{ Request::url() == route('template.index') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('template.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -166,7 +175,8 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                                href="javascript:;">Pages</a>
                         </li>
                         @if (Request::url() == route('control'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
@@ -176,6 +186,9 @@
                         @endif
                         @if (Request::url() == route('template.index'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Templates</li>
+                        @endif
+                        @if (Request::url() == route('document'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Documents</li>
                         @endif
                         @if (Request::url() == route('category.control'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Categorys</li>
@@ -190,7 +203,8 @@
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Selector</li>
                         @endif
                         @if (Request::url() == route('inporgressInspections'))
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">In Progress Inspection</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">In Progress
+                                Inspection</li>
                         @endif
                         {{-- @if (Request::url() == route('handover.index'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Hand Over</li>
