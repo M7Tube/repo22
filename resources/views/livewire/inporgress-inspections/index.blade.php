@@ -60,12 +60,12 @@
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="javascript:;"
-                                            class="text-secondary btn-outline-success font-weight-bold text-xs"
+                                        <button
+                                            class="text-secondary btn btn-outline-success font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user"
                                             wire:click.prevent="makeComplate({{ $ipi->IPI_id }})">
                                             Make Complate
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -51,9 +51,13 @@
                 </div>
             </div>
         </div>
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <button class="text-secondary btn btn-outline-success font-weight-bold text-xs w-50"
+                wire:click.prevent="downloadAll()">
+                Dowmload All
+            </button>
+        </div>
+
     </div>
     {!! $docs->links() !!}
-    <button class="text-secondary btn btn-outline-success font-weight-bold text-xs" wire:click.prevent="downloadAll()">
-        Dowmload All
-    </button>
 </div>
