@@ -17,6 +17,7 @@ use App\Models\ReportCategory;
 use App\Models\Selector;
 use App\Models\Template;
 use App\Models\TextBox;
+use App\Models\VisitType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -457,6 +458,7 @@ class AppApiController extends Controller
             'template_name' => ['required', 'string', 'max:72'],
             'template_desc' => ['required', 'string', 'max:144'],
             'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
+            'template_with_visit_type' => ['required', 'boolean'],
             'template_instructions' => ['required', 'string', 'max:1440'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],
             // 'template_category' => ['json'],
@@ -465,6 +467,7 @@ class AppApiController extends Controller
             'name' => $request->template_name ?? '',
             'desc' => $request->template_desc ?? '',
             'pic' => $request->file('template_pic')->getClientOriginalName() ?? '', //'https://c-rpt.com/storage/app/public/images/' .
+            'with_visit_type' =>  $request->template_with_visit_type ?? 0,
             'instructions' =>  $request->template_instructions ?? '',
             'signatures' =>  $request->signatures ?? '',
             'user_id' => $request->template_user_id ?? '',
@@ -603,11 +606,26 @@ class AppApiController extends Controller
         $data = ReportCategory::where('template_id', $id)->with(['att', 'selector', 'textbox'])->get();
         $template = Template::where('template_id', $id)->first();
         if ($data && $template) {
+
             $docNo = Document::all()->last();
             if ($docNo) {
                 $docNo = $docNo->docNo + 1;
             } else {
                 $docNo = 1;
+            }
+            if ($template->with_visit_type == 1) {
+                $visit_type = VisitType::all();
+                return response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Successfull Request',
+                    'data' => [
+                        'Template' => $template,
+                        'visit_type' => $visit_type,
+                        'Category' => CreateInspectionResource::collection($data),
+                        'Doc_No' => $docNo,
+                    ],
+                ], 200);
             }
             return response()->json([
                 'status' => 'success',

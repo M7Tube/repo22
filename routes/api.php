@@ -26,12 +26,12 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
 
 //Protected Routeee
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['as' => 'Auth.'], function () {
         //get route
+        Route::get('homepage/perpage/{perpage}', [AppApiController::class, 'homepage'])->name('homepage');
         Route::get('handover/perpage/{perpage}', [AppApiController::class, 'gethandover'])->name('gethandover');
         Route::get('Inspection/inProgress/history/perpage/{perpage}', [AppApiController::class, 'inProgressHistory'])->name('inProgressHistory');
         Route::get('Inspection/Complate/history/perpage/{perpage}', [AppApiController::class, 'ComplateHistory'])->name('ComplateHistory');

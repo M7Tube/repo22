@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Template;
 use App\Models\User;
+use App\Models\VisitType;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -125,6 +126,9 @@ class DatabaseSeeder extends Seeder
             'doc_no' => 1,
             'value' => null,
             'is_complated' => 1
+        ]);
+        VisitType::Create([
+            'name' => 'test'
         ]);
         //;'
     }

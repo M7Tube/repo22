@@ -18,6 +18,7 @@ class CreateTemplatesTable extends Migration
             $table->string('name');
             $table->string('desc')->nullable();
             $table->string('pic')->nullable();
+            $table->boolean('with_visit_type')->default(0);
             $table->string('instructions')->nullable();
             $table->json('signatures')->nullable();
             $table->bigInteger('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade')->index()->unsigned();

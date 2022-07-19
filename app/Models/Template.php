@@ -20,6 +20,7 @@ class Template extends Model
         'desc',
         'pic',
         'instructions',
+        'with_visit_type',
         'signatures',
         'user_id'
     ];
