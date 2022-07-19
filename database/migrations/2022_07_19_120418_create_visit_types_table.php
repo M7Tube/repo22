@@ -19,8 +19,7 @@ class CreateVisitTypesTable extends Migration
             $table->timestamps();
         });
     }
-
-    /**
+    /**ds
      * Reverse the migrations.
      *
      * @return void
