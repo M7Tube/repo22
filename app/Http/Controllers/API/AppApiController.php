@@ -449,11 +449,9 @@ class AppApiController extends Controller
             ],
         ], 200);
     }
-
-    //
+    //s
     public function template(Request $request)
     {
-        // return $request->template_category;
         $request->validate([
             'template_name' => ['required', 'string', 'max:72'],
             'template_desc' => ['required', 'string', 'max:144'],
