@@ -88,6 +88,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'hwhwhwh',
             'desc' => 'hahahahah',
             'pic' => 'logo.png',
+            'with_visit_type' => 1,
             'instructions' => 'Test From Mahmoud',
             'signatures' => '[{"title":"hehe"},{"title":"hwhw"}]',
             'user_id' => '1',
