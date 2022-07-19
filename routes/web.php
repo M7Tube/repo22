@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () { 
         Route::resource('handover', HandOverController::class);
         Route::view('inporgressInspections', 'inporgressInspections.index')->name('inporgressInspections');
         Route::view('document', 'document.index')->name('document');
+        Route::view('visit_type', 'visit_type.index')->name('visit_type');
         Route::view('category', 'Category.create')->name('category.create');
         Route::view('category/control', 'Category.control')->name('category.control');
         Route::view('signatures', 'signatures.index')->name('signatures.index');

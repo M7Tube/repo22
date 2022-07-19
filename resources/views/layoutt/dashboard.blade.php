@@ -128,6 +128,15 @@
                         <span class="nav-link-text ms-1">Selector</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::url() == route('visit_type') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('visit_type') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Visit Type</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages
                     </h6>
@@ -205,6 +214,9 @@
                         @if (Request::url() == route('inporgressInspections'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">In Progress
                                 Inspection</li>
+                        @endif
+                        @if (Request::url() == route('visit_type'))
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Visit Type</li>
                         @endif
                         {{-- @if (Request::url() == route('handover.index'))
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Hand Over</li>
