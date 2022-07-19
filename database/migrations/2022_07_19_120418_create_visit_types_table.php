@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateVisitTypesTable extends Migration
 {
-    /**
+    /**f
      * Run the migrations.
      *
      * @return void
@@ -19,7 +19,8 @@ class CreateVisitTypesTable extends Migration
             $table->timestamps();
         });
     }
-    /**ds
+
+    /**
      * Reverse the migrations.
      *
      * @return void
