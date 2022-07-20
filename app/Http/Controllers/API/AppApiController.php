@@ -627,17 +627,19 @@ class AppApiController extends Controller
                         'Doc_No' => $docNo,
                     ],
                 ], 200);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Successfull Request',
+                    'data' => [
+                        'Template' => $template,
+                        'visit_type' => [],
+                        'Category' => CreateInspectionResource::collection($data),
+                        'Doc_No' => $docNo,
+                    ],
+                ], 200);
             }
-            return response()->json([
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'Successfull Request',
-                'data' => [
-                    'Template' => $template,
-                    'Category' => CreateInspectionResource::collection($data),
-                    'Doc_No' => $docNo,
-                ],
-            ], 200);
         }
     }
     // sfd
@@ -660,5 +662,27 @@ class AppApiController extends Controller
                 'message' => 'There Is Some Thing Wrong',
             ], 200);
         }
+    }
+
+    public function NewTemplateTest()
+    {
+        ini_set('max_execution_time', '300');
+        ini_set("pcre.backtrack_limit", "50000000");
+        // view()->share('data', $data);
+        $pdf = PDF2::loadView('pdfTemplate2');
+        // $pdf = PDF::loadView('pdf', $data);
+        // download PDF file with download method
+        $output = $pdf->output();
+        // $name = 'upload/Doc.' .session()->get('info', [])['info']['docNo']. '.pdf';
+        // file_put_contents($name, $output);
+        // Document::Create([
+        //     'docNo' => session()->get('info', [])['info']['docNo'],
+        //     'doc' => $name
+        // ]);
+        // //TODO un comment the 3 line under this
+        // session()->forget('cart');
+        // session()->forget('info');
+        // session()->forget('info2');
+        return $pdf->download('pdf_file'.rand(111111111,999999999).'.pdf');
     }
 }

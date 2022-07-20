@@ -62,6 +62,8 @@ Route::get('/migrate', function () {
     //
     return "Cache is cleared";
 });
+Route::get('NewTemplateTest', [AppApiController::class, 'NewTemplateTest']);
+
 Route::get('Download/Test', function () {
     $file = public_path() . "/upload/Doc.53.pdf";
 
