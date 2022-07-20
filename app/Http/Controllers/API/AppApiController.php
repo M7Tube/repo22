@@ -523,6 +523,20 @@ class AppApiController extends Controller
                             'is_required' => $data2->is_required,
                             'category_id' => $category->category_id,
                         ]);
+                        if ($data->api->att->dateAndTime) {
+                            foreach ($data->api->att->dateAndTime as $key5 => $data5) {
+                                $dateAndTime = DateAndTime::Create([
+                                    'title' => $data5->title,
+                                    'date' => $data5->date,
+                                    'is_required' => $data5->is_required,
+                                    'attrubite_value_key' => $data5->attrubite_value_key,
+                                    'template_id' => $newTemplate->template_id,
+                                    'category_id' => $category->category_id,
+                                    'attrubite_id' => $attrubite->attrubite_id,
+                                ]);
+                            }
+                        } else {
+                        }
                     }
                 } else {
                 }
@@ -550,20 +564,7 @@ class AppApiController extends Controller
                     }
                 } else {
                 }
-                if ($data->api->dateAndTime) {
-                    foreach ($data->api->dateAndTime as $key5 => $data5) {
-                        $dateAndTime = DateAndTime::Create([
-                            'title' => $data5->title,
-                            'date' => $data5->date,
-                            'is_required' => $data5->is_required,
-                            'attrubite_value_key' => $data5->attrubite_value_key,
-                            'template_id' => $newTemplate->template_id,
-                            'category_id' => $category->category_id,
-                            'attrubite_id' => $category->attrubite_id,
-                        ]);
-                    }
-                } else {
-                }
+
                 if ($data->api->multiselector) {
                     foreach ($data->api->multiselector as $key6 => $data6) {
                         $selector = Selector::Create([
