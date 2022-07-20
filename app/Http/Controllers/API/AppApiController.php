@@ -519,23 +519,24 @@ class AppApiController extends Controller
                             'name' => $data2->name,
                             'template_id' => $newTemplate->template_id,
                             'status' => $data2->status,
+                            'dateAndTime' => $data2->dateAndTime,
                             'is_required' => $data2->is_required,
                             'category_id' => $category->category_id,
                         ]);
-                        if (json_decode($data->api->att->dateAndTime)) {
-                            foreach (json_decode($data->api->att->dateAndTime) as $key5 => $data5) {
-                                $dateAndTime = DateAndTime::Create([
-                                    'title' => $data5->title,
-                                    'date' => $data5->date,
-                                    'is_required' => $data5->is_required,
-                                    'attrubite_value_key' => $data5->attrubite_value_key,
-                                    'template_id' => $newTemplate->template_id,
-                                    'category_id' => $category->category_id,
-                                    'attrubite_id' => $attrubite->attrubite_id,
-                                ]);
-                            }
-                        } else {
-                        }
+                        // if (json_decode($data->api->att->dateAndTime)) {
+                        //     foreach (json_decode($data->api->att->dateAndTime) as $key5 => $data5) {
+                        //         $dateAndTime = DateAndTime::Create([
+                        //             'title' => $data5->title,
+                        //             'date' => $data5->date,
+                        //             'is_required' => $data5->is_required,
+                        //             'attrubite_value_key' => $data5->attrubite_value_key,
+                        //             'template_id' => $newTemplate->template_id,
+                        //             'category_id' => $category->category_id,
+                        //             'attrubite_id' => $attrubite->attrubite_id,
+                        //         ]);
+                        //     }
+                        // } else {
+                        // }
                     }
                 } else {
                 }
