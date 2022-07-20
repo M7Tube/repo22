@@ -523,8 +523,8 @@ class AppApiController extends Controller
                             'is_required' => $data2->is_required,
                             'category_id' => $category->category_id,
                         ]);
-                        if ($data->api->att->dateAndTime) {
-                            foreach ($data->api->att->dateAndTime as $key5 => $data5) {
+                        if (json_decode($data->api->att->dateAndTime)) {
+                            foreach (json_decode($data->api->att->dateAndTime) as $key5 => $data5) {
                                 $dateAndTime = DateAndTime::Create([
                                     'title' => $data5->title,
                                     'date' => $data5->date,
