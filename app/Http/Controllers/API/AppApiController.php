@@ -556,8 +556,10 @@ class AppApiController extends Controller
                             'title' => $data5->title,
                             'date' => $data5->date,
                             'is_required' => $data5->is_required,
+                            'attrubite_value_key' => $data5->attrubite_value_key,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
+                            'attrubite_id' => $category->attrubite_id,
                         ]);
                     }
                 } else {

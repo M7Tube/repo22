@@ -11,6 +11,6 @@ class DateAndTime extends Model
     protected $table = 'date_and_times';
     protected $primaryKey = 'date_and_time_id';
     protected $fillable = [
-        'title', 'date', 'is_required', 'template_id', 'category_id'
+        'title', 'date', 'is_required', 'attrubite_value_key', 'template_id', 'category_id', 'attrubite_id'
     ];
 }

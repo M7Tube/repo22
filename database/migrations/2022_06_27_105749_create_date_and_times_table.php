@@ -18,8 +18,10 @@ class CreateDateAndTimesTable extends Migration
             $table->string('title');
             $table->date('date');
             $table->boolean('is_required');
+            $table->integer('attrubite_value_key');
             $table->bigInteger('template_id')->references('template_id')->on('templates')->onDelete('cascade')->onUpdate('cascade')->index()->unsigned();
             $table->bigInteger('category_id')->references('category_id')->on('report_categories')->onDelete('cascade')->onUpdate('cascade')->index()->unsigned();
+            $table->bigInteger('attrubite_id')->references('attrubite_id')->on('attrubites')->onDelete('cascade')->onUpdate('cascade')->index()->unsigned();
             $table->timestamps();
         });
     }
