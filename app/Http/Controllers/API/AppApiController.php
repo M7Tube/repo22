@@ -506,7 +506,6 @@ class AppApiController extends Controller
                 'message' => 'There Is Somthing Wrong',
             ], 200);
         }
-        //ss
         //first i need to make loop for creating the category
         if ($request->template_category) {
             foreach (json_decode($request->template_category) as $key => $data) {
