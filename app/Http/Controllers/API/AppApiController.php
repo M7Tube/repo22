@@ -93,8 +93,8 @@ class AppApiController extends Controller
                     $name = time() . $file->getClientOriginalName();
                     $path = $file->storeAs('public/images/signture/', $name);
                     return array_push($uploadedsignture, [
-                        'key' => $request->signatureTitle . $i,
-                        'signName' => $request->signatureName2 . $i,
+                        'key' => $request['signatureTitle' . $i],
+                        'signName' => $request['signatureName' . $i],
                         'filename' => $name,
                     ]);
                     response()->json([
