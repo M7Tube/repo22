@@ -20,6 +20,7 @@ use App\Models\TextBox;
 use App\Models\VisitType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AppApiController extends Controller
@@ -31,13 +32,8 @@ class AppApiController extends Controller
         $request->validate([
             'note' => ['required', 'string', 'max:1044'],
             'images' => ['required'],
-            // 'images.*' => ['mimes:png,jpg,jpeg'],
-            'signture1' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture1Name' => ['required', 'string', 'max:72'],
-            'signture2' => ['required', 'mimes:png,jpg,jpeg'],
-            'signture2Name' => ['required', 'string', 'max:72'],
         ]);
-        return $request->obada['name'];
+        // return $request->obada['name'];
         //store the  images from site
         if (!$request->hasFile('images')) {
             return response()->json([
@@ -45,104 +41,81 @@ class AppApiController extends Controller
                 'code' => 200,
                 'message' => 'upload file not found',
             ], 200);
-        }
-        $allowedfileExtension = ['pdf', 'jpg', 'png'];
-        $files = $request->file('images');
-        $uploadedimages = [];
-        foreach ($files as $file) {
-            // return 'a';
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedfileExtension);
-            if ($check) {
-                foreach ($files as $mediaFiles) {
-                    $name = $mediaFiles->getClientOriginalName();
-                    $path = $mediaFiles->storeAs('public/images', $name);
-                    response()->json([
-                        'status' => 'success',
+        } else {
+            $allowedfileExtension = ['pdf', 'jpg', 'png'];
+            $files = $request->file('images');
+            $uploadedimages = [];
+            foreach ($files as $file) {
+                // return 'a';
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedfileExtension);
+                if ($check) {
+                    foreach ($files as $mediaFiles) {
+                        $name = $mediaFiles->getClientOriginalName();
+                        $path = $mediaFiles->storeAs('public/images', $name);
+                        response()->json([
+                            'status' => 'success',
+                            'code' => 200,
+                            'message' => 'images saved',
+                        ], 200);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => 'fails',
                         'code' => 200,
-                        'message' => 'images saved',
+                        'message' => 'Invalid File Format',
                     ], 200);
                 }
-            } else {
-                return response()->json([
-                    'status' => 'fails',
-                    'code' => 200,
-                    'message' => 'Invalid File Format',
-                ], 200);
-            }
-            array_push($uploadedimages, $file->getClientOriginalName());
-            response()->json([
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'images saved',
-            ], 200);
-        }
-        //store the signtures
-        $uploadedsignture = [];
-        if (!$request->hasFile('signture1')) {
-            return response()->json([
-                'status' => 'fails',
-                'code' => 200,
-                'message' => 'upload file not found',
-            ], 200);
-        } else {
-            $allowedExtension = ['jpg', 'jpeg', 'png'];
-            $file = $request->file('signture1');
-            // $erros = [];
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedExtension);
-            if ($check) {
-                $name = $file->getClientOriginalName();
-                $path = $file->storeAs('public/images/signture', $name);
+                array_push($uploadedimages, $file->getClientOriginalName());
                 response()->json([
                     'status' => 'success',
                     'code' => 200,
                     'message' => 'images saved',
                 ], 200);
-            } else {
-                return response()->json([
-                    'status' => 'fails',
-                    'code' => 200,
-                    'message' => 'Invalid File Format',
-                ], 200);
             }
-            array_push($uploadedsignture, $file->getClientOriginalName());
         }
-        if (!$request->hasFile('signture2')) {
-            return response()->json([
-                'status' => 'fails',
-                'code' => 200,
-                'message' => 'upload file not found',
-            ], 200);
-        } else {
-            $allowedExtension = ['jpg', 'jpeg', 'png'];
-            $file = $request->file('signture2');
-            // $erros = [];
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedExtension);
-            if ($check) {
-                $name = $file->getClientOriginalName();
-                $path = $file->storeAs('public/images/signture', $name);
-                response()->json([
-                    'status' => 'success',
-                    'code' => 200,
-                    'message' => 'images saved',
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 'fails',
-                    'code' => 200,
-                    'message' => 'Invalid File Format',
-                ], 200);
-            }
-            array_push($uploadedsignture, $file->getClientOriginalName());
+        // //store the signtures
+        // $uploadedsignture = [];
+        // if (!$request->hasFile('signture1')) {
+        //     return response()->json([
+        //         'status' => 'fails',
+        //         'code' => 200,
+        //         'message' => 'upload file not found',
+        //     ], 200);
+        // } else {
+        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
+        //     $file = $request->file('signture1');
+        //     // $erros = [];
+        //     $extension = $file->getClientOriginalExtension();
+        //     $check = in_array($extension, $allowedExtension);
+        //     if ($check) {
+        //         $name = $file->getClientOriginalName();
+        //         $path = $file->storeAs('public/images/signture', $name);
+        //         response()->json([
+        //             'status' => 'success',
+        //             'code' => 200,
+        //             'message' => 'images saved',
+        //         ], 200);
+        //     } else {
+        //         return response()->json([
+        //             'status' => 'fails',
+        //             'code' => 200,
+        //             'message' => 'Invalid File Format',
+        //         ], 200);
+        //     }
+        //     array_push($uploadedsignture, $file->getClientOriginalName());
+        // }
+        foreach (json_decode($request->data) as $requestData) {
+            $data = [
+                'first_page' => $requestData->firstForm,
+                'note' => $request->note,
+                'categories' => $requestData->categories,
+                'pictures' => $uploadedimages,
+                // 'signutares' => $uploadedsignture,
+                // 0 => $request->data[0],
+            ];
         }
-        return $data = [
-            'info' => $request->data['info'],
-            'pictures' => $uploadedimages,
-            'signutares' => $uploadedsignture,
-            0 => $request->data[0],
-        ];
+        // return $data;
         //create the pdf
         // $info = session()->get('Quinfo' . session()->get('LoggedAccount')['email'], []);
         // $files = session()->get('files' . session()->get('LoggedAccount')['email'], []);
@@ -171,8 +144,9 @@ class AppApiController extends Controller
         $pdf = PDF2::chunkLoadView('<html-separator/>', 'apiPDF', $data);
         // $pdf = PDF2::loadView('pdf', $data);
         $output = $pdf->output();
-        $name = 'upload/pdf/Doc.' . $request->note . $request->signture1Name . $request->signture2Name . '.pdf';
-        file_put_contents($name, $output);
+        $name = 'file' . $request->note . rand(1111111111, 9999999999) . '.pdf';
+        // storeAs($name, $output);
+        Storage::put('pdf/' . $name, $pdf->output());
         // $document = Document::Create([
         // 'docNo' => session()->get('Quinfo' . session()->get('LoggedAccount')['email'], [])['Quinfo' . session()->get('LoggedAccount')['email']]['docNo'],
         // 'doc' => $name
@@ -182,14 +156,14 @@ class AppApiController extends Controller
         // session()->forget('files');
         // download PDF file with download method
         // /upload/pdf/Doc.dsfaadfsaffadsewr.pdf
-        return $file = 'https://www.c-rpt.com/public' . '/' . $name;
+        // return $file = 'https://www.c-rpt.com/public' . '/' . $name;
 
         // $headers = array(
         //     'Content-Type: application/pdf',
         // );
-        // //ssa
+        // //ssaap
         // return response()->download($file, 'filename.pdf', $headers);
-        // return $pdf->download('Report.pdf');
+        return $pdf->stream('Report.pdf');
         //store the pdf
         //return the pdf
     }
@@ -628,7 +602,7 @@ class AppApiController extends Controller
                         'Doc_No' => $docNo,
                     ],
                 ], 200);
-            }else{
+            } else {
                 return response()->json([
                     'status' => 'success',
                     'code' => 200,
@@ -684,6 +658,6 @@ class AppApiController extends Controller
         // session()->forget('cart');
         // session()->forget('info');
         // session()->forget('info2');
-        return $pdf->download('pdf_file'.rand(111111111,999999999).'.pdf');
+        return $pdf->download('pdf_file' . rand(111111111, 999999999) . '.pdf');
     }
 }

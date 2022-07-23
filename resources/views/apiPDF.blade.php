@@ -8312,224 +8312,270 @@
         }
 
     </style>
-    <title>API PDF</title>
+    <title>test</title>
 </head>
 
 <body>
     <htmlpageheader name="page-header">
-        <div style="background-color: #549dd2; margin: 0%; border-radius: 4px;">&nbsp;</div>
+        <div style="margin: 0%; border-radius: 4px;">&nbsp;</div>
     </htmlpageheader>
     <div class="container">
-        @if (file_exists('../public/images/logo.png'))
-        <div class="col-xs-12 text-center">
-            <img src="data:image/png;base64, {!! base64_encode(file_get_contents('../public/images/logo.png')) !!}" style="height: auto; width: 125px;">
+        <div class="row">
+            <div class="col-xs-5">
+                <img src="data:image/png;base64, {!! base64_encode(file_get_contents('../public/images/logo.png')) !!}" style="height: auto; width: 125px;">
+            </div>
         </div>
-        @endif
-        <div class="col-xs-12 text-center">
-            <h4> Inspection & Maintenance Report</h4>
-        </div>
-        {{ $data['note'] }}
-    </div>
-    {{-- <div class="text-center text-muted">{{ $data['data' . session()->get('LoggedAccount')['email']][0]['name'] }}</div> --}}
-    <html-separator />
-    {{-- <div class="container">
-        @foreach ($data['data' . session()->get('LoggedAccount')['email']]['info'] as $info)
-            <div class="row">
-                <div class="col-xs-5">
-                    Company Name : <small>{{ $info['companyName'] }}</small>
-                </div>
-                <div class="col-xs-5">
-                    Date : <small>{{ date('d-m-Y', strtotime($info['date'])) }}</small>
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="text-left">
+                    <h4> Inspection & Maintenance Report</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-5">
-                    Phone Number : <small>{{ $info['clientPhone'] }}</small>
-                </div>
-                <div class="col-xs-5">
-                    DocNo.<small>{{ $info['docNo'] }}</small>
-                </div>
-            </div>
-        @endforeach
-    </div> --}}
-    <html-separator />
-    <br />
-    {{-- @forelse ($data['data' . session()->get('LoggedAccount')['email']][0]['at'][0] as $key => $at)
-        <div class="container">
-            @forelse ($at as $kkey => $a)
-                @if ($loop->first)
-                    <h3 class="text-left"><b>{{ $key }}</b></h3>
-                @endif
-                @forelse ($a as $kkkey => $aa)
-                    @if (substr($aa, strpos($aa, '\./') + 3) == 'success')
-                        <div class="col-xs-12" style="background-image:url('../public/images/success.png'); height: 50px;
-                                                        background-position: center;
-                                                        background-repeat: no-repeat;
-                                                        background-size: cover;
-                                                        margin-bottom:4px; ">
-                            <div class="row" style="margin-top: 7px">
-                                <div class="col-xs-5">
-                                    <h4><b>{{ $kkey }}</b>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-5">
-                                    <h4 class="text-muted"><b>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ explode('\./', $aa)[0] }}</b>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    @if (substr($aa, strpos($aa, '\./') + 3) == 'danger')
-                        <div class="col-xs-12" style="background-image:url('../public/images/danger.png'); height: 50px;
-                                                        background-position: center;
-                                                        background-repeat: no-repeat;
-                                                        background-size: cover;
-                                                        margin-bottom:4px; ">
-                            <div class="row" style="margin-top: 7px">
-                                <div class="col-xs-5">
-                                    <h4><b>{{ $kkey }}</b>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-5">
-                                    <h4 class="text-muted"><b>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ explode('\./', $aa)[0] }}</b>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    @if (substr($aa, strpos($aa, '\./') + 3) == 'secondary')
-                        <div class="col-xs-12" style="background-image:url('../public/images/gray.png'); height: 50px;
-                                                        background-position: center;
-                                                        background-repeat: no-repeat;
-                                                        background-size: cover;
-                                                        margin-bottom:4px; ">
-                            <div class="row" style="margin-top: 7px">
-                                <div class="col-xs-5">
-                                    <h4><b>{{ $kkey }}</b>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-5">
-                                    <h4 class="text-muted"><b>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ explode('\./', $aa)[0] }}</b>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    @if (substr($aa, strpos($aa, '\./') + 3) == 'warning')
-                        <div class="col-xs-12" style="background-image:url('../public/images/warning.png'); height: 50px;
-                                                        background-position: center;
-                                                        background-repeat: no-repeat;
-                                                        background-size: cover;
-                                                        margin-bottom:4px; ">
-                            <div class="row" style="margin-top: 7px">
-                                <div class="col-xs-5">
-                                    <h4><b>{{ $kkey }}</b>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-5">
-                                    <h4 class="text-muted"><b>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ explode('\./', $aa)[0] }}</b>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12" style="background-image:url('../public/images/reason.png'); height: 35px;
-                                                        background-position: center;
-                                                        background-repeat: no-repeat;
-                                                        background-size: cover;
-                                                        margin-bottom:6px;
-                                                        margin-top:7px; ">
-                            @if ($a['reason'])
-                                <h5><b>{{ $a['reason'] }}</b></h5>
-                            @else
-                                <h5><b>There Is No Reason To Descripe</b></h5>
-                            @endif
-                        </div>
-                    @endif
+        </div>
+        <div class="row">
+            <div class="col-xs-5">
+                @forelse ($data['first_page'] as $d)
+                    <div class="text-left text-muted">{{ $d->name ?? ''}} / Document_{{ $d->doc_no ?? ''}} / {{ $d->date ?? ''}} </div>
                 @empty
+
                 @endforelse
-            @empty
-            @endforelse
-            @forelse ($data['data' . session()->get('LoggedAccount')['email']][0]['selection'][0][$key] as $ekey => $sel)
-                <div class="container">
-                    @forelse ($sel as $kekkey => $aa)
-                        <div class="row" style="margin-top: 7px">
-                            <div class="col-xs-5">
-                                <h4><b>{{ $ekey }} : </b>
-                                </h4>
-                            </div>
-                            <div class="col-xs-5">
-                                <h4 class="text-muted"><b>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $aa }}</b>
-                                </h4>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
-                </div>
-            @empty
-            @endforelse
-            @forelse ($data['data' . session()->get('LoggedAccount')['email']][0]['textbox'][0][$key] as $erkey => $tex)
-                <div class="container">
-                    @forelse ($tex as $kekkey => $aa)
-                        <div class="row" style="margin-top: 7px">
-                            <div class="col-xs-5">
-                                <h4><b>{{ $erkey }} : </b>
-                                </h4>
-                            </div>
-                            <div class="col-xs-5">
-                                <h4 class="text-muted"><b>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $aa }}</b>
-                                </h4>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
-                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="text-right text-success">Complate</div>
+            </div>
+        </div>
+        <html-separator />
+        <br/>
+        <div class="row">
+            @forelse ($data['first_page'] as $d)
+                    <div class="col-xs-5">
+                        <h5 class="text-left">Doc No</h5>
+                    </div>
+                    <div class="col-xs-5">
+                        <h5 class="text-right text-muted">{{ $d->doc_no ?? ''}}</h5>
+                    </div>
             @empty
             @endforelse
         </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            @forelse ($data['first_page'] as $d)
+                    <div class="col-xs-5">
+                        <div class="text-left">Project Name</div><br/>
+                        <div class="text-left text-muted">{{ $d->name ?? ''}}</div>
+                    </div>
+                    <div class="col-xs-5">
+                    </div>
+            @empty
+            @endforelse
+        </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            @forelse ($data['first_page'] as $d)
+                    <div class="col-xs-5">
+                        <h5 class="text-left">Date</h5>
+                    </div>
+                    <div class="col-xs-5">
+                        <h5 class="text-right text-muted">{{ $d->date ?? ''}}</h5>
+                    </div>
+            @empty
+            @endforelse
+        </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            @forelse ($data['first_page'] as $d)
+                    <div class="col-xs-5">
+                        <h5 class="text-left">Location</h5>
+                    </div>
+                    <div class="col-xs-5">
+                        <h5 class="text-right text-muted">{{ $d->location ?? ''}}</h5>
+                    </div>
+            @empty
+            @endforelse
+        </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            @forelse ($data['first_page'] as $d)
+                    <div class="col-xs-5">
+                        <h5 class="text-left">Visit Type</h5>
+                    </div>
+                    <div class="col-xs-5" style="margin-left: 100px;">
+                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->with_visit_type ?? ''}}</h5>
+                    </div>
+            @empty
+            @endforelse
+        </div>
+        {{-- <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            <div class="col-xs-5">
+                <h5 class="text-left">Level Of Risk (Inspector Rating)</h5>
+            </div>
+            <div class="col-xs-5" style="margin-left: 100px;">
+                <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;"> كلو شكلوز باللوز ;-)</h5>
+            </div>
+        </div> --}}
+        {{-- <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            <div class="col-xs-10">
+                <p class="text-left text-muted">{{ $data['note'] ?? ''}}</p>
+            </div>
+        </div> --}}
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            <div class="col-xs-10">
+                <h5 class="text-left">Engineering Department Stamp & Signature</h5>
+                The Stamp IS Here
+            </div>
+        </div>
+    </div>
+    <pagebreak></pagebreak>
+    @forelse ($data['categories'] as $cate)
+        <div class="container">
+            <div class="row" style="background-color:#e6e6e6; padding:5px; margin-right: 0px; margin-left: 0px;">
+                <div class="col-xs-10">
+                    <h4 class="text-center" style="margin-left: 50px;"><b>{{ $cate->name ?? ''}}</b></h4>
+                </div>
+
+            </div>
+            <hr style="margin: 1px; padding: 0;">
+            <div class="row">
+                @forelse ($cate->web as $at)
+                    @forelse ($at->att as $att)
+                        <hr style="margin: 1px; padding: 0;">
+                            <div class="col-xs-5">
+                                <h5 class="text-left">{{ $att->name ?? ''}}</h5>
+                            </div>
+                            <div class="col-xs-5" style="margin-left: 100px;">
+                                @forelse ($att->selected as $color)
+                                    @if($color->value=='success')
+                                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                    @elseif($color->value=='secondary')
+                                        <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                    @elseif($color->value=='danger')
+                                        <h5 class="text-center text-muted" style="background-color:red; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                    @elseif($color->value=='warning')
+                                        <h5 class="text-center text-muted" style="background-color:yellow; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                    @endif
+                                @empty        
+                                @endforelse
+                            </div>
+                        @empty    
+                        @endforelse
+                    @empty    
+                    @endforelse
+            </div>
+            {{-- <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Jockey Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">يا هيك البمبات يا اما بلا</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Diesel Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">نص نص</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Jockey Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:red; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">يا هيك البمبات يا اما بلا</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Diesel Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">نص نص</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Jockey Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">يا هيك البمبات يا اما بلا</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Diesel Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">نص نص</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Jockey Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">يا هيك البمبات يا اما بلا</h5>
+                </div>
+            </div>
+            <hr style="margin: 0; padding: 0;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <h5 class="text-left">Diesel Pump</h5>
+                </div>
+                <div class="col-xs-5" style="margin-left: 100px;">
+                    <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">نص نص</h5>
+                </div>
+            </div> --}}
+        </div>
+    <pagebreak></pagebreak>
     @empty
-    @endforelse --}}
-    <html-separator />
+        
+    @endforelse
     <pagebreak></pagebreak>
     <div class="container">
+        <hr style="margin: 0; padding: 0;">
         <div class="row">
-            <h4 class="text-center text-muted">
-                <b>Signtures</b>
-            </h4>
-        </div>
-        @forelse ($data['signture'] as $Signkey =>$sign)
-            @if (file_exists('../storage/app/public/images/signture/' . $sign))
-                <div class="col-xs-5 text-center">
-                    <img src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/signture/' . $sign)) !!}" style="height: auto; width: 500px;">
+            <div class="col-xs-5">
+                <div class="text-left">Note</div><br/>
+                <div class="text-left text-muted">
+                    {{ $data['note'] ?? ''}}
                 </div>
-            @endif
-        @empty
-        @endforelse
-    </div>
-    <html-separator />
-    <pagebreak></pagebreak>
-    {{-- <div class="container">
-        <div class="row">
-            <h4 class="text-center text-muted">
-                <b>Picture From The Site</b>
-            </h4>
-        </div>
-        @forelse ($data['data' . session()->get('LoggedAccount')['email']]['files'][0] as $key =>$file)
-            <div class="col-xs-5 text-left">
-                Photo {{ $loop->index + 1 }}
-                <img src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/' . $key)) !!}" style="height: auto; width: 1000px;">
             </div>
-        @empty
-        @endforelse
-    </div> --}}
-    {{-- <htmlpagefooter name="page-footer">
-        <div style="background-color: #549dd2; margin: 0%; border-radius: 4px;">&nbsp;</div>
-    </htmlpagefooter> --}}
+            <div class="col-xs-5">
+            </div>
+        </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="text-left">Pictures</div><br/>
+                <div class="text-left text-muted">هون الصور</div>
+            </div>
+            <div class="col-xs-5">
+            </div>
+        </div>
+        <hr style="margin: 0; padding: 0;">
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="text-left">Signatures</div><br/>
+                <div class="text-left text-muted">هون التواقيع</div>
+            </div>
+            <div class="col-xs-5">
+            </div>
+        </div>
+    </div>
+    <htmlpagefooter name="page-footer">
+        <h6 style="margin:10px;padding:25px;">Here We Will Write The Footer Info</h6>
+    </htmlpagefooter>
 </body>
 
 </html>
