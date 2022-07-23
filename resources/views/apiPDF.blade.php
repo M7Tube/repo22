@@ -8572,7 +8572,14 @@
         <div class="row">
             <div class="col-xs-5">
                 <div class="text-left">Signatures</div><br/>
-                <div class="text-left text-muted">هون التواقيع</div>
+                <div class="text-left text-muted">
+                    @forelse ($data['signutares'] as $pic)
+                        <div class="text-left text-muted">
+                            <img src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/signture/' . $pic->filename)) !!}" style="height: auto; width: 1000px;">
+                        </div>
+                    @empty
+                    @endforelse
+                </div>
             </div>
             <div class="col-xs-5">
             </div>

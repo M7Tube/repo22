@@ -92,7 +92,7 @@ class AppApiController extends Controller
                 if ($check) {
                     $name = time() . $file->getClientOriginalName();
                     $path = $file->storeAs('public/images/signture/', $name);
-                    return array_push($uploadedsignture, [
+                    array_push($uploadedsignture, [
                         'key' => $request['signatureTitle' . $i],
                         'signName' => $request['signatureName' . $i],
                         'filename' => $name,
@@ -118,7 +118,7 @@ class AppApiController extends Controller
             'note' => $request->note,
             'categories' => json_decode($request->data)->categories,
             'pictures' => $uploadedimages,
-            // 'signutares' => $uploadedsignture,
+            'signutares' => $uploadedsignture,
             // 0 => $request->data[0],
         ];
         // }
