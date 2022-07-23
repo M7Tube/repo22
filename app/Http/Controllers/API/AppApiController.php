@@ -76,8 +76,8 @@ class AppApiController extends Controller
         }
         //store the signtures
         $uploadedsignture = [];
-        foreach (json_decode($request->signatures) as $sign) {
-            if (!$sign->hasFile('value')) {
+        for ($i = 1; $i <= $request->signatureCount; $i++) {
+            if (!$request->hasFile('signature' . $i)) {
                 return response()->json([
                     'status' => 'fails',
                     'code' => 200,
@@ -85,13 +85,18 @@ class AppApiController extends Controller
                 ], 200);
             } else {
                 $allowedExtension = ['jpg', 'jpeg', 'png'];
-                $file = $sign->file('value');
+                $file = $request->file('signature' . $i);
                 // $erros = [];
                 $extension = $file->getClientOriginalExtension();
                 $check = in_array($extension, $allowedExtension);
                 if ($check) {
-                    $name = $sign->name;
-                    $path = $file->storeAs('public/images/signture', $name);
+                    $name = time() . $file->getClientOriginalName();
+                    $path = $file->storeAs('public/images/signture/', $name);
+                    return array_push($uploadedsignture, [
+                        'key' => $request->signatureTitle . $i,
+                        'signName' => $request->signatureName2 . $i,
+                        'filename' => $name,
+                    ]);
                     response()->json([
                         'status' => 'success',
                         'code' => 200,
@@ -104,11 +109,6 @@ class AppApiController extends Controller
                         'message' => 'Invalid File Format',
                     ], 200);
                 }
-                return array_push($uploadedsignture, [
-                    'key'=>$sign->key,
-                    'signName'=>$sign->signName,
-                    'filename'=>$sign->name,
-                ]);
             }
         }
         // return json_decode($request->data)->firstForm;
