@@ -8456,12 +8456,12 @@
                                     @elseif($color->value=='warning')
                                         <h5 class="text-center text-muted" style="background-color:yellow; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
                                     @endif
-                                @empty        
+                                @empty
                                 @endforelse
                             </div>
-                        @empty    
+                        @empty
                         @endforelse
-                    @empty    
+                    @empty
                     @endforelse
             </div>
             {{-- <hr style="margin: 0; padding: 0;">
@@ -8539,7 +8539,7 @@
         </div>
     <pagebreak></pagebreak>
     @empty
-        
+
     @endforelse
     <pagebreak></pagebreak>
     <div class="container">
@@ -8558,7 +8558,12 @@
         <div class="row">
             <div class="col-xs-5">
                 <div class="text-left">Pictures</div><br/>
-                <div class="text-left text-muted">هون الصور</div>
+                    @forelse ($data['pictures'] as $pic)
+                            <div class="text-left text-muted">
+                                <img src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/' . $pic)) !!}" style="height: auto; width: 1000px;">
+                            </div>
+                    @empty
+                    @endforelse
             </div>
             <div class="col-xs-5">
             </div>

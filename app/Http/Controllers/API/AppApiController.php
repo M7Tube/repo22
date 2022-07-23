@@ -117,7 +117,7 @@ class AppApiController extends Controller
             'first_page' => json_decode($request->data)->firstForm,
             'note' => $request->note,
             'categories' => json_decode($request->data)->categories,
-            // 'pictures' => $uploadedimages,
+            'pictures' => $uploadedimages,
             // 'signutares' => $uploadedsignture,
             // 0 => $request->data[0],
         ];
@@ -163,7 +163,7 @@ class AppApiController extends Controller
         // session()->forget('files');
         // download PDF file with download method
         // /upload/pdf/Doc.dsfaadfsaffadsewr.pdf
-        // return $file = 'https://www.c-rpt.com/public' . '/' . $name;
+        // return $file = 'https://www.c-rpt.com/storage/app/pdf' . '/' . $name;
 
         // $headers = array(
         //     'Content-Type: application/pdf',
