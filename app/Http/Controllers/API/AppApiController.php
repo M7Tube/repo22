@@ -117,7 +117,7 @@ class AppApiController extends Controller
             'first_page' => json_decode($request->data)->firstForm,
             'note' => $request->note,
             'categories' => json_decode($request->data)->categories,
-            'pictures' => $uploadedimages,
+            // 'pictures' => $uploadedimages,
             // 'signutares' => $uploadedsignture,
             // 0 => $request->data[0],
         ];
