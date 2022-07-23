@@ -545,6 +545,7 @@ class AppApiController extends Controller
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
                             'is_required' => $data3->is_required,
+                            'is_number' => $data3->is_number,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);

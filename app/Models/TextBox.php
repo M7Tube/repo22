@@ -11,11 +11,12 @@ class TextBox extends Model
     protected $table = 'text_boxes';
     protected $primaryKey = 'box_id';
     protected $fillable = [
-        'name', 'is_required', 'template_id', 'category_id'
+        'name', 'is_required','is_number', 'template_id', 'category_id'
     ];
 
     protected $casts = [
-        'is_required' => 'integer'
+        'is_required' => 'integer',
+        'is_number' => 'integer',
     ];
 
     public function template()
