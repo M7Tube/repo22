@@ -8575,7 +8575,7 @@
                 <div class="text-left text-muted">
                     @forelse ($data['signutares'] as $pic)
                         <div class="text-left text-muted">
-                            <img src="'data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents(storage_path('app/public/images/' . $pic['filename']))) !!}'" style="height: auto; width: 1000px;">
+                            <img src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/signture/' . $pic['filename'])) !!}" style="height: auto; width: 1000px;">
                         </div>
                     @empty
                     @endforelse
