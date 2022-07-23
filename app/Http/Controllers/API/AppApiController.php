@@ -163,7 +163,7 @@ class AppApiController extends Controller
         // session()->forget('files');
         // download PDF file with download method
         // /upload/pdf/Doc.dsfaadfsaffadsewr.pdf
-        return $file = storage_path('app/pdf') . '/' . $name;
+        return $file = 'https://www.c-rpt.com/storage/app/pdf' . '/' . $name;
 
         // $headers = array(
         //     'Content-Type: application/pdf',
