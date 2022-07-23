@@ -74,37 +74,43 @@ class AppApiController extends Controller
                 ], 200);
             }
         }
-        // //store the signtures
-        // $uploadedsignture = [];
-        // if (!$request->hasFile('signture1')) {
-        //     return response()->json([
-        //         'status' => 'fails',
-        //         'code' => 200,
-        //         'message' => 'upload file not found',
-        //     ], 200);
-        // } else {
-        //     $allowedExtension = ['jpg', 'jpeg', 'png'];
-        //     $file = $request->file('signture1');
-        //     // $erros = [];
-        //     $extension = $file->getClientOriginalExtension();
-        //     $check = in_array($extension, $allowedExtension);
-        //     if ($check) {
-        //         $name = $file->getClientOriginalName();
-        //         $path = $file->storeAs('public/images/signture', $name);
-        //         response()->json([
-        //             'status' => 'success',
-        //             'code' => 200,
-        //             'message' => 'images saved',
-        //         ], 200);
-        //     } else {
-        //         return response()->json([
-        //             'status' => 'fails',
-        //             'code' => 200,
-        //             'message' => 'Invalid File Format',
-        //         ], 200);
-        //     }
-        //     array_push($uploadedsignture, $file->getClientOriginalName());
-        // }
+        //store the signtures
+        $uploadedsignture = [];
+        foreach ($request->signatures as $sign) {
+            if (!$sign->hasFile('value')) {
+                return response()->json([
+                    'status' => 'fails',
+                    'code' => 200,
+                    'message' => 'upload file not found',
+                ], 200);
+            } else {
+                $allowedExtension = ['jpg', 'jpeg', 'png'];
+                $file = $sign->file('value');
+                // $erros = [];
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedExtension);
+                if ($check) {
+                    $name = $sign->name;
+                    $path = $file->storeAs('public/images/signture', $name);
+                    response()->json([
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'images saved',
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => 'fails',
+                        'code' => 200,
+                        'message' => 'Invalid File Format',
+                    ], 200);
+                }
+                return array_push($uploadedsignture, [
+                    'key'=>$sign->key,
+                    'signName'=>$sign->signName,
+                    'filename'=>$sign->name,
+                ]);
+            }
+        }
         foreach (json_decode($request->data) as $requestData) {
             $data = [
                 'first_page' => $requestData->firstForm,
