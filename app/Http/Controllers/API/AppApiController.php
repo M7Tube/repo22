@@ -31,7 +31,7 @@ class AppApiController extends Controller
         //see the field form XD and validate it
         $request->validate([
             'note' => ['required', 'string', 'max:1044'],
-            // 'images' => ['required'],
+            'images' => ['required'],
         ]);
         // return $request->obada['name'];
         //store the  images from site
