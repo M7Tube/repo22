@@ -31,7 +31,7 @@ class AppApiController extends Controller
         //see the field form XD and validate it
         $request->validate([
             'note' => ['required', 'string', 'max:1044'],
-            'images' => ['required'],
+            // 'images' => ['required'],
         ]);
         // return $request->obada['name'];
         //store the  images from site
@@ -74,53 +74,54 @@ class AppApiController extends Controller
                 ], 200);
             }
         }
-        //store the signtures
-        $uploadedsignture = [];
-        foreach (json_decode($request->signatures) as $sign) {
-            if (!$sign->hasFile('value')) {
-                return response()->json([
-                    'status' => 'fails',
-                    'code' => 200,
-                    'message' => 'upload file not found',
-                ], 200);
-            } else {
-                $allowedExtension = ['jpg', 'jpeg', 'png'];
-                $file = $sign->file('value');
-                // $erros = [];
-                $extension = $file->getClientOriginalExtension();
-                $check = in_array($extension, $allowedExtension);
-                if ($check) {
-                    $name = $sign->name;
-                    $path = $file->storeAs('public/images/signture', $name);
-                    response()->json([
-                        'status' => 'success',
-                        'code' => 200,
-                        'message' => 'images saved',
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'status' => 'fails',
-                        'code' => 200,
-                        'message' => 'Invalid File Format',
-                    ], 200);
-                }
-                return array_push($uploadedsignture, [
-                    'key'=>$sign->key,
-                    'signName'=>$sign->signName,
-                    'filename'=>$sign->name,
-                ]);
-            }
-        }
-        foreach (json_decode($request->data) as $requestData) {
-            $data = [
-                'first_page' => $requestData->firstForm,
-                'note' => $request->note,
-                'categories' => $requestData->categories,
-                'pictures' => $uploadedimages,
-                // 'signutares' => $uploadedsignture,
-                // 0 => $request->data[0],
-            ];
-        }
+        // //store the signtures
+        // $uploadedsignture = [];
+        // foreach (json_decode($request->signatures) as $sign) {
+        //     if (!$sign->hasFile('value')) {
+        //         return response()->json([
+        //             'status' => 'fails',
+        //             'code' => 200,
+        //             'message' => 'upload file not found',
+        //         ], 200);
+        //     } else {
+        //         $allowedExtension = ['jpg', 'jpeg', 'png'];
+        //         $file = $sign->file('value');
+        //         // $erros = [];
+        //         $extension = $file->getClientOriginalExtension();
+        //         $check = in_array($extension, $allowedExtension);
+        //         if ($check) {
+        //             $name = $sign->name;
+        //             $path = $file->storeAs('public/images/signture', $name);
+        //             response()->json([
+        //                 'status' => 'success',
+        //                 'code' => 200,
+        //                 'message' => 'images saved',
+        //             ], 200);
+        //         } else {
+        //             return response()->json([
+        //                 'status' => 'fails',
+        //                 'code' => 200,
+        //                 'message' => 'Invalid File Format',
+        //             ], 200);
+        //         }
+        //         return array_push($uploadedsignture, [
+        //             'key'=>$sign->key,
+        //             'signName'=>$sign->signName,
+        //             'filename'=>$sign->name,
+        //         ]);
+        //     }
+        // }
+        // return json_decode($request->data)->firstForm;
+        // foreach (json_encode($request->data) as $requestData) {
+        $data = [
+            'first_page' => json_decode($request->data)->firstForm,
+            'note' => $request->note,
+            'categories' => json_decode($request->data)->categories,
+            'pictures' => $uploadedimages,
+            // 'signutares' => $uploadedsignture,
+            // 0 => $request->data[0],
+        ];
+        // }
         // return $data;
         //create the pdf
         // $info = session()->get('Quinfo' . session()->get('LoggedAccount')['email'], []);
