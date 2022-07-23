@@ -76,7 +76,7 @@ class AppApiController extends Controller
         }
         //store the signtures
         $uploadedsignture = [];
-        foreach ($request->signatures as $sign) {
+        foreach (json_decode($request->signatures) as $sign) {
             if (!$sign->hasFile('value')) {
                 return response()->json([
                     'status' => 'fails',
@@ -150,7 +150,7 @@ class AppApiController extends Controller
         $pdf = PDF2::chunkLoadView('<html-separator/>', 'apiPDF', $data);
         // $pdf = PDF2::loadView('pdf', $data);
         $output = $pdf->output();
-        $name = 'file' . $request->note . rand(1111111111, 9999999999) . '.pdf';
+        $name = 'file' . $request->note . time() . rand(1111111111, 9999999999) . '.pdf';
         // storeAs($name, $output);
         Storage::put('pdf/' . $name, $pdf->output());
         // $document = Document::Create([
