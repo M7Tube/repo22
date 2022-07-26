@@ -53,6 +53,7 @@
 
     </style>
     <title>Create TextBox</title>
+    @livewireStyles
 </head>
 
 <body>

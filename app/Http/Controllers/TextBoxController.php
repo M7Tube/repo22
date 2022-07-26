@@ -35,9 +35,9 @@ class TextBoxController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO valdiation
-        TextBox::Create($request->all());
-        return back()->with('success', 'Text Box Created Successfully');
+        // // TODO valdiation
+        // TextBox::Create($request->all());
+        // return back()->with('success', 'Text Box Created Successfully');
     }
 
     /**

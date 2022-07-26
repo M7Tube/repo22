@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4"><a href="/public/admin"
+                            <h3 class="text-center font-weight-light my-4"><a href="{{ route('dashboard') }}"
                                     class="btn btn-outline-secondary"><i class="bi bi-skip-backward-fill"></i></a><span
                                     class="mx-5">Create Text Box</span>
                                 {{-- <a
@@ -27,8 +27,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <form action="{{ route('textbox.store') }}" enctype='multipart/form-data'
-                                autocomplete="off" method="POST">
+                            <form wire:submit.prevent="create">
                                 @csrf
                                 {{--  --}}
                                 <div class="col-md-12">
@@ -42,7 +41,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-floating mb-3">
-                                                                            <select name="category_id"
+                                                                            <select wire:model="category_id"
                                                                                 class="form-control">
                                                                                 <option value="0" selected>Choose The
                                                                                     Category</option>
@@ -124,7 +123,7 @@
                                                                         <div class="form-floating mb-3">
                                                                             <input class="form-control" id="inputName"
                                                                                 type="text" placeholder="Mohammed S"
-                                                                                name="name" autocomplete="off"
+                                                                                wire:model="name" autocomplete="off"
                                                                                 value="{{ old('name') }}" />
                                                                             <span class="text-danger">
                                                                                 @error('name')
@@ -145,10 +144,52 @@
                                     </div>
                                 </div>
                                 {{--  --}}
-                                <div class="row mb-3">
-                                    <input type="hidden" name="template_id"
-                                        value="{{ request()->query('template_id') }}">
+
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        <div class="my-2 col-12">
+                                            <div class="card shadow-lg border-2 rounded-lg">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="form-floating mb-3">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" id="inputwith_visit_type" type="checkbox"
+                                                                            placeholder="Mohammed S" wire:model="is_required"
+                                                                            autocomplete="off" value="{{ old('is_required') }}" />
+                                                                        <label for="inputdesc" class="form-check-label">Required ?</label>
+                                                                    </div>
+                                                                    <span class="text-danger">
+                                                                        @error('is_required')
+                                                                            {{ $message }}
+                                                                        @enderror
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-floating mb-3">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" id="inputwith_visit_type" type="checkbox"
+                                                                            placeholder="Mohammed S" wire:model="is_number"
+                                                                            autocomplete="off" value="{{ old('is_number') }}" />
+                                                                        <label for="inputdesc" class="form-check-label">Number Field ?</label>
+                                                                    </div>
+                                                                    <span class="text-danger">
+                                                                        @error('is_number')
+                                                                            {{ $message }}
+                                                                        @enderror
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                {{--  --}}
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-outline-success">Create <i

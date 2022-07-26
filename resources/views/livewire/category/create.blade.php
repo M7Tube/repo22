@@ -9,7 +9,7 @@
                                 class="btn btn-outline-secondary"><i class="bi bi-skip-forward-fill"></i> Login</a></h3> --}}
                     </div>
                     <div class="card-body">
-                        <form action="" enctype='multipart/form-data' autocomplete="off" method="POST">
+                        <form wire:submit.prevent="create">
                             @csrf
                             <div class="results">
                                 @if (Session::get('fail'))
@@ -41,7 +41,7 @@
                             </div>
                             <div class="mt-4 mb-0">
                                 <div class="d-grid">
-                                    <button wire:click.prevent="create()" class="btn btn-outline-success">Create <i class="bi bi-file-plus"></i></button>
+                                    <button type="submit" class="btn btn-outline-success">Create <i class="bi bi-file-plus"></i></button>
                                 </div>
                             </div>
                         </form>

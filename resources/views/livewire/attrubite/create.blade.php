@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4"><a href="/public/admin"
+                            <h3 class="text-center font-weight-light my-4"><a href="{{ route('dashboard') }}"
                                     class="btn btn-outline-secondary"><i class="bi bi-skip-backward-fill"></i></a><span
                                     class="mx-5">Create Question</span>
                                 {{-- <a

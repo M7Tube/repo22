@@ -37,13 +37,13 @@ class TemplateController extends Controller
      */
     public function store(TemplateRequest $request)
     {
-        $template = Template::Create($request->all());
-        if ($template) {
-            return redirect()->route('dashboard');
-            // return back()->with('success', 'The Template Has been added successfuly');
-        } else {
-            return back()->with('fail', 'Somthing Wrong is Happening');
-        }
+        // $template = Template::Create($request->all());
+        // if ($template) {
+        //     return redirect()->route('dashboard');
+        //     // return back()->with('success', 'The Template Has been added successfuly');
+        // } else {
+        //     return back()->with('fail', 'Somthing Wrong is Happening');
+        // }
     }
 
     /**

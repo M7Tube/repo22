@@ -53,6 +53,7 @@
 
     </style>
     <title>Create Selector</title>
+    @livewireStyles
 </head>
 
 <body>

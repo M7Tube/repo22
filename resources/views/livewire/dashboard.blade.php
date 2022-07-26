@@ -125,7 +125,7 @@
                 </div>
             </main>
         @endif
-        @if (session()->get('LoggedAccount')['role_id'] == 3 || session()->get('LoggedAccount')['role_id'] == 1)
+        {{-- @if (session()->get('LoggedAccount')['role_id'] == 3 || session()->get('LoggedAccount')['role_id'] == 1)
             <main>
                 <div class="container-fluid">
                     <div class="row justify-content-center">
@@ -142,11 +142,6 @@
                                     <div class="row">
                                         <h3 class="text-center font-weight-light my-4">Quotation <i
                                                 class="bi bi-file-earmark-spreadsheet"></i></h3>
-                                        {{-- <a href="{{ route('template.create') }}"
-                                        class="btn btn-outline-success w-25 mx-auto text-capitalize"><i
-                                            class="bi bi-file-earmark-plus"></i> Create</a>
-                                    <a href="{{ route('control') }}"
-                                        class="btn btn-outline-primary w-25 mx-auto text-capitalize"><i class="bi bi-menu-app"></i> Control Pages</a> --}}
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -215,6 +210,6 @@
                     </div>
                 </div>
             </main>
-        @endif
+        @endif --}}
     </div>
 </div>

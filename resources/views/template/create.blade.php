@@ -53,10 +53,12 @@
 
     </style>
     <title>Template Create</title>
+    @livewireStyles
 </head>
 
 <body class="">
     @livewire('template.create')
+    @livewireScripts
 </body>
 
 </html>

@@ -436,7 +436,7 @@ class AppApiController extends Controller
         $request->validate([
             'template_name' => ['required', 'string', 'max:72'],
             'template_desc' => ['required', 'string', 'max:144'],
-            'template_pic' => ['required', 'mimes:png,jpg,jpeg', 'max:10500'],
+            'template_pic' => ['mimes:png,jpg,jpeg', 'max:10500'],
             'template_with_visit_type' => ['required', 'boolean'],
             'template_instructions' => ['required', 'string', 'max:1440'],
             'template_user_id' => ['required', 'integer', 'exists:users,user_id'],

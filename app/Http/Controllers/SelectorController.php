@@ -35,9 +35,9 @@ class SelectorController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO valdiation
-        Selector::Create($request->all());
-        return back()->with('success', 'Selector Created Successfully');
+        // // TODO valdiation
+        // Selector::Create($request->all());
+        // return back()->with('success', 'Selector Created Successfully');
     }
 
     /**

@@ -15,7 +15,8 @@ class Selector extends Model
     ];
 
     protected $casts = [
-        'is_required' => 'integer'
+        'is_required' => 'integer',
+        'is_multi' => 'integer',
     ];
 
     public function template()

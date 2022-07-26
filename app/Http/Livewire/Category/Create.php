@@ -26,6 +26,7 @@ class Create extends Component
         ]);
         session()->flash('success', 'Category Added Successfully');
         $this->clear();
+        return redirect()->route('template.manage',$this->template_id);
     }
 
     public function clear()
