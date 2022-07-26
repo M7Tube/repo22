@@ -8322,16 +8322,17 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-5">
-                <img src="data:image/png;base64, {!! base64_encode(file_get_contents('../public/images/logo.png')) !!}" style="height: auto; width: 125px;">
+                <img src="data:image/png;base64, {!! base64_encode(file_get_contents('../public/images/logo.png')) !!}" style="height: auto; width: 140px;">
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-5">
+            <div class="col-xs-10">
                 <div class="text-left">
-                    <h4> Inspection & Maintenance Report</h4>
+                    <h3><b>Inspection & Maintenance Report</b></h3>
                 </div>
             </div>
         </div>
+        <html-separator />
         <div class="row">
             <div class="col-xs-5">
                 @forelse ($data['first_page'] as $d)
@@ -8340,19 +8341,18 @@
 
                 @endforelse
             </div>
-            <div class="col-xs-5">
-                <div class="text-right text-success">Complate</div>
+            <div class="col-xs-5" style="margin-left: 100px;">
+                <div class="text-right text-success"><b>Complate</b></div>
             </div>
         </div>
-        <html-separator />
         <br/>
         <div class="row">
             @forelse ($data['first_page'] as $d)
                     <div class="col-xs-5">
                         <h5 class="text-left">Doc No</h5>
                     </div>
-                    <div class="col-xs-5">
-                        <h5 class="text-right text-muted">{{ $d->doc_no ?? ''}}</h5>
+                    <div class="col-xs-5" style="margin-left: 100px;">
+                        <h5 class="text-center text-muted" style="padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->doc_no ?? ''}}</h5>
                     </div>
             @empty
             @endforelse
@@ -8361,10 +8361,10 @@
         <div class="row">
             @forelse ($data['first_page'] as $d)
                     <div class="col-xs-5">
-                        <div class="text-left">Project Name</div><br/>
-                        <div class="text-left text-muted">{{ $d->name ?? ''}}</div>
+                        <h5 class="text-left">Project Name</h5>
                     </div>
-                    <div class="col-xs-5">
+                    <div class="col-xs-5" style="margin-left: 100px;">
+                        <h5 class="text-center text-muted" style="padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->name ?? ''}}</h5>
                     </div>
             @empty
             @endforelse
@@ -8375,8 +8375,8 @@
                     <div class="col-xs-5">
                         <h5 class="text-left">Date</h5>
                     </div>
-                    <div class="col-xs-5">
-                        <h5 class="text-right text-muted">{{ $d->date ?? ''}}</h5>
+                    <div class="col-xs-5" style="margin-left: 100px;">
+                        <h5 class="text-center text-muted" style="padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->date ?? ''}}</h5>
                     </div>
             @empty
             @endforelse
@@ -8387,8 +8387,8 @@
                     <div class="col-xs-5">
                         <h5 class="text-left">Location</h5>
                     </div>
-                    <div class="col-xs-5">
-                        <h5 class="text-right text-muted">{{ $d->location ?? ''}}</h5>
+                    <div class="col-xs-5" style="margin-left: 100px;">
+                        <h5 class="text-center text-muted" style="padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->location ?? ''}}</h5>
                     </div>
             @empty
             @endforelse
@@ -8400,7 +8400,7 @@
                         <h5 class="text-left">Visit Type</h5>
                     </div>
                     <div class="col-xs-5" style="margin-left: 100px;">
-                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{ $d->with_visit_type ?? ''}}</h5>
+                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 0px; margin-left: 50px;">{{ $d->with_visit_type ?? ''}}</h5>
                     </div>
             @empty
             @endforelse
@@ -8431,30 +8431,32 @@
     <pagebreak></pagebreak>
     @forelse ($data['categories'] as $cate)
         <div class="container">
-            <div class="row" style="background-color:#e6e6e6; padding:5px; margin-right: 0px; margin-left: 0px;">
+            <div class="row" style="background-color:#fff7f792; padding-left: 0px; padding-top:5px; padding-bottom:5px;">
                 <div class="col-xs-10">
-                    <h4 class="text-center" style="margin-left: 50px;"><b>{{ $cate->name ?? ''}}</b></h4>
+                    <h3 class="text-left"><b>{{ $cate->name ?? ''}}</b></h3>
                 </div>
-
             </div>
-            <hr style="margin: 1px; padding: 0;">
+        </div>
+        <div class="container-fluid" style="padding: 0px;">
+
+            {{-- <hr style="margin: 1px; padding: 0;"> --}}
             <div class="row">
                 @forelse ($cate->web as $at)
                     @forelse ($at->att as $att)
-                        <hr style="margin: 1px; padding: 0;">
-                            <div class="col-xs-5">
+                            <hr style="margin: 0px; padding: 0;">
+                            <div class="col-xs-5" style="margin-left: 25px;">
                                 <h5 class="text-left">{{ $att->name ?? ''}}</h5>
                             </div>
                             <div class="col-xs-5" style="margin-left: 100px;">
                                 @forelse ($att->selected as $color)
                                     @if($color->value=='success')
-                                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                        <h5 class="text-center text-muted" style="background-color:#4b804b; color:white; padding:10px ; margin-top: 0; margin-bottom: 0px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
                                     @elseif($color->value=='secondary')
-                                        <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                        <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 0px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
                                     @elseif($color->value=='danger')
-                                        <h5 class="text-center text-muted" style="background-color:red; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                        <h5 class="text-center text-muted" style="background-color:red; color:white; padding:10px ; margin-top: 0; margin-bottom: 0px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
                                     @elseif($color->value=='warning')
-                                        <h5 class="text-center text-muted" style="background-color:yellow; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
+                                        <h5 class="text-center text-muted" style="background-color:yellow; color:white; padding:10px ; margin-top: 0; margin-bottom: 0px; margin-left: 50px;">{{$color->key ?? ''}}</h5>
                                     @endif
                                 @empty
                                 @endforelse
@@ -8464,6 +8466,7 @@
                     @empty
                     @endforelse
             </div>
+        </div>
             {{-- <hr style="margin: 0; padding: 0;">
             <div class="row">
                 <div class="col-xs-5">
@@ -8536,7 +8539,6 @@
                     <h5 class="text-center text-muted" style="background-color:gray; color:white; padding:10px ; margin-top: 0; margin-bottom: 2px; margin-left: 50px;">نص نص</h5>
                 </div>
             </div> --}}
-        </div>
     <pagebreak></pagebreak>
     @empty
 
@@ -8554,7 +8556,7 @@
             <div class="col-xs-5">
             </div>
         </div>
-        <hr style="margin: 0; padding: 0;">
+        {{-- <hr style="margin: 0; padding: 0;">
         <div class="row">
             <div class="col-xs-5">
                 <div class="text-left">Pictures</div><br/>
@@ -8583,7 +8585,7 @@
             </div>
             <div class="col-xs-5">
             </div>
-        </div>
+        </div> --}}
     </div>
     {{-- ssd --}}
     <htmlpagefooter name="page-footer">

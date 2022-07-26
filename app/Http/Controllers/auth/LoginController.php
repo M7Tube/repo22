@@ -29,7 +29,7 @@ class LoginController extends Controller
                 //the password is correct
                 //give him a session with his info
                 $request->session()->put('LoggedAccount', $user);
-                return redirect('/admin');
+                return redirect()->route('control');
             } else {
                 //the password is incorrect
                 //return him back

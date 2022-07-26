@@ -35,90 +35,90 @@ class AppApiController extends Controller
         ]);
         // return $request->obada['name'];
         //store the  images from site
-        if (!$request->hasFile('images')) {
-            return response()->json([
-                'status' => 'fails',
-                'code' => 200,
-                'message' => 'upload file not found',
-            ], 200);
-        } else {
-            $allowedfileExtension = ['pdf', 'jpg', 'png'];
-            $files = $request->file('images');
-            $uploadedimages = [];
-            foreach ($files as $file) {
-                // return 'a';
-                $extension = $file->getClientOriginalExtension();
-                $check = in_array($extension, $allowedfileExtension);
-                if ($check) {
-                    foreach ($files as $mediaFiles) {
-                        $name = $mediaFiles->getClientOriginalName();
-                        $path = $mediaFiles->storeAs('public/images', $name);
-                        response()->json([
-                            'status' => 'success',
-                            'code' => 200,
-                            'message' => 'images saved',
-                        ], 200);
-                    }
-                } else {
-                    return response()->json([
-                        'status' => 'fails',
-                        'code' => 200,
-                        'message' => 'Invalid File Format',
-                    ], 200);
-                }
-                array_push($uploadedimages, $file->getClientOriginalName());
-                response()->json([
-                    'status' => 'success',
-                    'code' => 200,
-                    'message' => 'images saved',
-                ], 200);
-            }
-        }
+        // if (!$request->hasFile('images')) {
+        //     return response()->json([
+        //         'status' => 'fails',
+        //         'code' => 200,
+        //         'message' => 'upload file not found',
+        //     ], 200);
+        // } else {
+        //     $allowedfileExtension = ['pdf', 'jpg', 'png'];
+        //     $files = $request->file('images');
+        //     $uploadedimages = [];
+        //     foreach ($files as $file) {
+        //         // return 'a';
+        //         $extension = $file->getClientOriginalExtension();
+        //         $check = in_array($extension, $allowedfileExtension);
+        //         if ($check) {
+        //             foreach ($files as $mediaFiles) {
+        //                 $name = $mediaFiles->getClientOriginalName();
+        //                 $path = $mediaFiles->storeAs('public/images', $name);
+        //                 response()->json([
+        //                     'status' => 'success',
+        //                     'code' => 200,
+        //                     'message' => 'images saved',
+        //                 ], 200);
+        //             }
+        //         } else {
+        //             return response()->json([
+        //                 'status' => 'fails',
+        //                 'code' => 200,
+        //                 'message' => 'Invalid File Format',
+        //             ], 200);
+        //         }
+        //         array_push($uploadedimages, $file->getClientOriginalName());
+        //         response()->json([
+        //             'status' => 'success',
+        //             'code' => 200,
+        //             'message' => 'images saved',
+        //         ], 200);
+        //     }
+        // }
         //store the signtures
-        $uploadedsignture = [];
-        for ($i = 1; $i <= $request->signatureCount; $i++) {
-            if (!$request->hasFile('signature' . $i)) {
-                return response()->json([
-                    'status' => 'fails',
-                    'code' => 200,
-                    'message' => 'upload file not found',
-                ], 200);
-            } else {
-                $allowedExtension = ['jpg', 'jpeg', 'png'];
-                $file = $request->file('signature' . $i);
-                // $erros = [];
-                $extension = $file->getClientOriginalExtension();
-                $check = in_array($extension, $allowedExtension);
-                if ($check) {
-                    $name = time() . $file->getClientOriginalName();
-                    $path = $file->storeAs('public/images/signture/', $name);
-                    array_push($uploadedsignture, [
-                        'key' => $request['signatureTitle' . $i],
-                        'signName' => $request['signatureName' . $i],
-                        'filename' => $name,
-                    ]);
-                    response()->json([
-                        'status' => 'success',
-                        'code' => 200,
-                        'message' => 'images saved',
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'status' => 'fails',
-                        'code' => 200,
-                        'message' => 'Invalid File Format',
-                    ], 200);
-                }
-            }
-        }
+        // $uploadedsignture = [];
+        // for ($i = 1; $i <= $request->signatureCount; $i++) {
+        //     if (!$request->hasFile('signature' . $i)) {
+        //         return response()->json([
+        //             'status' => 'fails',
+        //             'code' => 200,
+        //             'message' => 'upload file not found',
+        //         ], 200);
+        //     } else {
+        //         $allowedExtension = ['jpg', 'jpeg', 'png'];
+        //         $file = $request->file('signature' . $i);
+        //         // $erros = [];
+        //         $extension = $file->getClientOriginalExtension();
+        //         $check = in_array($extension, $allowedExtension);
+        //         if ($check) {
+        //             $name = time() . $file->getClientOriginalName();
+        //             $path = $file->storeAs('public/images/signture/', $name);
+        //             array_push($uploadedsignture, [
+        //                 'key' => $request['signatureTitle' . $i],
+        //                 'signName' => $request['signatureName' . $i],
+        //                 'filename' => $name,
+        //             ]);
+        //             response()->json([
+        //                 'status' => 'success',
+        //                 'code' => 200,
+        //                 'message' => 'images saved',
+        //             ], 200);
+        //         } else {
+        //             return response()->json([
+        //                 'status' => 'fails',
+        //                 'code' => 200,
+        //                 'message' => 'Invalid File Format',
+        //             ], 200);
+        //         }
+        //     }
+        // }
         // return json_decode($request->data)->firstForm;
         // foreach (json_encode($request->data) as $requestData) {
         $data = [
             'first_page' => json_decode($request->data)->firstForm,
             'note' => $request->note,
             'categories' => json_decode($request->data)->categories,
-            'pictures' => $uploadedimages,
-            'signutares' => $uploadedsignture,
+            // 'pictures' => $uploadedimages,
+            // 'signutares' => $uploadedsignture,
             // 0 => $request->data[0],
         ];
         // }
@@ -163,7 +163,7 @@ class AppApiController extends Controller
         // session()->forget('files');
         // download PDF file with download method
         // /upload/pdf/Doc.dsfaadfsaffadsewr.pdf
-        return $file = 'https://www.c-rpt.com/storage/app/pdf' . '/' . $name;
+        // return $file = 'https://www.c-rpt.com/storage/app/pdf' . '/' . $name;
 
         // $headers = array(
         //     'Content-Type: application/pdf',
