@@ -45,7 +45,7 @@
                                                             <div class="media-body text-right">
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                        Name
+                                                                       Site Name
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -60,7 +60,7 @@
                                                                                     {{ $message }}
                                                                                 @enderror
                                                                             </span>
-                                                                            <label for="inputName">Inspection
+                                                                            <label for="inputName">Site
                                                                                 Name</label>
                                                                         </div>
                                                                     </div>
@@ -73,7 +73,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                {{-- <div class="col-md-12">
                                     <div class="form-floating mb-3">
                                         <div class="my-2 col-12">
                                             <div class="Scard card shadow-lg border-2 rounded-lg">
@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-floating mb-3">
                                         <div class="my-2 col-12">
