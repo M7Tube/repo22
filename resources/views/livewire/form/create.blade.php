@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <h3 class="text-center font-weight-light my-4"><a href="{{ route('dashboard') }}"
                                 class="btn btn-outline-secondary"><i class="bi bi-skip-backward-fill"></i></a><span
-                                class="mx-5">New Form</span>
+                                class="mx-5">New Inspection</span>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('form.store') }}" enctype='multipart/form-data' autocomplete="off"

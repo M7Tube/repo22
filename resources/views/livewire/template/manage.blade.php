@@ -21,7 +21,7 @@
                                                         <div class="media d-flex">
                                                             <div class="media-body text-right">
                                                                 <h4><i class="bi bi-file-plus"></i>Create <span
-                                                                        class="text-muted">Form <i
+                                                                        class="text-muted">Inspection <i
                                                                             class="bi bi-ui-checks"></i></span>
                                                                 </h4>
                                                             </div>
