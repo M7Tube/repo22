@@ -7,6 +7,7 @@ use App\Models\Document;
 use App\Models\Signature;
 use App\Models\Statu;
 use App\Models\Subject;
+use App\Models\Template;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -22,6 +23,7 @@ class Create extends Component
     public $location;
     public $docNo;
     public $template_id;
+    public $sitename;
 
 
 
@@ -202,6 +204,7 @@ class Create extends Component
             $this->docNo = 1;
         }
         $this->template_id = request()->query('template_id');
+        $this->sitename = Template::find(request()->query('template_id'))['name'];
         // $this->signture = Signature::all('name', 'signature');
     }
 

@@ -45,7 +45,7 @@
                                                             <div class="media-body text-right">
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                       Site Name
+                                                                        Site Name
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -54,7 +54,7 @@
                                                                             <input class="form-control" id="inputName"
                                                                                 type="text" placeholder="Mohammed S"
                                                                                 name="name" autocomplete="off"
-                                                                                value="{{ session()->get('LoggedAccount')['name'] }} Inspection" />
+                                                                                value="{{ $sitename }}" />
                                                                             <span class="text-danger">
                                                                                 @error('name')
                                                                                     {{ $message }}
@@ -168,8 +168,7 @@
                                                                         {{-- <p id="demo"></p> --}}
                                                                         <div class="form-floating mb-1">
                                                                             <input class="form-control" id="demo"
-                                                                                type="text"
-                                                                                placeholder="Mohammed S"
+                                                                                type="text" placeholder="Mohammed S"
                                                                                 name="location" autocomplete="off"
                                                                                 disabled />
                                                                             <span class="text-danger">
