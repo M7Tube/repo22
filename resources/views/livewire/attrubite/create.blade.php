@@ -72,17 +72,17 @@
                                     </div>
                                 </div>
                                 {{--  --}}
-                                <div class="col-md-12">
+                                <div class="col-md-12" wire:ignore>
                                     <div class="form-floating mb-3">
                                         <div class="my-2 col-12">
                                             <div class="card shadow-lg border-2 rounded-lg">
                                                 <div class="card-content">
                                                     <div class="card-body">
-                                                        <div class="row">
+                                                        <div class="row"  wire:sortable="updateQuestionOrder">
                                                             @if (isset($prevQuestions))
-                                                                @forelse ($prevQuestions as $prev)
-                                                                    <div class="col-12 col-md-6">
-                                                                        <div class="form-floating mb-3">
+                                                                @forelse ($prevQuestions->sortBy('order') as $prev)
+                                                                    <div class="col-12" wire:sortable.item="{{ $prev->attrubite_id }}" wire:key="prev-{{ $prev->attrubite_id }}">
+                                                                        <div class="form-floating mb-3" wire:sortable.handle>
                                                                             <div class="col-12">
                                                                                 <div
                                                                                     class="Scard card shadow-lg border-2 rounded-lg">

@@ -45,6 +45,12 @@ class AttrubireController extends Controller
                 'attrubite_value_key' => $request->date_and_time_question
             ]);
         }
+        $order = Attrubite::all()->last();
+        if ($order) {
+            $order = $order->order + 1;
+        } else {
+            $order = 1;
+        }
         Attrubite::Create([
             'name' => $request->name,
             'status' => $request->status,
@@ -52,6 +58,7 @@ class AttrubireController extends Controller
             'is_required' => $request->boolean('is_required'),
             'template_id' => $request->template_id,
             'category_id' => $request->category_id,
+            'order' => $order,
         ]);
         return back()->with('success', 'Question Created Successfully');
     }

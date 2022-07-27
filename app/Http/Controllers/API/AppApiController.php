@@ -496,6 +496,12 @@ class AppApiController extends Controller
                 ]);
                 if ($data->api->att) {
                     foreach ($data->api->att as $key2 => $data2) {
+                        $order = Attrubite::all()->last();
+                        if ($order) {
+                            $order = $order->order + 1;
+                        } else {
+                            $order = 1;
+                        }
                         $attrubite = Attrubite::Create([
                             'name' => $data2->name,
                             'template_id' => $newTemplate->template_id,
@@ -503,6 +509,7 @@ class AppApiController extends Controller
                             'dateAndTime' => $data2->dateAndTime,
                             'is_required' => $data2->is_required,
                             'category_id' => $category->category_id,
+                            'order' => $order,
                         ]);
                         // if (json_decode($data->api->att->dateAndTime)) {
                         //     foreach (json_decode($data->api->att->dateAndTime) as $key5 => $data5) {
@@ -526,7 +533,7 @@ class AppApiController extends Controller
                         $textbox = TextBox::Create([
                             'name' => $data3->name,
                             'is_required' => $data3->is_required,
-                            'is_number' => $data3->is_number,
+                            'is_number' => $data3->is_number ?? 0,
                             'template_id' => $newTemplate->template_id,
                             'category_id' => $category->category_id,
                         ]);

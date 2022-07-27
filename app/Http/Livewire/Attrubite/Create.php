@@ -31,13 +31,19 @@ class Create extends Component
         $this->template_id = request()->query('template_id');
     }
 
-    // public function updatedprevQuestions()
-    // {
-    //     $this->selectedCategory = ReportCategory::where(
-    //         'template_id',
-    //         request()->query('template_id')
-    //     );
-    // }
+    public function updateQuestionOrder($list)
+    {
+        $test = [];
+        foreach ($list as $data) {
+            Attrubite::find($data['value'])->update(['order' => $data['order']]);
+            array_push($test,$data);
+        }
+        // dd($test);
+        // $this->selectedCategory = ReportCategory::where(
+        //     'template_id',
+        //     request()->query('template_id')
+        // );
+    }
 
     public function clear()
     {
