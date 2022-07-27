@@ -7,6 +7,8 @@ use App\Models\Document;
 use App\Models\Form;
 use App\Models\ReportCategory;
 use App\Models\Statu;
+use App\Models\Template;
+use App\Models\VisitType;
 use Illuminate\Http\Request;
 use PDF2;
 
@@ -79,8 +81,23 @@ class FormController extends Controller
     public function create()
     {
         $att = ReportCategory::where('template_id', request()->query('template_id'))->with('att', 'selector', 'textbox')->get();
+        $template = Template::where('template_id', request()->query('template_id'))->first();
+        if ($att && $template) {
+            $docNo = Document::all()->last();
+            if ($docNo) {
+                $docNo = $docNo->docNo + 1;
+            } else {
+                $docNo = 1;
+            }
+            if ($template->with_visit_type == 1) {
+                $visit_type = VisitType::all();
+                return view('form.create', compact(['att', 'template', 'visit_type']));
+            } else {
+                return view('form.create', compact(['att', 'template']));
+            }
+        }
         // $stt=Statu::all();
-        return view('form.create', compact('att'));
+
     }
 
     /**
@@ -103,6 +120,7 @@ class FormController extends Controller
         // return $request->all();
         // $t=Statu::all();
         // share data to view
+        return $request->all();
         session()->put('request' . session()->get('LoggedAccount')['email'], $request->all());
         return redirect()->route('Exportform');
         $info = session()->get('Quinfo' . session()->get('LoggedAccount')['email'], []);

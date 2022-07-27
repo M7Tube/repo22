@@ -15,15 +15,19 @@ class Create extends Component
 {
     use WithFileUploads;
 
+    //new
+    public $name;
+    public $desc;
+    public $date;
+    public $location;
+    public $docNo;
     public $template_id;
+
+
+
+
     public $att;
     public $stt;
-
-    public $companyName;
-    // public $clientName;
-    public $clientPhone;
-    public $docNo;
-
 
     public $status;
 
@@ -62,11 +66,11 @@ class Create extends Component
         session()->flash('messageFile', 'Photos Added Successfully');
     }
 
-    public function updatedClientName()
+    public function updatedName()
     {
         $this->validate([
-            'companyName' => ['required', 'string', 'max:72'],
-            // 'clientName' => ['required', 'string', 'max:72'],
+            'name' => ['required', 'string', 'max:144'],
+            'desc' => ['required', 'string', 'max:1440'],
             'clientPhone' => ['required', 'string', 'max:15'],
             'docNo' => ['required', 'integer'],
         ]);
@@ -197,6 +201,7 @@ class Create extends Component
         } else {
             $this->docNo = 1;
         }
+        $this->template_id = request()->query('template_id');
         // $this->signture = Signature::all('name', 'signature');
     }
 

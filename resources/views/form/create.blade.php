@@ -53,6 +53,7 @@
 
     </style>
     <title>Export</title>
+    @livewireStyles
 </head>
 
 <body class="">

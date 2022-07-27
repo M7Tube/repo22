@@ -54,8 +54,45 @@
                                                                                     {{ $message }}
                                                                                 @enderror
                                                                             </span>
-                                                                            <label for="inputName">Choose The Inspection
+                                                                            <label for="inputName">Inspection
                                                                                 Name</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        <div class="my-2 col-12">
+                                            <div class="Scard card shadow-lg border-2 rounded-lg">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media">
+                                                            <div class="media-body text-right">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        Description
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-floating mb-1">
+                                                                            <input class="form-control" id="inputName"
+                                                                                type="text" placeholder="Mohammed S"
+                                                                                name="desc" autocomplete="off" />
+                                                                            <span class="text-danger">
+                                                                                @error('desc')
+                                                                                    {{ $message }}
+                                                                                @enderror
+                                                                            </span>
+                                                                            <label for="inputdesc">Inspection
+                                                                                Description</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -84,7 +121,7 @@
                                                                     <div class="col-md-12">
                                                                         <div class="form-floating mb-1">
                                                                             <input class="form-control" id="date"
-                                                                                type="text" name="created_at"
+                                                                                type="text" name="date"
                                                                                 autocomplete="off"
                                                                                 value="{{ date('Y-m-d H:i:s') }}"
                                                                                 disabled />
@@ -93,46 +130,9 @@
                                                                                     {{ $message }}
                                                                                 @enderror
                                                                             </span>
-                                                                            <label for="date">The Inspection Creation
+                                                                            <label for="date">The Inspection
+                                                                                Creation
                                                                                 Date</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating mb-3">
-                                        <div class="my-2 col-12">
-                                            <div class="Scard card shadow-lg border-2 rounded-lg">
-                                                <div class="card-content">
-                                                    <div class="card-body">
-                                                        <div class="media">
-                                                            <div class="media-body text-right">
-                                                                <div class="row">
-                                                                    <div class="col-12 noselect">
-                                                                        Company Name
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-floating mb-1">
-                                                                            <input class="form-control" id="inputName"
-                                                                                type="text" placeholder="Mohammed S"
-                                                                                wire:model="companyName"
-                                                                                autocomplete="off" />
-                                                                            <span class="text-danger">
-                                                                                @error('companyName')
-                                                                                    {{ $message }}
-                                                                                @enderror
-                                                                            </span>
-                                                                            <label for="inputName">The Company
-                                                                                Name</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -162,15 +162,16 @@
                                                                         {{-- <p id="demo"></p> --}}
                                                                         <div class="form-floating mb-1">
                                                                             <input class="form-control" id="demo"
-                                                                                type="text" placeholder="Mohammed S"
-                                                                                wire:model="Location" autocomplete="off"
-                                                                                disabled />
+                                                                                type="text"
+                                                                                placeholder="Mohammed S"
+                                                                                name="location"
+                                                                                autocomplete="off" disabled />
                                                                             <span class="text-danger">
-                                                                                @error('Location')
+                                                                                @error('location')
                                                                                     {{ $message }}
                                                                                 @enderror
                                                                             </span>
-                                                                            <label for="inputLocation">
+                                                                            <label for="inputlocation">
                                                                                 Location</label>
                                                                         </div>
                                                                     </div>
@@ -204,91 +205,14 @@
                                                                                     id="inputGroup-sizing-lg">Doc.</span>
                                                                                 <input class="form-control "
                                                                                     id="inputdocNo" type="text"
-                                                                                    wire:model="docNo"
-                                                                                    autocomplete="off" disabled />
+                                                                                    name="docNo"
+                                                                                    autocomplete="off" value="{{ $docNo }}" disabled />
                                                                                 <span class="text-danger">
                                                                                     @error('docNo')
                                                                                         {{ $message }}
                                                                                     @enderror
                                                                                 </span>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-12">
-                                    <div class="form-floating mb-3">
-                                        <div class="my-2 col-12">
-                                            <div class="Scard card shadow-lg border-2 rounded-lg">
-                                                <div class="card-content">
-                                                    <div class="card-body">
-                                                        <div class="media">
-                                                            <div class="media-body text-right">
-                                                                <div class="row">
-                                                                    <div class="col-12 noselect">
-                                                                        Client Name
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-floating mb-1">
-                                                                            <input class="form-control" id="inputName"
-                                                                                type="text" placeholder="Mohammed S"
-                                                                                wire:model="clientName"
-                                                                                autocomplete="off" />
-                                                                            <span class="text-danger">
-                                                                                @error('clientName')
-                                                                                    {{ $message }}
-                                                                                @enderror
-                                                                            </span>
-                                                                            <label for="inputName">The Client
-                                                                                Name</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-12">
-                                    <div class="form-floating mb-3">
-                                        <div class="my-2 col-12">
-                                            <div class="Scard card shadow-lg border-2 rounded-lg">
-                                                <div class="card-content">
-                                                    <div class="card-body">
-                                                        <div class="media">
-                                                            <div class="media-body text-right">
-                                                                <div class="row">
-                                                                    <div class="col-12 noselect">
-                                                                        Client Phone Number
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-floating mb-1">
-                                                                            <input class="form-control"
-                                                                                id="inputName" type="text"
-                                                                                placeholder="Mohammed S"
-                                                                                wire:model="clientPhone"
-                                                                                autocomplete="off" />
-                                                                            <span class="text-danger">
-                                                                                @error('clientPhone')
-                                                                                    {{ $message }}
-                                                                                @enderror
-                                                                            </span>
-                                                                            <label for="inputName">The Client
-                                                                                Phone</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -335,8 +259,7 @@
                                                                                 <div class="media">
                                                                                     <div class="media-body text-right">
                                                                                         <div class="row">
-                                                                                            <div
-                                                                                                class="col-12">
+                                                                                            <div class="col-12">
                                                                                                 {{-- <input type="hidden" name="at[{{$kkey}}]key"
                                                                                 value="{{ $at->name }}"> --}}
                                                                                                 <h3>{{ $at->name }}
@@ -380,6 +303,26 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         @endif
+                                                                                                        @forelse ($at->dateAndTime as $date)
+                                                                                                            @if ($key == $date['attrubite_value_key'])
+                                                                                                                <label
+                                                                                                                    for="inputlocation">
+                                                                                                                    {{$date['title']}}</label>
+                                                                                                                <input
+                                                                                                                    class="form-control"
+                                                                                                                    id="inputdocNo"
+                                                                                                                    type="date"
+                                                                                                                    name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][{{$date['title']}}]"
+                                                                                                                    autocomplete="off" {{ $date['is_required']==1 ? 'required' : '' }}/>
+                                                                                                                <span
+                                                                                                                    class="text-danger">
+                                                                                                                    @error('dateAndTime')
+                                                                                                                        {{ $message }}
+                                                                                                                    @enderror
+                                                                                                                </span>
+                                                                                                            @endif
+                                                                                                        @empty
+                                                                                                        @endforelse
                                                                                                         {{-- <input type="hidden"
                                                                                         name="at[{{ 0 }}][{{ $at->name }}][color]"
                                                                                         value="{{ $st['value'] }}"> --}}
@@ -411,14 +354,14 @@
                                                                                 <div class="media">
                                                                                     <div class="media-body text-right">
                                                                                         <div class="row">
-                                                                                            <div
-                                                                                                class="col-12">
+                                                                                            <div class="col-12">
                                                                                                 {{ $stt['name'] }}
                                                                                                 <select
                                                                                                     class="form-control"
                                                                                                     name="selection[{{ 0 }}][{{ $attt->name }}][{{ $stt['name'] }}][{{ $kkkeyy }}]"
                                                                                                     id="">
-                                                                                                    <option value="0">
+                                                                                                    <option
+                                                                                                        value="0">
                                                                                                         Choose Form
                                                                                                         <b>{{ $stt['name'] }}</b>
                                                                                                     </option>
@@ -454,8 +397,7 @@
 
                                                                                         </div>
                                                                                         <div class="row">
-                                                                                            <div
-                                                                                                class="col-md-12">
+                                                                                            <div class="col-md-12">
                                                                                                 <div
                                                                                                     class="form-floating mb-1">
                                                                                                     <input
@@ -517,7 +459,7 @@
                             @endif
                             <div class="row">
                                 <div class="col-md-6 mt-2">
-                                    <input type="file" id="photos" class="form-control" wire:model="photos" multiple>
+                                    <input type="file" id="photos" class="form-control" name="photos" multiple>
                                 </div>
                                 <div class="col-md-6 mt2">
                                     @if ($photos)
