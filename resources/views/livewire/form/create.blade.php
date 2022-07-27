@@ -28,7 +28,7 @@
                             </div>
                             <input type="hidden" name="user_id"
                                 value="{{ session()->get('LoggedAccount')['user_id'] }}">
-                            <h5 class="text-secondary">
+                            <h5 class="text-secondary text-center">
                                {{ $instruction }}
                             </h5>
                             <div class="row mb-3">
