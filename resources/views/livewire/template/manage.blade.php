@@ -12,7 +12,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    {{-- <div class="my-2 col-xl-3 col-sm-6 col-12">
+                                    <div class="my-2 col-xl-3 col-sm-6 col-12">
                                         <a href="{{ route('form.create', ['template_id' => $template->template_id]) }}"
                                             class="text-dark" style="text-decoration: none;">
                                             <div class="Scard card shadow-lg border-2 rounded-lg">
@@ -30,7 +30,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                    </div> --}}
+                                    </div>
                                     <div class="my-2 col-xl-3 col-sm-6 col-12">
                                         <a href="{{ route('attrubite.create', ['template_id' => $template->template_id]) }}"
                                             class="text-dark" style="text-decoration: none;">
