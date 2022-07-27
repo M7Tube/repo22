@@ -20,8 +20,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('css/material-dashboard.css') }}" ?v=3.0.2
-        rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('css/material-dashboard.css') }}" ?v=3.0.2 rel="stylesheet" />
     @yield('head')
     @livewireStyles
 </head>
@@ -55,6 +54,14 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Control pages
                     </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Inspections</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Request::url() == route('controleUser') ? 'active bg-gradient-primary' : '' }}"
