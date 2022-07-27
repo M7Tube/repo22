@@ -28,6 +28,12 @@
                             </div>
                             <input type="hidden" name="user_id"
                                 value="{{ session()->get('LoggedAccount')['user_id'] }}">
+                            {{-- <h5 class="text-secondary">
+                                @forelse ($template as $temp)
+                                    {{ $temp['instructions'] }}
+                                @empty
+                                @endforelse
+                            </h5> --}}
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="form-floating mb-3">
@@ -164,8 +170,8 @@
                                                                             <input class="form-control" id="demo"
                                                                                 type="text"
                                                                                 placeholder="Mohammed S"
-                                                                                name="location"
-                                                                                autocomplete="off" disabled />
+                                                                                name="location" autocomplete="off"
+                                                                                disabled />
                                                                             <span class="text-danger">
                                                                                 @error('location')
                                                                                     {{ $message }}
@@ -205,8 +211,9 @@
                                                                                     id="inputGroup-sizing-lg">Doc.</span>
                                                                                 <input class="form-control "
                                                                                     id="inputdocNo" type="text"
-                                                                                    name="docNo"
-                                                                                    autocomplete="off" value="{{ $docNo }}" disabled />
+                                                                                    name="docNo" autocomplete="off"
+                                                                                    value="{{ $docNo }}"
+                                                                                    disabled />
                                                                                 <span class="text-danger">
                                                                                     @error('docNo')
                                                                                         {{ $message }}
@@ -307,13 +314,14 @@
                                                                                                             @if ($key == $date['attrubite_value_key'])
                                                                                                                 <label
                                                                                                                     for="inputlocation">
-                                                                                                                    {{$date['title']}}</label>
+                                                                                                                    {{ $date['title'] }}</label>
                                                                                                                 <input
                                                                                                                     class="form-control"
                                                                                                                     id="inputdocNo"
                                                                                                                     type="date"
-                                                                                                                    name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][{{$date['title']}}]"
-                                                                                                                    autocomplete="off" {{ $date['is_required']==1 ? 'required' : '' }}/>
+                                                                                                                    name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][{{ $date['title'] }}]"
+                                                                                                                    autocomplete="off"
+                                                                                                                    {{ $date['is_required'] == 1 ? 'required' : '' }} />
                                                                                                                 <span
                                                                                                                     class="text-danger">
                                                                                                                     @error('dateAndTime')

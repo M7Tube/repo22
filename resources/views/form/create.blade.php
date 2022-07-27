@@ -60,7 +60,7 @@
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
-                @livewire('form.create',['att'=>$att])
+                @livewire('form.create',['att'=>$att,'template'=>$template])
             </main>
         </div>
     </div>
