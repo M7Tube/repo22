@@ -25,9 +25,8 @@ class AttrubiteRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:48'],
-            'is_required' => ['required', 'boolean'],
+            'is_required' => ['boolean'],
             'template_id' => ['required', 'integer', 'exists:templates,template_id'],
-            'is_required' => ['required', 'integer', 'in:0,1'],
             'category_id' => ['required', 'integer', 'exists:report_categories,category_id']
         ];
     }

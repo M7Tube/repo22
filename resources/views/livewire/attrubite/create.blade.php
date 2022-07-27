@@ -27,7 +27,8 @@
                                     </div>
                                 @endif
                             </div>
-                            <form wire:submit.prevent="create">
+                            <form action="{{ route('attrubite.store') }}" enctype='multipart/form-data'
+                                autocomplete="off" method="POST">
                                 @csrf
                                 {{--  --}}
                                 <div class="col-md-12">
@@ -41,7 +42,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-floating mb-3">
-                                                                            <select wrie:model="category_id"
+                                                                            <select name="category_id"
                                                                                 class="form-control">
                                                                                 <option value="0" selected>Choose
                                                                                     The
@@ -130,7 +131,7 @@
                                                                         <div class="form-floating mb-3">
                                                                             <input class="form-control" id="inputName"
                                                                                 type="text" placeholder="Mohammed S"
-                                                                                wire:model="name" autocomplete="off"
+                                                                                name="name" autocomplete="off"
                                                                                 value="{{ old('name') }}" />
                                                                             <span class="text-danger">
                                                                                 @error('name')
@@ -163,7 +164,7 @@
                                                                                                 id="inputName"
                                                                                                 type="text"
                                                                                                 placeholder="Mohammed S"
-                                                                                                wire:model="status[{{ $i }}][key]"
+                                                                                                name="status[{{ $i }}][key]"
                                                                                                 autocomplete="off"
                                                                                                 value="{{ old('status[$i][key]') }}" />
                                                                                             <span class="text-danger">
@@ -179,7 +180,7 @@
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-floating mb-3">
                                                                                             <select
-                                                                                                wire:model="status[{{ $i }}][value]"
+                                                                                                name="status[{{ $i }}][value]"
                                                                                                 class="form-control">
                                                                                                 <option value="0"
                                                                                                     selected>
@@ -188,7 +189,8 @@
                                                                                                     <i
                                                                                                         class="bi bi-palette-fill"></i>
                                                                                                 </option>
-                                                                                                <option value="success">
+                                                                                                <option
+                                                                                                    value="success">
                                                                                                     Green</option>
                                                                                                 <option value="danger">
                                                                                                     Red</option>
@@ -213,6 +215,90 @@
                                                                                 </div>
                                                                                 <hr />
                                                                             @endfor
+                                                                            <div class="col-12">
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        Date
+                                                                                        And Time Name
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-12 col-md-6">
+                                                                                        <div
+                                                                                            class="form-floating mb-3">
+                                                                                            <input class="form-control"
+                                                                                                id="inputName"
+                                                                                                type="text"
+                                                                                                placeholder="Mohammed S"
+                                                                                                name="date_and_time_name"
+                                                                                                autocomplete="off"
+                                                                                                value="{{ old('date_and_time_name') }}" />
+                                                                                            <span class="text-danger">
+                                                                                                @error('date_and_time_name')
+                                                                                                    {{ $message }}
+                                                                                                @enderror
+                                                                                            </span>
+                                                                                            <label for="inputName">Date
+                                                                                                And Time Name
+                                                                                                <i
+                                                                                                    class="bi bi-patch-question"></i></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12 col-md-6">
+                                                                                        <div
+                                                                                            class="form-floating mb-3">
+                                                                                            <select
+                                                                                                name="date_and_time_question"
+                                                                                                class="form-control">
+                                                                                                <option value="0"
+                                                                                                    selected>Choose
+                                                                                                    The
+                                                                                                    Question</option>
+                                                                                                @for ($i = 0; $i <= 3; $i++)
+                                                                                                    <option
+                                                                                                        value="{{ $i }}">
+                                                                                                        {{ $i + 1 }}
+                                                                                                    </option>
+                                                                                                @endfor
+                                                                                            </select>
+                                                                                            <span class="text-danger">
+                                                                                                @error('date_and_time_question')
+                                                                                                    {{ $message }}
+                                                                                                @enderror
+                                                                                            </span>
+                                                                                            <label
+                                                                                                for="inputUsercategory">Choose
+                                                                                                The
+                                                                                                Question</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12 col-md-6">
+                                                                                        <div
+                                                                                            class="form-floating mb-3">
+                                                                                            <div class="form-check">
+                                                                                                <input
+                                                                                                    class="form-check-input"
+                                                                                                    id="inputwith_visit_type"
+                                                                                                    type="checkbox"
+                                                                                                    placeholder="Mohammed S"
+                                                                                                    name="date_and_time_is_required"
+                                                                                                    autocomplete="off"
+                                                                                                    value="1"
+                                                                                                    checked />
+                                                                                                <label for="inputdesc"
+                                                                                                    class="form-check-label">Required
+                                                                                                    ?</label>
+                                                                                            </div>
+                                                                                            <span class="text-danger">
+                                                                                                @error('date_and_time_is_required')
+                                                                                                    {{ $message }}
+                                                                                                @enderror
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr>
                                                                             <div class="col-6">
                                                                                 <div class="form-floating mb-3">
                                                                                     <div class="form-check">
@@ -220,9 +306,9 @@
                                                                                             id="inputwith_visit_type"
                                                                                             type="checkbox"
                                                                                             placeholder="Mohammed S"
-                                                                                            wire:model="is_required"
+                                                                                            name="is_required"
                                                                                             autocomplete="off"
-                                                                                            value="{{ old('is_required') }}" />
+                                                                                            value="1" checked />
                                                                                         <label for="inputdesc"
                                                                                             class="form-check-label">Required
                                                                                             ?</label>
@@ -246,6 +332,10 @@
                                     </div>
                                 </div>
                                 {{--  --}}
+                                <div class="row mb-3">
+                                    <input type="hidden" name="template_id"
+                                        value="{{ request()->query('template_id') }}">
+                                </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-outline-success">Create <i
@@ -265,7 +355,7 @@
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <h1 class="text-center text-capitalize m-5">There is no categories go create some</h1>
                         <a href="{{ route('category.create', ['template_id' => request()->query('template_id')]) }}"
-                            class="mx-auto btn btn-block w-25 btn-outline-success m-5">Create</a>
+                            {{-- https://erp-com.preview-domain.com/public --}} class="mx-auto btn btn-block w-25 btn-outline-success m-5">Create</a>
                     </div>
                 </div>
             </div>

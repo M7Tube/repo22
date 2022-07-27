@@ -37,8 +37,23 @@ class AttrubireController extends Controller
      */
     public function store(AttrubiteRequest $request)
     {
-        // Attrubite::Create($request->all());
-        // return back()->with('success', 'Question Created Successfully');
+        $dateAndTime = [];
+        if ($request->date_and_time_name) {
+            array_push($dateAndTime, [
+                'title' => $request->date_and_time_name,
+                'is_required' => $request->date_and_time_is_required,
+                'attrubite_value_key' => $request->date_and_time_question
+            ]);
+        }
+        Attrubite::Create([
+            'name' => $request->name,
+            'status' => $request->status,
+            'dateAndTime' => $dateAndTime,
+            'is_required' => $request->boolean('is_required'),
+            'template_id' => $request->template_id,
+            'category_id' => $request->category_id,
+        ]);
+        return back()->with('success', 'Question Created Successfully');
     }
 
     /**

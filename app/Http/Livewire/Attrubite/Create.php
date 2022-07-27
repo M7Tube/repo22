@@ -17,12 +17,8 @@ class Create extends Component
 
     public $prevQuestions;
 
-    public $name;
-    public $status = [];
-    public $dateAndTime = [];
-    public $is_required;
+    public $Cname;
     public $template_id;
-    public $category_id;
 
     public function mount()
     {
@@ -33,7 +29,6 @@ class Create extends Component
             request()->query('template_id')
         )->get();
         $this->template_id = request()->query('template_id');
-        $this->is_required = 0;
     }
 
     // public function updatedprevQuestions()
@@ -44,31 +39,10 @@ class Create extends Component
     //     );
     // }
 
-    public function create()
-    {
-        $this->validate([
-            'name' => ['required', 'string', 'max:288'],
-            // 'status' => ['required', 'array', 'max:4'],
-            'is_required' => ['required', 'boolean'],
-            'category_id' => ['required', 'integer', 'exists:report_categories,category_id'],
-        ]);
-        $question = Attrubite::Create([
-            'name' => $this->name,
-            'status' => $this->status,
-            'is_required' => $this->is_required ?? 0,
-            'dateAndTime' => $this->dateAndTime ?? [],
-            'template_id' => $this->template_id,
-            'category_id' => $this->category_id,
-        ]);
-    }
-
     public function clear()
     {
         $this->name = null;
-        $this->status = [];
-        $this->dateAndTime = [];
-        $this->is_required = null;
-        $this->category_id = null;
+        $this->template_id = null;
     }
 
     public function render()
