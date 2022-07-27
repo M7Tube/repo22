@@ -28,12 +28,9 @@
                             </div>
                             <input type="hidden" name="user_id"
                                 value="{{ session()->get('LoggedAccount')['user_id'] }}">
-                            {{-- <h5 class="text-secondary">
-                                @forelse ($template as $temp)
-                                    {{ $temp['instructions'] }}
-                                @empty
-                                @endforelse
-                            </h5> --}}
+                            <h5 class="text-secondary">
+                               {{ $instruction }}
+                            </h5>
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="form-floating mb-3">

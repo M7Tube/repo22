@@ -205,6 +205,7 @@ class Create extends Component
         }
         $this->template_id = request()->query('template_id');
         $this->sitename = Template::find(request()->query('template_id'))['name'];
+        $this->instruction = Template::find(request()->query('template_id'))['instructions'];
         // $this->signture = Signature::all('name', 'signature');
     }
 

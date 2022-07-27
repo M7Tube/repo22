@@ -79,7 +79,7 @@
                                                 {{ $message }}
                                             @enderror
                                         </span>
-                                        <label for="inputTemplatePicture">Template Icon</label>
+                                        <label for="inputTemplatePicture">Logo</label>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
