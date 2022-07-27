@@ -49,7 +49,7 @@
                                         @endif
                                     </div>
                                     <div class="row">
-                                        <h3 class="text-center font-weight-light my-4">Template <i
+                                        <h3 class="text-center font-weight-light my-4">Create Inspection <i
                                                 class="bi bi-textarea-resize"></i></h3>
                                         <div class="col-12 col-md-6">
                                             <a href="{{ route('template.create') }}"
