@@ -51,12 +51,16 @@
                                     <div class="row">
                                         <h3 class="text-center font-weight-light my-4">Template <i
                                                 class="bi bi-textarea-resize"></i></h3>
-                                        <a href="{{ route('template.create') }}"
-                                            class="btn btn-outline-success w-25 mx-auto text-capitalize"><i
-                                                class="bi bi-file-earmark-plus"></i></a>
-                                        <a href="{{ route('control') }}"
-                                            class="btn btn-outline-primary w-25 mx-auto text-capitalize"><i
-                                                class="bi bi-menu-app"></i></a>
+                                        <div class="col-12 col-md-6">
+                                            <a href="{{ route('template.create') }}"
+                                                class="btn btn-outline-success w-100 mb-2 text-capitalize">Create
+                                                Temmplate <i class="bi bi-file-earmark-plus"></i></a>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <a href="{{ route('control') }}"
+                                                class="btn btn-outline-primary w-100 mb-2 text-capitalize">Dashboard <i
+                                                    class="bi bi-menu-app"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -70,7 +74,8 @@
                                                             <div class="card-body">
                                                                 <div class="align-self-center">
                                                                     @if (!is_null($template->pic))
-                                                                        <img src="{{ $template->pic }}" alt="" width="35px">
+                                                                        <img src="{{ $template->pic }}" alt=""
+                                                                            width="35px">
                                                                     @else
                                                                         <i class="bi bi-file-earmark-bar-graph"></i>
                                                                     @endif

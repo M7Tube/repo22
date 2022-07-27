@@ -27,8 +27,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <form action="{{ route('attrubite.store') }}" enctype='multipart/form-data'
-                                autocomplete="off" method="POST">
+                            <form wire:submit.prevent="create">
                                 @csrf
                                 {{--  --}}
                                 <div class="col-md-12">
@@ -42,9 +41,10 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-floating mb-3">
-                                                                            <select name="category_id"
+                                                                            <select wrie:model="category_id"
                                                                                 class="form-control">
-                                                                                <option value="0" selected>Choose The
+                                                                                <option value="0" selected>Choose
+                                                                                    The
                                                                                     Category</option>
                                                                                 @foreach ($categorys as $category)
                                                                                     <option
@@ -52,10 +52,11 @@
                                                                                         {{ $category->name }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            <span
-                                                                                class="text-danger">@error('category_id')
+                                                                            <span class="text-danger">
+                                                                                @error('category_id')
                                                                                     {{ $message }}
-                                                                                @enderror</span>
+                                                                                @enderror
+                                                                            </span>
                                                                             <label for="inputUsercategory">Choose The
                                                                                 Category</label>
                                                                         </div>
@@ -129,11 +130,13 @@
                                                                         <div class="form-floating mb-3">
                                                                             <input class="form-control" id="inputName"
                                                                                 type="text" placeholder="Mohammed S"
-                                                                                name="name" autocomplete="off"
+                                                                                wire:model="name" autocomplete="off"
                                                                                 value="{{ old('name') }}" />
-                                                                            <span class="text-danger">@error('name')
+                                                                            <span class="text-danger">
+                                                                                @error('name')
                                                                                     {{ $message }}
-                                                                                @enderror</span>
+                                                                                @enderror
+                                                                            </span>
                                                                             <label for="inputName">Question <i
                                                                                     class="bi bi-patch-question"></i></label>
                                                                         </div>
@@ -156,18 +159,18 @@
                                                                                 <div class="row">
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-floating mb-3">
-                                                                                            <input
-                                                                                                class="form-control"
+                                                                                            <input class="form-control"
                                                                                                 id="inputName"
                                                                                                 type="text"
                                                                                                 placeholder="Mohammed S"
-                                                                                                name="status[{{ $i }}][key]"
+                                                                                                wire:model="status[{{ $i }}][key]"
                                                                                                 autocomplete="off"
                                                                                                 value="{{ old('status[$i][key]') }}" />
-                                                                                            <span
-                                                                                                class="text-danger">@error('status')
+                                                                                            <span class="text-danger">
+                                                                                                @error('status')
                                                                                                     {{ $message }}
-                                                                                                @enderror</span>
+                                                                                                @enderror
+                                                                                            </span>
                                                                                             <label for="inputName">Name
                                                                                                 <i
                                                                                                     class="bi bi-vector-pen"></i></label>
@@ -176,7 +179,7 @@
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-floating mb-3">
                                                                                             <select
-                                                                                                name="status[{{ $i }}][value]"
+                                                                                                wire:model="status[{{ $i }}][value]"
                                                                                                 class="form-control">
                                                                                                 <option value="0"
                                                                                                     selected>
@@ -192,13 +195,15 @@
                                                                                                 <option
                                                                                                     value="secondary">
                                                                                                     Gray</option>
-                                                                                                <option value="warning">
+                                                                                                <option
+                                                                                                    value="warning">
                                                                                                     Yellow</option>
                                                                                             </select>
-                                                                                            <span
-                                                                                                class="text-danger">@error('department_id')
+                                                                                            <span class="text-danger">
+                                                                                                @error('department_id')
                                                                                                     {{ $message }}
-                                                                                                @enderror</span>
+                                                                                                @enderror
+                                                                                            </span>
                                                                                             <label
                                                                                                 for="inputUserDepartment">Choose
                                                                                                 The Status Color <i
@@ -208,6 +213,27 @@
                                                                                 </div>
                                                                                 <hr />
                                                                             @endfor
+                                                                            <div class="col-6">
+                                                                                <div class="form-floating mb-3">
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            id="inputwith_visit_type"
+                                                                                            type="checkbox"
+                                                                                            placeholder="Mohammed S"
+                                                                                            wire:model="is_required"
+                                                                                            autocomplete="off"
+                                                                                            value="{{ old('is_required') }}" />
+                                                                                        <label for="inputdesc"
+                                                                                            class="form-check-label">Required
+                                                                                            ?</label>
+                                                                                    </div>
+                                                                                    <span class="text-danger">
+                                                                                        @error('is_required')
+                                                                                            {{ $message }}
+                                                                                        @enderror
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -220,10 +246,6 @@
                                     </div>
                                 </div>
                                 {{--  --}}
-                                <div class="row mb-3">
-                                    <input type="hidden" name="template_id"
-                                        value="{{ request()->query('template_id') }}">
-                                </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-outline-success">Create <i
@@ -243,7 +265,7 @@
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <h1 class="text-center text-capitalize m-5">There is no categories go create some</h1>
                         <a href="{{ route('category.create', ['template_id' => request()->query('template_id')]) }}"
-                            {{-- https://erp-com.preview-domain.com/public --}} class="mx-auto btn btn-block w-25 btn-outline-success m-5">Create</a>
+                            class="mx-auto btn btn-block w-25 btn-outline-success m-5">Create</a>
                     </div>
                 </div>
             </div>
