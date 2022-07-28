@@ -50,7 +50,6 @@
             transform: scale(1.01);
             box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
         }
-
     </style>
     <title>Export</title>
     @livewireStyles
@@ -60,7 +59,7 @@
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
-                @livewire('form.create',['att'=>$att,'template'=>$template])
+                @livewire('form.create', ['att' => $att, 'template' => $template])
             </main>
         </div>
     </div>
@@ -82,7 +81,7 @@
         }
 
         function showPosition(position) {
-            x.value =position.coords.latitude +
+            x.value = position.coords.latitude +
                 " . " + position.coords.longitude;
         }
 
@@ -101,6 +100,19 @@
                     x.value = "An unknown error occurred."
                     break;
             }
+        }
+    </script>
+    <script>
+        function showDiv() {
+            if (document.getElementById('welcomeDiv').style.display == "none") {
+                document.getElementById('welcomeDiv').style.display = "block";
+            } else {
+                document.getElementById('welcomeDiv').style.display = "none";
+            }
+        }
+
+        function hideDiv() {
+            document.getElementById('welcomeDiv').style.display = "none";
         }
     </script>
     @livewireScripts

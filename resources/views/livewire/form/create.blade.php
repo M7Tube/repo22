@@ -29,7 +29,7 @@
                             <input type="hidden" name="user_id"
                                 value="{{ session()->get('LoggedAccount')['user_id'] }}">
                             <h5 class="text-secondary text-center">
-                               {{ $instruction }}
+                                {{ $instruction }}
                             </h5>
                             <div class="row mb-3">
                                 <div class="col-md-12">
@@ -50,8 +50,8 @@
                                                                         <div class="form-floating mb-1">
                                                                             <input class="form-control" id="inputName"
                                                                                 type="text" placeholder="Mohammed S"
-                                                                                name="name" autocomplete="off"
-                                                                                value="{{ $sitename }}" />
+                                                                                name="name" autocomplete="off" />
+                                                                            {{-- value="{{ $sitename }}" --}}
                                                                             <span class="text-danger">
                                                                                 @error('name')
                                                                                     {{ $message }}
@@ -269,13 +269,27 @@
                                                                                                 </h3>
                                                                                                 @forelse ($at->status as $key => $st)
                                                                                                     @if ($st['key'] != null && $st['value'] != null)
-                                                                                                        <input
-                                                                                                            type="radio"
-                                                                                                            class="btn-check w-100"
-                                                                                                            name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][value]"
-                                                                                                            value="{{ $st['key'] }}\./{{ $st['value'] }}"
-                                                                                                            id="option{{ $kkkey }}{{ $kkey }}{{ $key }}"
-                                                                                                            autocomplete="off">
+                                                                                                        @if (!is_null($at->dateAndTime) && $at->dateAndTime != [])
+                                                                                                            @forelse ($at->dateAndTime as $date)
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    class="btn-check w-100"
+                                                                                                                    name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][value]"
+                                                                                                                    value="{{ $st['key'] }}\./{{ $st['value'] }}"
+                                                                                                                    id="option{{ $kkkey }}{{ $kkey }}{{ $key }}"
+                                                                                                                    autocomplete="off"
+                                                                                                                    {{ $key == $date['attrubite_value_key'] ? 'onchange=showDiv()' : 'onchange=hideDiv()' }}>
+                                                                                                            @empty
+                                                                                                            @endforelse
+                                                                                                        @else
+                                                                                                            <input
+                                                                                                                type="radio"
+                                                                                                                class="btn-check w-100"
+                                                                                                                name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][value]"
+                                                                                                                value="{{ $st['key'] }}\./{{ $st['value'] }}"
+                                                                                                                id="option{{ $kkkey }}{{ $kkey }}{{ $key }}"
+                                                                                                                autocomplete="off">
+                                                                                                        @endif
                                                                                                         <label
                                                                                                             class="btn btn-outline-{{ $st['value'] }} w-100 my-1"
                                                                                                             for="option{{ $kkkey }}{{ $kkey }}{{ $key }}">{{ $st['key'] }}</label>
@@ -306,27 +320,34 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         @endif
-                                                                                                        @forelse ($at->dateAndTime as $date)
-                                                                                                            @if ($key == $date['attrubite_value_key'])
-                                                                                                                <label
-                                                                                                                    for="inputlocation">
-                                                                                                                    {{ $date['title'] }}</label>
-                                                                                                                <input
-                                                                                                                    class="form-control"
-                                                                                                                    id="inputdocNo"
-                                                                                                                    type="date"
-                                                                                                                    name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][{{ $date['title'] }}]"
-                                                                                                                    autocomplete="off"
-                                                                                                                    {{ $date['is_required'] == 1 ? 'required' : '' }} />
-                                                                                                                <span
-                                                                                                                    class="text-danger">
-                                                                                                                    @error('dateAndTime')
-                                                                                                                        {{ $message }}
-                                                                                                                    @enderror
-                                                                                                                </span>
-                                                                                                            @endif
-                                                                                                        @empty
-                                                                                                        @endforelse
+                                                                                                        @if (!is_null($at->dateAndTime) && $at->dateAndTime != [])
+                                                                                                            @forelse ($at->dateAndTime as $date)
+                                                                                                                @if ($key == $date['attrubite_value_key'])
+                                                                                                                    <div id="welcomeDiv"
+                                                                                                                        style="display:none;"
+                                                                                                                        class="answer_list">
+                                                                                                                        <label
+                                                                                                                            for="inputlocation">
+                                                                                                                            {{ $date['title'] }}</label>
+                                                                                                                        <input
+                                                                                                                            class="form-control"
+                                                                                                                            id="inputdocNo"
+                                                                                                                            type="date"
+                                                                                                                            name="at[{{ 0 }}][{{ $attt->name }}][{{ $at->name }}][{{ $date['title'] }}]"
+                                                                                                                            autocomplete="off" />
+                                                                                                                        {{-- {{ $date['is_required'] == 1 ? 'required' : '' }} --}}
+                                                                                                                        <span
+                                                                                                                            class="text-danger">
+                                                                                                                            @error('dateAndTime')
+                                                                                                                                {{ $message }}
+                                                                                                                            @enderror
+                                                                                                                        </span>
+                                                                                                                    </div>
+                                                                                                                @endif
+                                                                                                            @empty
+                                                                                                            @endforelse
+                                                                                                        @endif
+
                                                                                                         {{-- <input type="hidden"
                                                                                         name="at[{{ 0 }}][{{ $at->name }}][color]"
                                                                                         value="{{ $st['value'] }}"> --}}

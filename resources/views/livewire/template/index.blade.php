@@ -15,8 +15,7 @@
                                     Name</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     Icon</th>
-                                <th
-                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     User</th>
                                 <th class="text-secondary opacity-7">Action</th>
                             </tr>
@@ -37,7 +36,7 @@
                                     @else
                                         <td class="text-sm">
                                             <span class=""><img width="75px"
-                                                src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/' . $template->pic)) !!}"
+                                                    src="data:image/png|jpg|jpeg;base64, {!! base64_encode(file_get_contents('../storage/app/public/images/' . $template->pic)) !!}"
                                                     alt="Picture"></span>
                                         </td>
                                     @endif
@@ -46,11 +45,16 @@
                                         </span>{{ $template->user->name }}
                                     </td>
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                            data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal"
+                                        <button class="btn btn-block btn-outline-success" data-toggle="tooltip"
+                                            data-original-title="Edit user" data-bs-toggle="modal"
                                             data-bs-target="#edittemplateModal"
                                             wire:click.prevent="edit({{ $template->template_id }})">
                                             Edit
+                                        </button>
+                                        <a class="btn btn-block btn-outline-secondary" data-toggle="tooltip"
+                                            data-original-title="Edit user"
+                                            href="{{ route('form.create', ['template_id'=>$template->template_id]) }}">
+                                            Start Inspection
                                         </a>
                                     </td>
                                 </tr>
