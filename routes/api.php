@@ -42,8 +42,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::post('/inspection/inprogress', [AppApiController::class, 'inspection_inprogress'])->name('inspection_inprogress');
             Route::post('/handover', [AppApiController::class, 'handover'])->name('handover');
             Route::post('/template', [AppApiController::class, 'template'])->name('template');
-            Route::post('/form', [AppApiController::class, 'for
-            m'])->name('form');
+            Route::post('/form', [AppApiController::class, 'form'])->name('form');
         });
         //auth route
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
